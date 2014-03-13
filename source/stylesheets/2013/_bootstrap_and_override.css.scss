@@ -1,0 +1,41 @@
+@import "bootstrap";
+
+.navbar-inverse {
+
+  padding: 20px 0 5px 0;
+  .navbar-brand {
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    font-size: 2.2em;
+    font-weight: bold;
+    padding-left: 0;
+  }
+}
+
+.site-sidenav {
+  .nav > li > a:hover, .nav > li > a:focus {
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 1px solid #eee;
+  }
+
+  .nav>.active>a, .nav>.active:hover>a, .nav>.active:focus>a{
+    padding-left:18px;font-weight:700;color:#563d7c;background-color:transparent;border-left:2px solid #563d7c
+  }
+}
+
+.nav {
+  > li {
+    padding-left: 10px;
+    > a {
+      &:hover,
+      &:focus {
+        text-decoration: none;
+        background-color: transparent;
+        // left padding is 15px, we have to account for that when adding a
+        // border
+        border-left: 4px solid #eee;
+        padding-left: 11px;
+      }
+    }
+  }
+}

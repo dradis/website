@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title><%= data.page.title || "Dradis Framework" %></title>
+
+    <!-- favicon.ico extravaganzza -->
+    <%= favicon_tag '/apple-touch-icon-144x144-precomposed.png', rel: 'apple-touch-icon-precomposed', sizes: '144x144' %>
+    <%= favicon_tag '/apple-touch-icon-114x114-precomposed.png', rel: 'apple-touch-icon-precomposed', sizes: '114x114' %>
+    <%= favicon_tag '/apple-touch-icon-72x72-precomposed.png', rel: 'apple-touch-icon-precomposed', sizes: '72x72' %>
+    <%= favicon_tag '/apple-touch-icon-precomposed.png', rel: 'apple-touch-icon-precomposed' %>
+    <%= favicon_tag '/favicon.png', rel: 'shortcut icon' %>
+    <%= favicon_tag '/favicon.ico', rel: 'icon' %>
+
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:400,700,600" rel="stylesheet" />
+    <link href='//fonts.googleapis.com/css?family=Signika:700' rel='stylesheet' type='text/css'>
+
+    <%= gzip_css_on_build 'site' %>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body class="<%= page_classes %>">
+    <div class="navbar navbar-inverse" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Dradis Framework</a>
+        </div>
+        <div class="collapse navbar-collapse">
+          <!-- <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul> -->
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div id="logo"></div>
+
+    <div class="container main-container">
+      <div class="row">
+        <div class="col-md-9">
+          <%= yield %>
+        </div>
+        <div class="col-md-3">
+          <%= partial 'sidenav' %>
+        </div>
+      </div>
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script>window.jQuery || document.write('<script src="javascripts/vendor/jquery-1.10.2.min.js"><\/script>')</script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <%= gzip_js_on_build "site" %>    
+  </body>
+</html>

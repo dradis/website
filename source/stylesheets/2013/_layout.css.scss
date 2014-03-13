@@ -1,0 +1,39 @@
+
+#logo {
+  background: image-url('logo_small.png');
+  display: none;
+  height: 200px;
+  position: absolute; 
+  right: 0;
+  top: 40px; 
+  width: 200px;
+  z-index: 1000;
+
+  // only show logo on the big screens
+  @media (min-width: $screen-md-min) {display: block;}
+  @media (min-width: $screen-lg-min) {display: block;}
+}
+
+
+.main-container {
+  background-color: #fff;
+  border-top: 6px solid #b1cc29;
+  box-shadow: 4px 83px 2px #eee, -4px 83px 2px #eee;
+}
+
+.dradispro {
+  margin-top: 20px;
+  text-align: center;
+
+  a img {
+    padding-bottom: 3px;
+  }
+  a:hover img {
+    border-bottom: 3px solid #78a5c9;
+    padding-bottom: 0;
+  }
+}
+
+.breadcrumb {
+  background-color: transparent;
+}

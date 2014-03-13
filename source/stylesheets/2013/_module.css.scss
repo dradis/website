@@ -1,0 +1,19 @@
+.center {
+  text-align: center;
+}
+
+body.events {
+  ul {
+    list-style-image: image-url('tick.png');
+
+    li {
+      margin-bottom: 0.5ex;
+      &.twitter {
+        list-style: none;
+        background: transparent image-url('bird-light-bgs.png') left center no-repeat;
+        margin-bottom: 10px;
+        padding-left: 28px;
+      }
+    }
+  }
+}
