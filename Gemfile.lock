@@ -14,8 +14,15 @@ GEM
     activesupport (3.2.16)
       i18n (~> 0.6, >= 0.6.4)
       multi_json (~> 1.0)
+    bitters (0.10.1)
+      bourbon (>= 3.2)
+      sass (>= 3.2)
+      thor
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
+    bourbon (3.2.3)
+      sass (~> 3.2)
+      thor
     chunky_png (1.2.9)
     coffee-script (2.2.0)
       coffee-script-source
@@ -36,6 +43,8 @@ GEM
       docile (~> 1.1)
       mini_magick (~> 3.5)
     ffi (1.9.3)
+    font-awesome-sass (4.2.2)
+      sass (~> 3.2)
     fssm (0.2.10)
     haml (4.0.5)
       tilt
@@ -82,6 +91,9 @@ GEM
     mini_magick (3.7.0)
       subexec (~> 0.2.1)
     multi_json (1.8.4)
+    neat (1.5.0)
+      bourbon (>= 2.1)
+      sass (>= 3.2)
     net-sftp (2.1.2)
       net-ssh (>= 2.6.5)
     net-ssh (2.7.0)
@@ -119,10 +131,14 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bitters
   bootstrap-sass (~> 3.1.0)
+  bourbon
+  font-awesome-sass (~> 4.2.0)
   middleman (~> 3.2.2)
   middleman-deploy
   middleman-favicon-maker
   middleman-livereload (~> 3.1.1)
   middleman-sprockets!
+  neat
   redcarpet

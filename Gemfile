@@ -15,3 +15,10 @@ gem "middleman-favicon-maker"
 # Non-middleman stuff
 gem "redcarpet"
 gem 'bootstrap-sass', '~> 3.1.0', require: false
+
+gem 'bourbon'
+gem 'neat'
+gem 'bitters'
+
+#gem 'font-awesome'
+gem 'font-awesome-sass', '~> 4.2.0'
