@@ -7,16 +7,27 @@
 
 // Use SMACSS to organize your themes - http://smacss.com/
 
-//****************************************************************** 2013 theme
-@import "2013/variables";
-@import "2013/bootstrap_and_override";
+////****************************************************************** 2013 theme
+//@import "2013/variables";
+//@import "2013/bootstrap_and_override";
+//
+////@import "_mixins/gradients";
+////@import "_mixins/shadow";
+//
+//
+//@import "2013/base";
+//@import "2013/layout";
+//@import "2013/module";
+////@import "2013/state";
+////@import "2013/theme";
 
-//@import "_mixins/gradients";
-//@import "_mixins/shadow";
 
+//****************************************************************** 2014 theme
+@import '2014/vendor/bourbon/bourbon';
+@import '2014/vendor/normalize';
+@import '2014/vendor/base/base';
+@import '2014/vendor/neat/neat';
 
-@import "2013/base";
-@import "2013/layout";
-@import "2013/module";
-//@import "2013/state";
-//@import "2013/theme";
+@import '2014/modules/refills';
+
+@import '2014/layout'
