@@ -1,3 +1,15 @@
+h1 {
+  font-weight: 400;
+}
+
+h2 {
+  font-weight: 300;
+}
+
+h3 {
+  font-weight: 200;
+}
+
 pre.code {
   background: #F7F7F7;
   border-radius: $base-border-radius * 1.5;
@@ -9,30 +21,12 @@ pre.code {
 //  white-space: nowrap;
 }
 
-.download {
-  h2 {
-    border-bottom: 1px solid transparentize($base-font-color, .8);
-    margin-bottom: 0.5em;
-    padding-top: 1em;
-  }
-  h3 {
-    padding-top: 1em;
-  }
-  section {
-    @include outer-container;
-    margin-bottom: 100px;
-    margin-top: 50px;
-  }
+
+.container {
+  @include outer-container;
 }
 
-.index {
-  section {
-    @include outer-container;
-    margin-bottom: 100px;
-    margin-top: 50px;
-  }
-
-  .bullets {
-    @include outer-container;
-  }
+.intro-text h2 {
+  font-family: $sans-serif;
+  font-weight: 300;
 }

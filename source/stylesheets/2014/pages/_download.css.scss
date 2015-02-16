@@ -1,0 +1,17 @@
+body.download {
+
+  h2.faq {
+    border-bottom: 1px solid transparentize($base-font-color, .8);
+//    margin-bottom: 0.5em;
+    padding-top: 1em;
+  }
+
+  h3 {
+    padding-top: 1em;
+  }
+
+  div.container {
+    margin-bottom: 100px;
+    margin-top: 50px;
+  }
+}
