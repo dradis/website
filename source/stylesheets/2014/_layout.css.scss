@@ -1,3 +1,30 @@
+pre.code {
+  background: #F7F7F7;
+  border-radius: $base-border-radius * 1.5;
+  border: 1px solid #E0E0E0;
+  font-family: monaco;
+//  font-size: 0.65em;
+  font-style: normal;
+  padding: 0.1em 0.4em;
+//  white-space: nowrap;
+}
+
+.download {
+  h2 {
+    border-bottom: 1px solid transparentize($base-font-color, .8);
+    margin-bottom: 0.5em;
+    padding-top: 1em;
+  }
+  h3 {
+    padding-top: 1em;
+  }
+  section {
+    @include outer-container;
+    margin-bottom: 100px;
+    margin-top: 50px;
+  }
+}
+
 .index {
   section {
     @include outer-container;
