@@ -1,0 +1,50 @@
+.center-image {
+  text-align: center;
+  padding: 2em 0 0;
+
+  h1 {
+    padding: 1em;
+    color: darken($light-gray, 30%);
+    font-weight: 300;
+  }
+
+  img {
+    max-width: 120px;
+    padding: 1em;
+    border-radius: 50%;
+    // background: desaturate(darken($green, 20%), 30);
+    background: $light-gray;
+    transition: background 0.5s;
+
+    @include media($medium-screen) {
+      max-width: 180px;
+    }
+
+    &:hover {
+      background: lighten($light-gray, 5%);
+    }
+  }
+
+  hr {
+    margin: 2em auto 2.5em;
+    width: 100px;
+    border-top: solid 2px $light-gray;
+  }
+
+  button {
+    background: #c7c7c7;
+    margin: 4px 2px;
+
+    &:hover {
+      background: darken(#c7c7c7, 10%);
+    }
+
+    &.primary {
+      background: darken($green, 10%);
+
+      &:hover {
+        background: darken($green, 15%);
+      }
+    }
+  }
+}

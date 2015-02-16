@@ -16,7 +16,8 @@ header.navigation {
   $horizontal-bar-mode: $large-screen;
 
   background-color: $navigation-background;
-  border-bottom: 1px solid darken($navigation-background, 10);
+//  border-bottom: 1px solid darken($navigation-background, 10);
+  border-bottom: 0;
   height: $navigation-height;
   width: 100%;
   z-index: 999;
@@ -261,10 +262,15 @@ header.navigation {
   }
 
   a.sign-up {
-    margin-top: 1.2em;
+    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 80px;
+
+    margin-top: 1.1em;
     float: right;
     @include transition (all 0.2s ease-in-out);
-    display: inline;
+//    display: inline;
     background: $navigation-nav-button-background;
     border-radius: $base-border-radius;
     color: white;

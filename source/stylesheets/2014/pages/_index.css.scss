@@ -8,4 +8,13 @@ body.index {
   .bullets {
     @include outer-container;
   }
+
+  .light-gray-wrapper {
+    background: #f4f4f4;
+    padding: 5em 0 3em;
+
+    section {
+      margin: 0 auto;
+    }
+  }
 }
