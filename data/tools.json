@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Burp Suite",
+    "description": "Burp Suite is an integrated platform for attacking web applications."
+  },
+  {
+    "title": "Nessus",
+    "description": "Nessus is one of the most popular and capable vulnerability scanners, particularly for UNIX systems."
+  },
+  {
+    "title": "NeXpose",
+    "description": "Vulnerability management product from Rapid7."
+  },
+  {
+    "title": "Nikto",
+    "description": "Nikto is an Open Source (GPL) web server scanner which performs comprehensive tests against web servers for multiple items."
+  },
+  {
+    "title": "Nmap",
+    "description": "Nmap is a free and open source utility for network discovery and security auditing."
+  },
+  {
+    "title": "OpenVAS",
+    "description": "OpenVAS is a vulnerability scanner that was forked from the last free version of Nessus after that tool went proprietary in 2005."
+  },
+  {
+    "title": "OSVDB",
+    "description": "OSVDB is an independent and open sourced web-based vulnerability database created for the security community."
+  },
+  {
+    "title": "Qualys",
+    "description": "Qualys is a cloud-based vulnerability scanner."
+  },
+  {
+    "title": "Retina",
+    "description": "Integrated network, web & virtual vulnerability scanner"
+  },
+  {
+    "title": "SureCheck",
+    "description": "SureCheck provides a simple and straight forward mechanism to perform security build reviews, system configuration reviews and policy compliance audits."
+  },
+  {
+    "title": "VulnDB",
+    "description": "VulnDB is a hosted library of reusable entries for your reports."
+  },
+  {
+    "title": "w3af",
+    "description": "The project's goal is to create a framework to find and exploit web application vulnerabilities."
+  },
+  {
+    "title": "MediaWiki",
+    "description": "MediaWiki is a free software open source wiki package written in PHP, originally for use on Wikipedia."
+  },
+  {
+    "title": "Web Exploitation Framework",
+    "description": "A Metasploit-like framework focused on the web standards along with exploits & payloads designed specifically for defeating web application protections."
+  },
+  {
+    "title": "Zed Attack Proxy",
+    "description": "The Zed Attack Proxy (ZAP) is an easy to use integrated penetration testing tool for finding vulnerabilities in web applications."
+  }
+]

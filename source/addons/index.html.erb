@@ -1,0 +1,29 @@
+---
+title: Dradis Framework add-ons library
+---
+
+<div class="intro-text">
+  <!-- <h3>Dradis Framework</h3> -->
+  <h2>Dradis Add-ons Library</h2>
+  <h4>We can connect and parse output of these fine tools.</h4>
+  <!-- <p>Lorem ipsum dolor sit amet, consectetur consectetur adipisicing elit. Perferendis para mitis eun non ullam atque debitis, illo adipisicing elit. Perferendis para mitis eun non ullam atque debitis, illo. Amet, consectetur adipisicing. <a href="">Learn more about Dradis<span>&#187;</span></a></p> -->
+</div>
+
+<div class="container">
+  <% data.tools.each_with_index do |plugin, i| %>
+    <div class="hover-tile-outer">
+      <div class="hover-tile-container">
+        <div class="hover-tile hover-tile-visible">
+          <%= plugin[:title] %>
+        </div>
+        <div class="hover-tile hover-tile-hidden">
+          <h4><%= plugin[:title] %></h4>
+          <p><%= plugin[:description] %> <a href="javascript:void(0)">Read more<span>&#187;</span></a></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+<!-- <p>Are you a tool writer but your tool is not in the list?</p> -->

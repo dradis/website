@@ -1,0 +1,17 @@
+body.addons {
+  .container {
+    margin-bottom: 100px;
+  }
+
+  .intro-text h2 {
+    font-family: $sans-serif;
+    font-weight: 300;
+  }
+
+  .hover-tile-outer {
+    @include span-columns(6);
+    @include omega(2n);
+
+    margin-bottom: $gutter;
+  }
+}
