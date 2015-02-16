@@ -72,5 +72,14 @@
     margin: auto;
     max-width: 35em;
     text-align: center;
+
+    a {
+      color: $footer-link-color;
+      text-decoration: underline;
+
+      &:hover {
+        color: transparentize($footer-color, 0);
+      }
+    }
   }
 }
