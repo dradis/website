@@ -1,0 +1,11 @@
+body.index {
+  section {
+    @include outer-container;
+    margin-bottom: 100px;
+    margin-top: 50px;
+  }
+
+  .bullets {
+    @include outer-container;
+  }
+}
