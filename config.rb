@@ -40,6 +40,9 @@ set :markdown_engine, :redcarpet
 # Helpers
 ###
 
+require 'lib/helpers/seo'
+helpers Helpers::Seo
+
 # Asset pipeline
 # activate :sprockets
 
