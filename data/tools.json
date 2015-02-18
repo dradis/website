@@ -1,62 +1,107 @@
 [
   {
     "title": "Burp Suite",
-    "description": "Burp Suite is an integrated platform for attacking web applications."
+    "page": "burp",
+    "description": "Burp Suite is an integrated platform for attacking web applications.",
+    "github": "http://github.com/dradis/dradis-burp",
+    "vendor": "http://portswigger.net/burp/"
   },
   {
     "title": "Nessus",
-    "description": "Nessus is one of the most popular and capable vulnerability scanners, particularly for UNIX systems."
+    "page": "nessus",
+    "description": "Nessus is one of the most popular and capable vulnerability scanners, particularly for UNIX systems.",
+    "github": "http://github.com/dradis/dradis-nessus",
+    "vendor": "http://www.tenable.com/products/nessus-vulnerability-scanner"
   },
   {
     "title": "NeXpose",
-    "description": "Vulnerability management product from Rapid7."
+    "page": "nexpose",
+    "description": "Vulnerability management product from Rapid7.",
+    "github": "http://github.com/dradis/dradis-nexpose",
+    "vendor": "http://www.rapid7.com/products/nexpose/"
   },
   {
     "title": "Nikto",
-    "description": "Nikto is an Open Source (GPL) web server scanner which performs comprehensive tests against web servers for multiple items."
+    "page": "nikto",
+    "description": "Nikto is an Open Source (GPL) web server scanner which performs comprehensive tests against web servers for multiple items.",
+    "github": "http://github.com/dradis/dradis-nikto",
+    "vendor": "https://cirt.net/Nikto2"
   },
   {
     "title": "Nmap",
-    "description": "Nmap is a free and open source utility for network discovery and security auditing."
+    "page": "nmap",
+    "description": "Nmap is a free and open source utility for network discovery and security auditing.",
+    "github": "http://github.com/dradis/dradis-nmap",
+    "vendor": "http://nmap.org/"
   },
   {
     "title": "OpenVAS",
-    "description": "OpenVAS is a vulnerability scanner that was forked from the last free version of Nessus after that tool went proprietary in 2005."
+    "page": "openvas",
+    "description": "OpenVAS is a vulnerability scanner that was forked from the last free version of Nessus after that tool went proprietary in 2005.",
+    "github": "http://github.com/dradis/dradis-openvas",
+    "vendor": "http://www.openvas.org/"
   },
   {
     "title": "OSVDB",
-    "description": "OSVDB is an independent and open sourced web-based vulnerability database created for the security community."
+    "page": "osvdb",
+    "description": "OSVDB is an independent and open sourced web-based vulnerability database created for the security community.",
+    "github": "http://github.com/dradis/dradis-osvdb",
+    "vendor": "http://osvdb.org/"
   },
   {
     "title": "Qualys",
-    "description": "Qualys is a cloud-based vulnerability scanner."
+    "page": "qualys",
+    "description": "Qualys is a cloud-based vulnerability scanner.",
+    "github": "http://github.com/dradis/dradis-qualys",
+    "vendor": "https://www.qualys.com/"
   },
   {
     "title": "Retina",
-    "description": "Integrated network, web & virtual vulnerability scanner"
+    "page": "retina",
+    "description": "Integrated network, web & virtual vulnerability scanner",
+    "github": "http://github.com/dradis/dradis-retina",
+    "vendor": "http://www.beyondtrust.com/Products/RetinaNetworkSecurityScanner/"
   },
   {
     "title": "SureCheck",
-    "description": "SureCheck provides a simple and straight forward mechanism to perform security build reviews, system configuration reviews and policy compliance audits."
+    "page": "surecheck",
+    "description": "SureCheck provides a simple and straight forward mechanism to perform security build reviews, system configuration reviews and policy compliance audits.",
+    "github": "http://github.com/dradis/dradis-surecheck",
+    "vendor": "http://www.wildcroftsecurity.com"
   },
   {
     "title": "VulnDB",
-    "description": "VulnDB is a hosted library of reusable entries for your reports."
+    "page": "vulndb",
+    "description": "VulnDB is a hosted library of reusable entries for your reports.",
+    "github": "http://github.com/dradis/dradis-vulndb",
+    "vendor": "http://vulndbhq.com/"
   },
   {
     "title": "w3af",
-    "description": "The project's goal is to create a framework to find and exploit web application vulnerabilities."
+    "page": "w3af",
+    "description": "The project's goal is to create a framework to find and exploit web application vulnerabilities.",
+    "github": "http://github.com/dradis/dradis-w3af",
+    "vendor": "http://w3af.org/"
   },
   {
     "title": "MediaWiki",
-    "description": "MediaWiki is a free software open source wiki package written in PHP, originally for use on Wikipedia."
+    "page": "mediawiki",
+    "description": "MediaWiki is a free software open source wiki package written in PHP, originally for use on Wikipedia.",
+    "github": "http://github.com/dradis/dradis-mediawiki",
+    "vendor": "http://www.mediawiki.org"
   },
   {
     "title": "Web Exploitation Framework",
-    "description": "A Metasploit-like framework focused on the web standards along with exploits & payloads designed specifically for defeating web application protections."
+    "page": "wxf",
+    "description": "A Metasploit-like framework focused on the web standards along with exploits & payloads designed specifically for defeating web application protections.",
+    "github": "http://github.com/dradis/dradis-wxf",
+    "vendor": "http://webexploitationframework.github.com/wXf/"
   },
   {
     "title": "Zed Attack Proxy",
-    "description": "The Zed Attack Proxy (ZAP) is an easy to use integrated penetration testing tool for finding vulnerabilities in web applications."
+    "page": "zap",
+    "description": "The Zed Attack Proxy (ZAP) is an easy to use integrated penetration testing tool for finding vulnerabilities in web applications.",
+    "github": "http://github.com/dradis/dradis-zap",
+    "vendor": "https://www.owasp.org/index.php/OWASP_Zed_Attack_Proxy_Project"
   }
 ]

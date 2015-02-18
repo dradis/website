@@ -1,0 +1,15 @@
+<%# see ./config.rb - we can't use frontmatter in dynamic pages afaik %>
+
+<div class="intro-text">
+  <h2><%= title %></h2>
+  <h4><%= description %></h4>
+</div>
+
+<div class="container">
+  <dl>
+    <dt>Add-on repo</dt>
+    <dd><%= link_to github, github %></dd>
+    <dt>Vendor website</dt>
+    <dd><%= link_to vendor, vendor %></dd>
+  </dl>
+</div>
