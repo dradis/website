@@ -1,0 +1,10 @@
+body.release_timeline {
+  h3 {
+    border-bottom: 1px solid transparentize($base-font-color, .8);
+  }
+
+  ul {
+    margin-top: $base-spacing/2;
+    margin-bottom: $base-spacing;
+  }
+}
