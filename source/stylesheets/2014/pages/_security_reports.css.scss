@@ -1,0 +1,9 @@
+body.security_reports {
+  h3 {
+    border-bottom: 1px solid transparentize($base-font-color, .8);
+  }
+
+  h4 {
+    padding-top: 1em;
+  }  
+}

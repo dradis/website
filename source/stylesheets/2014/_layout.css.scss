@@ -24,6 +24,7 @@ pre.code {
 
 .container {
   @include outer-container;
+  min-height: 300px;
 }
 
 .intro-text h2 {

@@ -1,0 +1,52 @@
+---
+title: Security Reports | Dradis Framework
+description: Advisories about the Dradis Framework.
+---
+
+<div class="intro-text">
+  <h2>Security Reports</h2>
+  <!-- <h4>Dradis Framework is released under the terms of the GNU GPLv2 license.</h4> -->
+</div>
+
+
+<div class="container">
+  <p>This page lists all security vulnerabilities fixed in released 
+  versions of <strong>Dradis</strong>. Each vulnerability is given 
+  a security impact rating by the <a href="https://github.com/orgs/dradis/people">Dradis core team</a> - please note that 
+  this rating may vary from platform to platform. We also list the 
+  versions of <strong>Dradis</strong> the flaw is known to affect, 
+  and where a flaw has not been verified list the version with a 
+  question mark.</p>
+  <p>Please send comments or corrections for these vulnerabilities to: 
+  <strong>security[ {at} ]dradisframework{ [dot] }org</strong></p>
+
+  <h3>Fixed in Dradis 2.5.2</h3>
+
+  <h4>high: Unauthenticated reflected cross-site scripting</h4>
+  <p>Insufficient output encoding could result in arbitrary JavaScript code 
+  being executed if a specially crafted file was uploaded by an authenticated
+  user.</p>
+  <p>Affects: 2.5.1, 2.5.0 and possibly older versions of Dradis.</p>
+  <p>Credit: Props go to <a href="http://twitter.com/holisticinfosec">Russ McRee</a>
+  for identifying this issue.</p>
+  <p>CVE not assigned yet</p>
+
+  <h3>Fixed in Dradis 2.0.1</h3>
+
+  <h4>high: Missing authentication</h4>
+  <p>The authentication filter was found to be missing in two components of
+  the server module (notes and configuration).</p>
+  <p>This was fixed in <a href="http://dradis.svn.sourceforge.net/viewvc/?view=rev&amp;revision=598">revision 598</a></p>
+  <p>Affects: 2.0.0</p>
+  <p><a href="http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2009-0670">CVE-2009-0670</a> (candidate)</p>
+
+  <!--
+  <h3>Fixed in dradis xx.yy.zz</h3>
+  <h2>rating: Title</h2>
+  <p>desc</p>
+  <p>This was fixed in <a href="http://dradis.svn.sourceforge.net/viewvc/?view=rev&revision=###">revision ###</a></p>
+  <p>Affects: </p>
+  <p>Credit:</p>
+  -->
+
+</div>
