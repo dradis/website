@@ -20,4 +20,10 @@ $(document).ready(function() {
     $(this).addClass("active-nav-item");
     $(".nav .more").removeClass("active-nav-item");
   });
+
+  $('.expander-trigger').click(function(){
+    console.log('trigger');
+    $(this).toggleClass("expander-hidden");
+  });
+
 });

@@ -1,0 +1,10 @@
+body.screenshots {
+  h3 {
+    border-bottom: 1px solid transparentize($base-font-color, .8);
+    margin-top: $base-spacing/2;
+    margin-bottom: $base-spacing;
+  }
+  div.container {
+    margin-bottom: 100px;
+  }
+}
