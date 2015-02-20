@@ -116,10 +116,7 @@ end
 # Deploy over rsync
 activate :deploy do |deploy|
   deploy.method = :rsync
-  deploy.user = 'deployer'
   deploy.host = 'viper'
   deploy.port = 22121
   deploy.path = '/var/www/dradisframework/www'
-  deploy.clean = true
 end
-
