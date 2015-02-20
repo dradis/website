@@ -109,8 +109,16 @@ configure :build do
   # Or use a different image path
   # set :http_prefix, "/Content/images/"
 
-  # Create favicons from source/favicon_base.png
-  activate :favicon_maker
+  # Create favicons from source/_favicon_template.png
+  activate :favicon_maker, icons: {
+    "_favicon_template.png" => [
+    { icon: "apple-touch-icon-152x152-precomposed.png" },             # Same as apple-touch-icon-57x57.png, for retina iPad with iOS7.
+    { icon: "apple-touch-icon-114x114-precomposed.png" },             # Same as apple-touch-icon-57x57.png, for retina iPhone with iOS6 or prior.
+    { icon: "apple-touch-icon-72x72-precomposed.png" },               # Same as apple-touch-icon-57x57.png, for non-retina iPad with iOS6 or prior.
+      { icon: "favicon.png", size: "16x16" },                           # The classic favicon, displayed in the tabs.
+      { icon: "favicon.ico", size: "64x64,32x32,24x24,16x16" },         # Used by IE, and also by some other browsers if we are not careful.
+    ]
+  }
 end
 
 # Deploy over rsync
