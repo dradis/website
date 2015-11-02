@@ -31,6 +31,17 @@
     <![endif]-->
   </head>
   <body class="<%= page_classes %>">
+  <% if build? %>
+  <!-- START Google Tag Manager - dradisframework.org -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TJJSWV"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TJJSWV');</script>
+  <!-- END Google Tag Manager - dradisframework.org -->
+  <% end %>
 
   <header class="navigation">
     <div class="navigation-wrapper">
@@ -76,7 +87,7 @@
         </ul>
       </div>
       <div class="navigation-tools">
-        <a href="http://securityroots.com/dradispro/" class="sign-up">Dradis Professional</a>
+        <a href="http://securityroots.com/dradispro/editions.html" class="sign-up">Dradis Professional</a>
       </div>
     </div>
   </header>
