@@ -1,14 +1,19 @@
 header.navigation {
+  $base-border-color: gainsboro !default;
+  $base-border-radius: 3px !default;
+  $action-color: #477DCA !default;
+  $dark-gray: #333 !default;
+  $large-screen: em(860) !default;
   $navigation-padding: 1em;
 //  $navigation-background: $dark-gray;
   $navigation-background: $base-accent-color;
   $navigation-color: transparentize(white, 0.3);
   $navigation-color-hover: white;
   $navigation-height: 60px;
-//  $navigation-nav-button-background: $base-accent-color;
+//  $navigation-nav-button-background: $action-color;
   $navigation-nav-button-background: #53b3f7;
-  $navigation-nav-button-background-hover: lighten($navigation-background, 10);
-  $navigation-nav-button-border: 1px solid lighten($navigation-nav-button-background, 20);
+  $navigation-nav-button-background-hover: lighten($navigation-background, 10%);
+  $navigation-nav-button-border: 1px solid lighten($navigation-nav-button-background, 20%);
   $navigation-search-background: lighten($navigation-background, 5);
   $navigation-search-border: 1px solid darken($navigation-background, 5);
   $navigation-active-link-color: transparentize(white, 0.5);
@@ -19,7 +24,7 @@ header.navigation {
   background-color: $navigation-background;
 //  border-bottom: 1px solid darken($navigation-background, 10);
   border-bottom: 0;
-  height: $navigation-height;
+  min-height: $navigation-height;
   width: 100%;
   z-index: 999;
 
@@ -38,7 +43,7 @@ header.navigation {
 
     img {
       max-height: $navigation-height;
-      padding: .8em 0;
+      padding: 0.8em 0;
     }
   }
 
@@ -48,17 +53,17 @@ header.navigation {
     color: $navigation-color;
     display: block;
     float: right;
-    font-family: $sans-serif;
-    font-weight: 700;
     line-height: $navigation-height;
     margin: 0;
     padding-right: 1em;
+    text-decoration: none;
     text-transform: uppercase;
 
     @include media ($horizontal-bar-mode) {
       display: none;
     }
 
+    &:focus,
     &:hover {
       color: $navigation-color-hover;
     }
@@ -66,16 +71,17 @@ header.navigation {
 
   // Nav menu
 
-  .nav {
-    z-index: 9999999;
+  nav {
     float: none;
+    min-height: $navigation-height;
+    z-index: 9999999;
+
     @include media ($horizontal-bar-mode) {
       float: left;
     }
   }
 
-  ul#navigation-menu {
-    -webkit-transform-style: preserve-3d; // stop webkit flicker
+  ul.navigation-menu {
     clear: both;
     display: none;
     margin: 0 auto;
@@ -83,6 +89,10 @@ header.navigation {
     padding: 0;
     width: 100%;
     z-index: 9999;
+
+    &.show {
+      display: block;
+    }
 
     @include media ($horizontal-bar-mode) {
       display: inline;
@@ -98,7 +108,7 @@ header.navigation {
     display: block;
     line-height: $navigation-height;
     overflow: hidden;
-    padding-right: .8em;
+    padding-right: 0.8em;
     text-align: right;
     width: 100%;
     z-index: 9999;
@@ -114,12 +124,13 @@ header.navigation {
     a {
       color: $navigation-color;
       display: inline-block;
-      font-weight: 400;
+      text-decoration: none;
 
       @include media ($horizontal-bar-mode) {
         padding-right: 1em;
       }
 
+      &:focus,
       &:hover {
         color: $navigation-color-hover;
       }
@@ -136,7 +147,7 @@ header.navigation {
   li.more.nav-link {
     padding-right: 0;
 
-    @include media($large-screen) {
+    @include media($horizontal-bar-mode) {
       padding-right: $navigation-submenu-padding;
     }
 
@@ -153,7 +164,7 @@ header.navigation {
     }
 
     > a:after {
-      @include position(absolute, auto -.4em auto auto);
+      @include position(absolute, auto -0.4em auto auto);
       content: '\25BE';
       color: $navigation-color;
     }
@@ -164,14 +175,14 @@ header.navigation {
     padding-right: 0;
 
     a {
-      padding-right: .8em;
+      padding-right: 0.8em;
     }
 
     > a {
       padding-right: 1.6em;
       position: relative;
 
-      @include media($large-screen) {
+      @include media($horizontal-bar-mode) {
         margin-right: $navigation-submenu-padding;
       }
 
@@ -183,12 +194,13 @@ header.navigation {
       }
     }
 
+    &:focus > .submenu,
     &:hover > .submenu {
       display: block;
     }
 
     @include media($horizontal-bar-mode) {
-      padding-right: .8em;
+      padding-right: 0.8em;
       position: relative;
     }
   }
@@ -205,7 +217,7 @@ header.navigation {
 
     .submenu {
       @include media($horizontal-bar-mode) {
-        left: $navigation-submenu-width - .2em;
+        left: $navigation-submenu-width - 0.2em;
         top: 0;
       }
     }
@@ -225,12 +237,12 @@ header.navigation {
         &:last-child > a {
           border-bottom-left-radius: $base-border-radius;
           border-bottom-right-radius: $base-border-radius;
-          padding-bottom: .7em;
+          padding-bottom: 0.7em;
         }
       }
 
       a {
-        background-color: darken($navigation-background, 3);
+        background-color: darken($navigation-background, 3%);
         display: inline-block;
         text-align: right;
         width: 100%;
@@ -248,17 +260,15 @@ header.navigation {
   // Elements on the far right
 
   .navigation-tools {
-    @include clearfix;
-    display: block;
-    padding-right: $navigation-padding;
-    padding-left: $navigation-padding/2;
-    clear: both;
     background: #505050;
+    clear: both;
+    display: block;
+//    height: $navigation-height;
 
-    @include media($large-screen) {
+    @include media($horizontal-bar-mode) {
       background: transparent;
-      float: right;
       clear: none;
+      float: right;
     }
   }
 
@@ -294,49 +304,55 @@ header.navigation {
   .search-bar {
     $search-bar-border-color: $base-border-color;
     $search-bar-border: 1px solid $search-bar-border-color;
-    $search-bar-background: lighten($search-bar-border-color, 10);
+    $search-bar-background: lighten($search-bar-border-color, 10%);
 
-    padding: .85em .6em;
     float: left;
-    .search-and-submit {
+    padding: 0.85em 0.85em 0.7em 0.6em;
+    width: 60%;
+
+    form {
       position: relative;
 
       input[type=search] {
+        @include box-sizing(border-box);
         background: $navigation-search-background;
-        border: $navigation-search-border;
-        padding: .6em .8em;
-        font-size: .9em;
-        font-style: italic;
-        color: $navigation-color;
         border-radius: $base-border-radius * 2;
+        border: $navigation-search-border;
+        color: $navigation-color;
+        font-size: 0.9em;
+        font-style: italic;
         margin: 0;
+        padding: 0.5em 0.8em;
+        width: 100%;
 
-        @include media($large-screen) {
+        @include media($horizontal-bar-mode) {
           width: 100%;
         }
       }
 
       button[type=submit] {
-        @include button(simple, lighten($navigation-search-background, 10));
-        position: absolute;
-        top: 0.3em;
-        right: 0.3em;
+        background: $navigation-search-background;
+        border: none;
         bottom: 0.3em;
         left: auto;
         outline: none;
-        padding: 0 15px;
+        padding: 0 9px;
+        position: absolute;
+        right: 0.3em;
+        top: 0.3em;
 
         img {
           height: 12px;
-          opacity: .7;
+          opacity: 0.7;
+          padding: 1px;
         }
       }
     }
 
     @include media($horizontal-bar-mode) {
-      width: 16em;
-      position: relative;
       display: inline-block;
+      position: relative;
+      width: 16em;
 
       input {
         @include box-sizing(border-box);
