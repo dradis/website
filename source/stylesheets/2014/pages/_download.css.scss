@@ -14,4 +14,34 @@ body.download {
     margin-bottom: 100px;
     margin-top: 50px;
   }
+
+  section {
+    @include outer-container;
+    article {
+      @include span-columns(8);
+    }
+    aside {
+      @include span-columns(4);
+      @include border-bottom-radius(10px);
+      @include border-top-radius(10px);
+
+      background-color: lighten($base-accent-color, 50);
+      background-color: #f4f4f4;
+
+      margin-top: $base-spacing;
+      padding: $base-spacing;
+
+      h3 {
+        margin-bottom: $base-spacing / 2;
+        padding: 0;
+        border-bottom: 1px solid transparentize($base-font-color, .8);
+      }
+
+      .editions {
+        font-size: 110%;
+        margin-top: $base-spacing;
+        text-align: center;
+      }
+    }
+  }
 }
