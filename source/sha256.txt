@@ -1,3 +1,6 @@
+4d11d8f97dde50eb677c10bb8b9f6e16f35a7c34bdcbfce95b820740f8ef763c  dradis-3.1.0.rc1-linux-x86.tar.gz
+25ec4897e8530850a56fd133196ba7e57f07614021b23c4ad8ad2a375e8e8a78  dradis-3.1.0.rc1-linux-x86_64.tar.gz
+e9dcaae985e3485811244b5a95bcccc1b4147a60ec26df480f7c417ff65708e1  dradis-3.1.0.rc1-osx.tar.gz
 42cfd23f227df78a90aedfec33707fc7521e3b4600196a17d130ff1c3ed7e211  dradis-3.0.0.rc3-linux-x86.tar.gz
 7b7f6b34029ede88de40558fb4ad81d1f040e2af8bdf8e6a9d26517c2e2bf333  dradis-3.0.0.rc3-linux-x86_64.tar.gz
 9f14e69cf9e170f237bf9a87621d23288829e84a3a374bb685aa5f680ea13b46  dradis-3.0.0.rc3-osx.tar.gz
