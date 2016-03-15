@@ -1,0 +1,68 @@
+---
+title: Installing Dradis on Cloud9 | Dradis Framework
+description: Use c9.io to get Dradis up and running on the Cloud9 IDE
+---
+
+<div class="intro-text">
+  <h2>Installing Dradis on Cloud9</h2>
+  <h4>If your answer is not here the <a href="http://discuss.dradisframework.org">Community Forums</a> are your best bet.</h4>
+</div>
+
+
+<div class="container">
+	<h2>Deploy Dradis on Cloud9</h2>
+	<p>Use this guide to install Dradis Community Edition and get up and running in the Cloud9 IDE. Unlike a <a href="install_git.html">local installation</a>, you won't be able to take this instance of Dradis offline. But, you'll have access to Dradis anywhere that has an internet connection.</p><br/>
+	<p>Running Windows and don't have access to <a href="http://tools.kali.org/reporting-tools/dradis">Kali Linux?</a> Use Cloud9 to get up and running with Dradis with just your browser, and fast!</p><br/><br/>
+	
+	<h3>Getting started on Cloud9</h3><br/>
+	<p>1. Sign up for a free account at <a href="https://c9.io/web/sign-up/free">Cloud9</a>.<br/>They have premium plans if you're interested in more workspaces or more diskspace. However, to launch and use Dradis, you can use their free account.</p><hr/>
+	<p>2. From your Cloud9 dashboard, click <a href="https://c9.io/new">+ Create a new workspace</a></p><hr/>
+	<p>3. Give your workspace a name (any name)<br/>Optionally give your workspace a description</p><hr/>
+	<p>4. For this guide, we're going to be working with a Hosted workspace. Make sure to select either a Private or a Public workspace.</p><hr/>
+	<p>5. Enter the following value into the <strong>Clone from Git or Mercurial URL</strong> field:<br/><code>https://github.com/dradis/dradis-ce.git</code></p><hr/>
+	<p>6. Under <strong>Choose a template</strong>, select the <strong>Ruby</strong> icon.</p><hr/>
+	<p>7. Click <strong>Create workspace</strong></p><br/>
+  <div class="centered-image">
+  	<%= image_tag 'documentation/dradisframework-04.png', width: "75%" %> 
+  </div><hr/><br/>
+  <h3>Get your workspace in order</h3><br/>
+  <p>When your workspace is loaded, you'll be greeted by the following screen:</p>
+  <div class="centered-image">
+  	<%= image_tag 'documentation/dradisframework-05.png', width: "75%" %>
+  </div><br/><br/>
+  <p>1. In the top left hand sidebar, click the <strong>Settings wheel</strong> and select <strong>Show Home in Favorites</strong> from the dropdown as shown below</p><br/>
+  <div class="centered-image">
+  	<%= image_tag 'documentation/dradisframework-06.png', width: "33%" %>
+  </div><hr/>
+  <p>2. Run the following in the terminal at the bottom of your screen:<br/><code>$ ./bin/setup</code><br/>Don't worry about the warning about <code>The path `/home/ubuntu/dradis-plugins` does not exist.</code>, we'll fix that next</p><hr/>
+  <p>3. Expand the <strong>~</strong> folder under <strong>Favorites</strong> at the top of your screen and expand the <strong>community</strong> folder so that you can see all 18 folders inside.</p><hr/>
+  <p>4. Move all 18 folders out of the <strong>community</strong> folder so that they are on the same level as the <strong>workspace</strong> folder (CTRL + click to select all 18 folders as once). Your file structure should now look like this:</p>
+  <div class="centered-image">
+  	<%= image_tag 'documentation/dradisframework-07.png', width: "20%" %>
+  </div><hr/>
+  <p>5. Run the following in the terminal at the bottom of your screen:<br/><code>$ bundle install</code><br/><br/><em>Troubleshooting this step:</em> If you get a message about <code>An error occurred while installing gem-name (1.0.0), and Bundler cannot continue</code>, it's likely a system-specific dependency issue. The first line of defense is to Google the specific error message to see whether StackOverflow or similar sites offer a solution. If you cannot resolve the issue, let us know in the <a href="http://discuss.dradisframework.org">Community Forums</a>
+  </p><hr/>
+  <p>6. Run the following in the terminal at the bottom of your screen:<br/><code>$ ./bin/setup</code><br/><br/><em>Troubleshooting this step:</em> If you get an error message similar to <code>"NoMethodError: undefined method `last_comment' for #<Rake::Application:0x007ff0cf37be38>"</code>, you can resolve it by inserting the following content in line #6 of your <code>Rakefile</code> to bypass an issue with Rake version 11:<br/><pre># temp fix for NoMethodError: undefined method `last_comment'<br/># remove when fixed in Rake 11.x<br/>  module TempFixForRakeLastComment<br/>    def last_comment<br/>      last_description<br/>    end <br/>  end<br/>  Rake::Application.send :include, TempFixForRakeLastComment<br/>  ### end of temfix</pre><a href="http://stackoverflow.com/questions/35893584/nomethoderror-undefined-method-last-comment-after-upgrading-to-rake-11/35893941">Credit to StackOverflow for this patch</a></p><hr/>
+  <p>7. Run the following in the terminal at the bottom of your screen:<br/><code>$ bundle exec rails server -p $PORT -b $IP</code></p><hr/>
+  <p>6. Navigate to the URL where Dradis is now running! The url requires your workspace name (dradis-ce in this example) and your Cloud9 username (rkorinek in this example). The url uses the following format: [WorkspaceName]-[Cloud9Username].c9users.io. <br/>Example: https://[workspace]dradis-ce-rkorinek.c9users.io/</p><hr/>
+  <p>8. Configure the shared password by entering it and confirming it:
+    <div class="centered-image">
+      <%= image_tag 'documentation/dradisframework-01.png', width: "50%" %>
+    </div>
+  </p>
+  <p>9. Create a username, then enter the password you created in step #3:
+    <div class="centered-image">
+      <%= image_tag 'documentation/dradisframework-02.png', width: "50%" %>
+    </div>
+  </p>
+  <br/>
+  <br/>
+  <h1>Congratulations!</h1>
+  <p>You did it! You have now completed the installation process are are now running Dradis on Cloud9. Congratulations on making it all the way from git to running on the cloud!</p><br/>
+    <div class="centered-image">
+      <%= image_tag 'documentation/dradisframework-03.png', width: "75%" %>
+    </div>
+  <br/><br/>
+  <h3 style="text-align:center">Next? Check out <a href="/documentation/">the rest of the Dradis Community guides</a>.</h3>
+  <br/><br/><br/>
+</div>
