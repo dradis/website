@@ -37,6 +37,7 @@ set :markdown_engine, :redcarpet
 #  :which_fake_page => "Rendering a fake page with a local variable" }
 
 # Redirects
+redirect 'documentation.html', to: '/documentation/'
 redirect 'server_plugins.html', to: '/addons/'
 redirect 'subversion.html', to: '/download.html'
 
