@@ -1,0 +1,39 @@
+<% content_for :page_title do %><%= title %> - Videos - Dradis Professional<% end %>
+<% content_for :page_description, escape_html(description)[0..154] %>
+
+<div class="container">
+  <br/>
+  <p><%= link_to 'Documentation', '/documentation/' %>&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Videos', '/documentation/videos/' %>&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;<%= title %></p>
+  <br/>
+  <h1>Video - <%= title %></h1>
+  <iframe frameborder="0" width="480" height="300" src="<%=id%>"></iframe>
+  <h2>About this video</h2>
+  <p class="quote2"><%= description%></p>
+  <hr/>
+    <div class="light-gray-wrapper">
+      <section>
+        <ul class="bullets">
+          <li class="bullet two-col-bullet">
+            <div class="bullet-content">
+              <h4>Have a question?</h4>
+              <ul>
+                <li><a href="http://discuss.dradisframework.org">Community Forums</a></li>
+                <li><a href="http://twitter.com/home?status=Hey+@dradispro+I+was+wondering...">Tweet Us</a></li>
+              </ul>
+            </div>
+          </li>
+          <li class="bullet two-col-bullet">
+            <div class="bullet-content">
+              <h4>Share this video</h4>
+              <ul class="share-this-article">
+                <li class="email"><a href="mailto:?Subject=Dradis Pro Video: <%= title %>&Body=Visit this link: http://dradisframework.com/documentation/videos/<%= name %>.html">Email It</a></li>
+                <li class="tweet"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dradispro">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
+                <li class="like"><iframe src="http://www.facebook.com/plugins/like.php?href=http://securityroots.com/dradispro/support/videos/<%= name %>.html&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=28" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:28px;" allowTransparency="true"></iframe></li>
+              </ul>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </div>
+  <br/>
+</div>
