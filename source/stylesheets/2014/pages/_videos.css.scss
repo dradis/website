@@ -1,0 +1,9 @@
+body.documentation_videos {
+  .bullets h4 {
+    border-bottom: 1px solid transparentize($base-font-color, .8);
+    margin: 2ex 0 1ex;
+  }
+  .video-container {
+    text-align: center;
+  }
+}

@@ -11,10 +11,10 @@ module Helpers
 
       if data.page.description
         description = data.page.description
-      elsif content_for?(:description)
-        description = content_for(:description)
+      elsif content_for?(:page_description)
+        description = content_for(:page_description)
       end
-      
+
       if description
         if valid_description?(description)
           content_tag :meta, nil, name: 'description', content: description
