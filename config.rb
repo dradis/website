@@ -46,6 +46,11 @@ data.tools.each do |addon_data|
   proxy "/addons/#{addon_data[:page]}.html", "/addons/addon.html", ignore: true, locals: addon_data
 end
 
+data.videos.each do |video_data|
+  proxy "/documentation/videos/#{video_data[:page]}.html", "/documentation/videos/video.html", ignore: true, locals: video_data
+end
+
+
 # Hook ready, because the sitemap has definitely been built at this point
 ready do
   data.tools.each do |tool_data|

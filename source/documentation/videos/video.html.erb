@@ -1,0 +1,39 @@
+<% content_for :page_title do %><%= title %> - Community Edition Videos - Dradis Framework<% end %>
+<% content_for :page_description, escape_html(description)[0..154] %>
+
+<div class="intro-text">
+  <h2><%= title %></h2>
+  <h4>If your answer is not here the <a href="http://discuss.dradisframework.org">Community Forums</a> are your best bet.</h4>
+</div>
+
+<div class="container">
+  <p><%= link_to 'Documentation', '/documentation/' %>&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to 'Videos', '/documentation/videos/' %>&nbsp;&nbsp;&nbsp;&nbsp;>&nbsp;&nbsp;&nbsp;&nbsp;<%= title %></p>
+  <div class="video-container">
+    <iframe frameborder="0" width="480" height="300" src="<%=id%>"></iframe>
+  </div>
+  <h2>About this video</h2>
+  <p class="quote2"><%= description %></p>
+
+  <ul class="bullets">
+    <li class="bullet two-col-bullet">
+      <div class="bullet-content">
+        <h4>Have a question?</h4>
+        <ul>
+          <li><a href="http://discuss.dradisframework.org">Community Forums</a></li>
+          <li><a href="http://twitter.com/home?status=Hey+@dradisfw+I+was+wondering...">Tweet Us</a></li>
+        </ul>
+      </div>
+    </li>
+    <li class="bullet two-col-bullet">
+      <div class="bullet-content">
+        <h4>Share this video</h4>
+        <ul class="">
+          <li class="email"><a href="mailto:?Subject=Dradis Video: <%= title %>&Body=Visit this link: http://dradisframework.org/documentation/videos/<%= page %>.html">Email It</a></li>
+          <li class="tweet"><a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="dradispro">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script></li>
+          <li class="like"><iframe src="http://www.facebook.com/plugins/like.php?href=http://dradisframework.org/support/videos/<%= page %>.html&amp;layout=button_count&amp;show_faces=false&amp;width=90&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=28" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:90px; height:28px;" allowTransparency="true"></iframe></li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+
+</div>
