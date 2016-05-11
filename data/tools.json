@@ -1,5 +1,12 @@
 [
   {
+    "title": "Brakeman",
+    "page": "brakeman",
+    "description": "Brakeman is an open source vulnerability scanner specifically designed for Ruby on Rails applications.",
+    "github": "http://github.com/dradis/dradis-brakeman",
+    "vendor": "http://brakemanscanner.org/"
+  },
+  {
     "title": "Burp Suite",
     "page": "burp",
     "description": "Burp Suite is an integrated platform for attacking web applications.",
@@ -33,6 +40,13 @@
     "description": "Nmap is a free and open source utility for network discovery and security auditing.",
     "github": "http://github.com/dradis/dradis-nmap",
     "vendor": "http://nmap.org/"
+  },
+  {
+    "title": "Metasploit",
+    "page": "metasploit",
+    "description": "Penetration testing software.",
+    "github": "http://github.com/dradis/dradis-metasploit",
+    "vendor": "http://www.metasploit.com/"
   },
   {
     "title": "OpenVAS",
