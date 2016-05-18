@@ -8,44 +8,57 @@ description: Dradis Framework documentation.
   <h4>If your answer is not here the <a href="http://discuss.dradisframework.org">Community Forums</a> are your best bet.</h4>
 </div>
 
-
+  
 <div class="container">
-  <h2>From git to running</h2>
-  <br/>
-  <p>1. Head over to the <a href="https://github.com/dradis/dradis-ce">Dradis Framework repo</a> on GitHub.</p>
-  <p>2. On your local system, run the following in your command line:<br/><code>$ git clone https://github.com/dradis/dradis-ce.git</code><br/><code>$ cd dradis-ce/</code></p>
-  <p>3. Run the following in your command line:<br/><code>$ bundle install</code></p>
-  <p>4. Run the following in your command line:<br/><code>$ ./bin/setup</code></p>
-  <br/>
-  <br/>
-  <h3>Troubleshooting tips</h3>
+  <ul class="bullets">
+    <li class="bullet two-col-bullet">
+      <div class="bullet-content" style="margin-left: 0">
+        <h1>Text Instructions</h1>
+        <h3>Getting started</h3>
+        <p>1. Head over to the <a href="https://github.com/dradis/dradis-ce">Dradis Framework repo</a> on GitHub.</p>
+        <p>2. On your local system, run the following in your command line:<br/><code>$ git clone https://github.com/dradis/dradis-ce.git</code><br/><code>$ cd dradis-ce/</code></p>
+        <p>3. Run the following in your command line:<br/><code>$ bundle install</code></p>
+        <p>4. Run the following in your command line:<br/><code>$ ./bin/setup</code></p>
+      </div>
+    </li>
+    <li class="bullet two-col-bullet">
+      <div class="bullet-content" style="margin-left: 0">
+        <h1>Video Tutorial</h1>
+        <div class="video-container">
+          <iframe frameborder="0" width="480" height="300" src="//fast.wistia.net/embed/iframe/smk350o0nr"></iframe>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h4>Troubleshooting tips</h4>
   <p>If you get an error about <code>The path '~/dradis-plugins' does not exist</code> during this step, check the file structure. Did the download create a folder like <strong>/community</strong> that holds the <strong>dradis-plugins</strong> folder? If so, move the contents of the <strong>community</strong> folder out into the same file that holds the <strong>dradis-ce</strong> folder.</p>
 
   <p>If you get a message about <code>An error occurred while installing gem-name (1.0.0), and Bundler cannot continue</code>, it's likely a system-specific dependency issue. The first line of defense is to Google the specific error message to see whether StackOverflow or similar sites offer a solution. If you cannot resolve the issue, let us know in the <a href="http://discuss.dradisframework.org">Community Forums</a></p>
   <br/>
   <br/>
- <h2>Setting up the app</h2>
+  <h3>Setting up the app</h3>
   <br/>
   <p>5. Once you've completed the steps above, fire up the server by running the following in your command line:<br/><code>$ bundle exec rails server</code></p>
   <p>6. Point your browser to: <a href="https://localhost:3000/">https://localhost:3000</a></p>
   <p>7. Configure the shared password by entering it and confirming it:
-    <div class="centered-image">
-      <%= image_tag 'documentation/dradisframework-01.png', width: "50%" %>
-    </div>
+  <div class="centered-image">
+    <%= image_tag 'documentation/dradisframework-01.png', width: "60%" %>
+  </div>
   </p>
   <p>Create a username, then enter the password you created in step #3:
-    <div class="centered-image">
-      <%= image_tag 'documentation/dradisframework-02.png', width: "50%" %>
-    </div>
+  <div class="centered-image">
+    <%= image_tag 'documentation/dradisframework-02.png', width: "60%" %>
+  </div>
   </p>
   <br/>
   <br/>
   <h1>Congratulations!</h1>
   <p>You did it! You have now completed the installation process. Congratulations on making it all the way from git to running!
-    <%= image_tag 'documentation/dradisframework-03.png', width: "75%" %>
+  <div class="centered-image">
+    <%= image_tag 'documentation/dradisframework-03.png', width: "90%" %>
+  </div>
   </p>
-  <br/><br/>
+  <br/><br/>    
   <h3 style="text-align:center">Next? Check out <a href="/documentation/">the rest of the Dradis Community guides</a>.</h3>
   <br/><br/><br/>
-
 </div>
