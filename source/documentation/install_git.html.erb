@@ -50,6 +50,9 @@ description: Dradis Framework documentation.
     <%= image_tag 'documentation/dradisframework-02.png', width: "60%" %>
   </div>
   </p>
+  <p>8. In a new tab in your terminal, start the <strong>Background worker</strong> that is needed to upload and parse tool output.</p>
+  <p>First, please make sure Redis is installed and running. If you're not sure how to install it on your local system, try searching Google for "install Redis [operating system]"</p>
+  <p>Once Redis is installed and running on your local system, run the following in your command line:<br/><code>$ bundle exec rake resque:work</code></p>
   <br/>
   <br/>
   <h1>Congratulations!</h1>
