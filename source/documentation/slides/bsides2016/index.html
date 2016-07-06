@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Dradis 3.1</title>
+
+		<meta name="description" content="BSides London 2014 workshop: Connecting Dradis to anything">
+		<meta name="author" content="Daniel Martin, @etdsoft">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/fonts.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <style type="text/css" media="screen">
+      .reveal ul {
+        margin-top: 1em;
+      }
+      .reveal ul.tick-cross {
+        list-style: none inside;
+        margin: 0;
+      }
+      .reveal li {
+        margin-bottom: 10px;
+      }
+      .reveal li.tick {
+        background: url('img/tick.png') left center no-repeat;
+        padding-left: 20px;
+      }
+      .reveal li.cross {
+        background: url('img/cross.png') left center no-repeat;
+        padding-left: 20px;
+      }
+      .reveal pre.line-by-line {
+        margin: 0 auto;
+      }
+      .reveal pre.line-by-line.fragment {
+        padding-top: 0;
+      }
+      .reveal pre.code-highlight code:hover {
+        background-color: #a0a0a0;
+        color: #3f3f3f;
+      }
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Dradis 3.1</h1>
+					<h3>A year of updates</h3>
+					<p>
+						<small>By <a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></small>
+					</p>
+					<aside class="notes">
+						<p>Show of hands:</p>
+            <ul>
+              <li>Used Dradis before.</li>
+              <li>Tried, but couldn't install.</li>
+              <li>Familiar with git.</li>
+              <li>Familiar with Rails.</li>
+            </ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Agenda</h2>
+          <ul>
+            <li>The basics</li>
+            <li>How does everything fit together</li>
+            <li>New stuff</li>
+            <li>Dradis packages</li>
+            <li>Dradis from Git</li>
+          </ul>
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<h1>You will ask questions now</h1>
+					<img src="img/hypnotoad.gif" height="332" width="474"/>
+				</section>
+
+				<section>
+					<h2>And when you get stuck</h2>
+          <br/>
+					<p><a href="http://discuss.dradisframework.org">http://discuss.dradisframework.org</a></p>
+					<img src="img/forum.png" height="" width=""  style="border:0; box-shadow: none"/>
+				</section>
+
+
+				<section>
+          <section>
+            <h2>The basics</h2>
+            <img src="img/snowcrash-05.png" height="" width="" style="border:0; box-shadow: none">
+          </section>
+
+          <section>
+            <h2>Issues</h2>
+            <img src="img/snowcrash-02.png" height="" width="" style="border:0; box-shadow: none">
+          </section>
+
+          <section>
+            <h2>Nodes</h2>
+            <img src="img/snowcrash-03.png" height="" width="" style="border:0; box-shadow: none">
+          </section>
+          
+          <section>
+            <h3>Notes, Evidence, Attachments</h3>
+            <img src="img/snowcrash-04.png" height="" width="" style="border:0; box-shadow: none">
+          </section>
+				</section>
+
+
+				<section>
+					<section>
+						<h2>How does everything<br/>fit together</h2>
+            <ul>
+              <li>The main app process</li>
+              <li>The background worker</li>
+            </ul>
+					</section>
+
+          <section>
+            <h2>Quick stats</h2>
+            <ul>
+              <li>263 downloads / 137 clones per week</li>
+              <li><a href="https://github.com/dradis/dradis-ce">dradis/dradis-ce</a> vs <a href="https://github.com/dradis/dradis-legacy">dradis/dradis-legacy</a></li>
+              <li>350 commits in the last 12 months (305 in the last 6)</li>
+              <li>1 code base to rule them all</li>
+            </ul>
+
+  					<aside class="notes">
+  						<ul>
+  						  <li>400/week -> 20,800/year</li>
+                <li>2007 -> 2016</li>
+                <li>Code convergence with Pro (1412 commits)</li>
+  						</ul>
+  					</aside>
+          </section>
+
+          <section>
+            <h2>The code</h2>
+            <br/>
+            <p>Main app:</p>
+            <p><a href="https://github.com/dradis/dradis-ce">dradis/dradis-ce</a></p>
+            <br/>
+            
+            <p>Connectors / add-ons</p>
+            <p><a href="https://github.com/dradis/dradis-burp">dradis/dradis-burp</a></p>
+            <p><a href="https://github.com/dradis/dradis-pdf_export">dradis/dradis-pdf_export</a></p>
+            <p><a href="https://github.com/dradis/dradis-calculator_cvss">dradis/dradis-calculator_cvss</a></p>
+          </section>
+
+					<section>
+						<h2>Ruby on Rails</h2>
+            <h4>version 4.2</h4>
+            <br/>
+            <p>Web interface:</p>
+            <p><a href="">http://127.0.0.1:3000</a></p>
+
+            <br/>
+            <p>Console interface:</p>
+  					<pre><code class="bash">
+  irb> Issue.count
+  32
+  irb> Issue.first.title
+  "Out-of-date Apache"
+            </code></pre>
+
+          </section>
+
+					<section>
+						<h2>Rails for hackers</h2>
+						<ul>
+  						<li><a href="http://carnal0wnage.attackresearch.com/2012/10/basics-of-rails-part-1.html">Rails Basics</a> series by <a href="http://twitter.com/cktricky">@cktricky</a></li>
+  						<li><a href="http://railscasts.com">Railscasts</a> learn by watching</li>
+  						<li><a href="http://railsforzombies.org/">RailsForZombies.org</a> step-by-step videos</li>
+  						<li><a href="http://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a> guide</li>
+  						<li><a href="http://tryruby.org/">Try ruby</a> learn by doing (non-Rails)</li>
+  					</ul>
+					</section>
+				</section>
+
+        <section>
+          <section>
+            <h2>New and improved<br/>in this release</h2>
+          </section>
+          <section>
+            <h2>Project summary</h2>
+            <img src="img/snowcrash-05.png" height="" width="" style="border:0; box-shadow: none">
+          </section>
+          <section>
+            <h2>Tagging</h2>
+            <img src="img/snowcrash-06.png" height="" width="" style="border:0; box-shadow: none">
+            <pre><code style="text-align:center">["!d62728_high", "!ff7f0e_medium", "!6baed6_low"]</code></pre>
+          </section>
+          <section>
+            <h2>Testing methodologies</h2>
+            <img src="img/snowcrash-07.png" height="" width="" style="border:0; box-shadow: none">
+            <p><a href="http://dradisframework.org/academy/industry/compliance/owasp/">The OWASP Testing Guide v4</a></p>
+          </section>
+          <section>
+            <h2>Activity Feed</h2>
+            <img src="img/snowcrash-08.png" height="" width="" style="border:0; box-shadow: none">
+          </section>
+          <section>
+            <h2>Smart Issues table</h2>
+            <img src="img/snowcrash-09.gif" height="" width="" style="border:0; box-shadow: none">
+          </section>
+          <section>
+            <h2>Tabbed views</h2>
+            <img src="img/snowcrash-10.png" height="" width="" style="border:0; box-shadow: none">
+          </section>
+          <section>
+            <h2>Host properties</h2>
+            <img src="img/snowcrash-11.png" height="" width="" style="border:0; box-shadow: none">
+          </section>
+          <section>
+            <h2>REST API</h2>
+            <ul>
+              <li><code>/api/issues</code></li>
+              <li><code>/api/nodes</code>
+                <ul>
+                  <li><code>./evidence</code></li>
+                  <li><code>./notes</code></li>
+                </ul>
+              </li>
+            </ul>
+          </section>
+          <section>
+            <pre><code class="bash">
+  $ curl -i -u etd http://dradisframework-ce.dev/api/issues/4
+  {
+    "id": 4,
+    "title": "Out-of-date Apache server",
+    "fields": {
+      "Title": "Out-of-date Apache server",
+      "OWASP": "A9",
+      "Risk": "High",
+      "Description": "The version of ...",
+      "Solution": "The Apache HTTP ...",
+      "References": "Apache HTTP Server Project\nhttp://httpd.apache.org"
+    },
+    "text": "#[Title]#\nOut-of-date Apache server\n\n#[OWASP]#\nA9\n\n...",
+    "created_at": "2016-06-08T05:53:52.703Z",
+    "updated_at": "2016-06-08T05:53:52.703Z"
+  }
+            </code></pre>
+          </section>
+  			</section>
+
+
+        <section>
+          <section>
+            <h2>Dradis on Kali</h2>
+            <ul>
+              <li>Non-Ruby prerequisites</li>
+              <li>Package: <code>3.0.0~rc1</code> (working on it)</li>
+              <li>You can still git</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Non-Ruby prerequisites (1/2): Redis</h2>
+            <p>Linux:</p>
+  					<pre class="line-by-line"><code class="bash">
+  $ apt-get install redis-server
+            </code></pre>
+            <p>Mac:</p>
+  					<pre class="line-by-line"><code class="bash">
+  $ brew install redis
+  $ redis-server /usr/local/etc/redis.conf  
+            </code></pre>
+          </section>
+          <section>
+            <h2>Non-Ruby prerequisites (2/2): SQlite3 libs</h2>
+            <p>Linux:</p>
+  					<pre class="line-by-line"><code class="bash">
+  $ apt-get install libsqlite3-dev
+            </code></pre>
+            <p>Mac:</p>
+  					<pre class="line-by-line"><code class="bash">
+  $ brew install sqlite
+            </code></pre>
+          </section>
+          <!-- <section>
+            <h2>Ruby environment</h2>
+            <ul>
+              <li>Kali Linux 1.1.0</li>
+              <li>Ruby 1.9</li>
+              <li>Bundler 1.1 (Ruby "package manager")</li>
+            <pre class="line-by-line"><code class="bash">
+  $ gem install bundler --no-rdoc --no-ri
+  $ bash -l
+            </code></pre>
+            <p>This bring Bundler to 1.10.</p>
+          </section> -->
+        </section>
+
+        <section>
+          <section>
+            <h2>Dradis packages</h2>
+            <ul>
+              <li>Background worker for long-running tasks (Redis).</li>
+              <li>Everything in one file.</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>What's inside the package?</h2>
+            <ul>
+              <li>Ruby interpreter (2.2.2)</li>
+              <li>Dradis Framework 3.1</li>
+              <li>Ruby libraries and dependencies</li>
+              <li>Download and run.</p>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Remember both processes</h2>
+            <pre><code class="bash">
+  $ ./dradis-webapp  && ./dradis-worker
+            </code></pre>
+          </section>
+
+          <!-- <section>
+            <img src="img/fail_stamp.png" style="border:none;box-shadow:none"/>
+          </section> -->
+        </section>
+
+			  <section>
+          <section>
+     				<h2>Dradis from Git</h2>
+    				<ul>
+    				  <li>For the latest and greatest.</li>
+              <li>Platform independent(ish)</li>
+    				</ul>
+          </section>
+
+          <section>
+            <h2>It's dangerous to go alone! Take this</h2>
+            <br/>
+            <p><a href="http://dradisframework.org/documentation/install_git.html">.../documentation/install_git.html</a></p>
+            <p><a href="http://dradisframework.org/documentation/videos/install_git.html">.../documentation/videos/install_git.html</a></p>
+          </section>
+
+					<section>
+  					<h2>Getting started</h2>
+  					<pre class="line-by-line"><code class="bash">
+  $ mkdir dradis3-git
+  $ cd dradis3-git/
+  $ git clone https://github.com/dradis/dradis-ce
+  $ cd dradis-ce/
+            </code></pre>
+  				</section>
+					<section>
+  					<h2>Getting started</h2>
+  					<pre class="line-by-line"><code class="bash">
+  $ ruby ./bin/setup
+  $ bundle install
+  $ ruby ./bin/setup
+            </code></pre>
+            <ul>
+              <li>Cloning core Dradis add-ons</li>
+              <li>Copying sample files (<span style="font-size:70%">database.yml.template; Gemfile.plugins.template</span>)</li>
+              <li>Installing dependencies</li>
+              <li>Preparing database</li>
+              <li>Removing old logs and tempfiles</li>
+            </ul>
+  				</section>
+
+
+          <!-- <section>
+            <h2>Trouble with Bundler</h2>
+            <pre class="line-by-line"><code class="css" style="color:#bc261e">
+<p style="color:#bbb">Warning: You're using Rubygems 1.8.23 with Spring. Upgrade to at least Rubygems 2.1.0 and run `gem pristine --all` for better startup performance.</p>
+Bundler could not find compatible versions for gem "bundler":
+  In Gemfile:
+    rails (= 4.1.9) ruby depends on
+      bundler (< 2.0, >= 1.3.0) ruby
+
+  Current Bundler version:
+    bundler (1.1.4)
+
+This Gemfile requires a different version of Bundler.
+Perhaps you need to update Bundler by running `gem install bundler`?
+            </code></pre>
+            <p>Try:</p>
+            <pre class="line-by-line"><code class="bash">
+            # bundle exec rake db:setup
+            </code></pre>
+          </section> -->
+
+          <section>
+            <h2>Running the process(es)</h2>
+            <p>What we need:</p>
+            <ul>
+              <li>The Dradis app:
+                <pre><code>./bin/rails server</code></pre>
+              </li>
+              <li>The Redis server.</li>
+              <li>The background worker:
+                <pre><code class="bash">./bin/rake resque:work</code></pre></li>
+            </ul>
+          </section>
+          <!-- <section>
+            <h2>Procfile</h2>
+            <pre class="line-by-line"><code class="bash">
+  web:    bundle exec rails server
+  # Uncomment for Mac:
+  # redis:  redis-server  /usr/local/etc/redis.conf
+  resque: bundle exec rake resque:work
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Run</h2>
+            <ul>
+              <li>`rerun`</li>
+              <li>`foreman start`</li>
+            </ul>
+            <pre><code>
+  $ bundle exec rerun --pattern '**/*.{rb,scss,sass,erb,haml,ru}' \
+      foreman start
+            </code></pre>
+            <p>Or...</p>
+            <pre><code>
+  $ bundle exec foreman start
+            </code></pre>
+          </section> -->
+
+				</section>
+
+				<section>
+          <section>
+  					<h1>Your turn</h1>
+          </section>
+  				<section>
+  					<h1>You will ask questions now</h1>
+  					<img src="img/hypnotoad.gif" height="332" width="474"/>
+  				</section>
+        </section>
+
+				<section>
+					<h1>Thank You</h1>
+					<h3><a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></h3>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
