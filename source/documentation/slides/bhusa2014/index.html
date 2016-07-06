@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Dradis Framework 3.0</title>
+
+		<meta name="description" content="BSides London 2014 workshop: Connecting Dradis to anything">
+		<meta name="author" content="Daniel Martin, @etdsoft">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <!-- <link rel="stylesheet" href="css/theme/moon.css" id="theme">
+    <link rel="stylesheet" href="css/theme/night.css" id="theme"> -->
+
+		<!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <style type="text/css" media="screen">
+      .reveal ul {
+        margin-top: 1em;
+      }
+      .reveal ul.tick-cross {
+        list-style: none inside;
+        margin: 0;
+      }
+      .reveal li {
+        margin-bottom: 10px;
+      }
+      .reveal li.tick {
+        background: url('img/tick.png') left center no-repeat;
+        padding-left: 20px;
+      }
+      .reveal li.cross {
+        background: url('img/cross.png') left center no-repeat;
+        padding-left: 20px;
+      }
+      .reveal pre.line-by-line {
+        margin: 0 auto;
+      }
+      .reveal pre.line-by-line.fragment {
+        padding-top: 0;
+      }
+      .reveal pre.code-highlight code:hover {
+        background-color: #a0a0a0;
+        color: #3f3f3f;
+      }
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Dradis 3.0</h1>
+					<h3>Packed with goodness</h3>
+					<p>
+						<small>By <a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></small>
+					</p>
+					<aside class="notes">
+						<p>Show of hands:</p>
+            <ul>
+              <li>Ruby devs in the room.</li>
+              <li>Rails devs in the room.</li>
+              <li>Dradis devs in the room.</li>
+            </ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>Agenda</h2>
+          <ul>
+            <li>New interface</li>
+            <li>Gemfile.plugins</li>
+            <li>HTTP API</li>
+            <li>Client bindings</li>
+            <li>New plugins: Qualys, PDF reports...</li>
+          </ul>
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<section>
+					<h1>You will ask questions</h1>
+					<img src="img/hypnotoad.gif" height="332" width="474"/>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>New interface</h2>
+            <img src="img/tour-01.png" height="600" width="911" style="border:none"/>
+					</section>
+
+					<section>
+						<h2>Issues/Evidence</h2>
+            <img src="img/issues-01.png" height="" width="" style="border:none"/>
+            <p><code>Issue</code> is the part that rarely changes</p>
+          </section>
+
+          <section>
+            <p><code>Evidence</code> is different each time</p>
+            <img src="img/issues-02.png" height="" width="" style="border:none"/>
+					</section>
+
+					<section>
+						<h2>Issues Library</h2>
+            <p>Shows the list of issues in the project</p>
+            <img src="img/issues-03.png" height="" width="" style="border:none"/>
+          </section>
+          
+					<section>
+						<h2>At the Node level</h2>
+            <p><code>Notes</code>, <code>Evidence</code> and <code>Attachments</code></p>
+            <img src="img/issues-04.png" height="" width="" style="border:none"/>
+					</section>
+				</section>
+
+        <section>
+          <section>
+            <h2>Gemfile.plugins</h2>
+            <p class="fragment visible" data-fragment-index="0"><code>Gemfile</code> controls Ruby dependencies.</p>
+            <p class="fragment" data-fragment-index="1">In Dradis 3 we're adding <code>Gemfile.plugins</code>.</p>
+            <p class="fragment" data-fragment-index="2">Each plugin in its own repo.</p>
+            <p class="fragment" data-fragment-index="3">Easy to add custom plugins.</p>
+          </section>
+          <section>
+            <h2>Sample</h2>
+            <pre><code>
+# General add-ons
+gem 'dradis-api'
+
+
+# Export plugin
+gem 'dradis-html_export', github: 'dradis/dradis-html_export'
+gem 'dradis-pdf_export', github: 'dradis/dradis-pdf_export'
+
+
+# Import plugins
+gem 'dradis-mediawiki', path: '../dradis-mediawiki'
+
+
+# Upload plugins
+gem 'dradis-burp', path: '../dradis-burp'
+gem 'dradis-nessus', path: '../dradis-nessus'
+
+
+# Themes
+# gem 'dradis-theme_snowcrash', path: '../dradis-theme_snowcrash'
+</code></pre>
+          </section>
+        </section>
+
+			  <section>
+          <section>
+     				<h2>HTTP API</h2>
+    				<ul>
+    				  <li>Implemented as a <strong>Gem</strong></li>
+    				  <li>Endpoints and <code>curl</code> examples</li>
+              <li>Get it at: <a href="https://github.com/dradis/dradis-api">dradis/dradis-api</a></li>
+    				</ul>
+          </section>
+					<section>
+  					<h2>In Gemfile.plugins</h2>
+  					<pre class="line-by-line"><code class="ruby">
+  gem 'dradis-api', github: 'dradis/dradis-api'
+            </code></pre>
+            <p>And</p>
+  					<pre class="line-by-line"><code class="bash">
+  $ bundle install
+            </code></pre>
+  				</section>
+          <section>
+            <h2>Endpoints</h2>
+            <pre><code>
+              /api/issues(.json)
+              /api/nodes(.json)
+              /api/nodes/[node_id]/evidence(.json)
+              /api/nodes/[node_id]/notes(.json)
+            </code></pre>
+            <ul>
+              <li><code>application/json</code></li>
+              <li>Versioned API via <code>Accept</code> header:
+                <pre><code>Accept: application/vnd.dradisapi; v=1</code></pre>
+                <p>Not needed to use for the <em>current</em> version.</p>
+              </li>
+            </ul>
+          </section>
+
+          <section>
+            <h2>Endpoints: Nodes</h2>
+            <p>To get the list of nodes:</p>
+            <pre><code class="output">
+ $ curl -u 'user:password' 'http://dradisframework.dev/api/nodes'
+            </code></pre>
+            <p>Requires authentication:</p>
+            <pre><code>
+ $ curl -i http://dradisframework.dev/api/nodes
+ HTTP/1.1 401 Unauthorized
+ Content-Type: application/json; charset=utf-8
+ X-UA-Compatible: IE=Edge
+ Cache-Control: no-cache
+ X-Request-Id: c03e3fc10ea5af6e3da30b47e7ce668c
+ X-Runtime: 0.006424
+ Date: Tue, 29 Apr 2014 09:12:13 GMT
+ Connection: close
+ 
+ {"message":"Requires authentication"}
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Endpoints: Nodes</h2>
+            <p>To get the list of nodes:</p>
+            <pre><code>
+ $ curl -u 'etd:dradis' http://dradisframework.dev/api/nodes
+ [
+   {"id":29,"label":"child","parent_id":28,"type_id":null},
+   {"id":28,"label":"clientapp","parent_id":null,"type_id":null},
+   {"id":3,"label":"Getting help","parent_id":1,"type_id":null},
+   {"id":2,"label":"What's new?","parent_id":1,"type_id":null},
+   {"id":1,"label":"Dradis Framework v2.10.0","parent_id":null,"type_id":null}
+ ]
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Endpoints: Notes</h2>
+            <p>To get the list of notes for a given node ID:</p>
+            <pre><code>
+ $ curl -u 'user:password' \
+    'http://dradisframework.dev/api/nodes/[node_id]/notes'
+            </code></pre>
+            <pre><code>
+ $ curl -u 'etd:dradis' \
+    'http://dradisframework.dev/api/nodes/3/notes'
+ [
+   {
+     "author":"First time wizard",
+     "category_id":1,
+     "created_at":"2014-03-06T12:45:19Z",
+     "id":3,
+     "node_id":3,
+     "text":"h1. Getting Help\n* Project Site...",
+     "updated_at":"2014-03-06T12:45:19Z"
+   },
+   ...
+ ]
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Endpoints: Evidence</h2>
+            <p>To get the list of evidence for a given node ID:</p>
+            <pre><code>
+ $ curl -u 'user:password' \
+    'http://dradisframework.dev/api/nodes/[node_id]/evidence'
+            </code></pre>
+            <pre><code>
+ $ curl -u 'etd:dradis' \
+    'http://dradisframework.dev/api/nodes/3/evidence'
+ [
+   {
+     "id":205,
+     "node_id":22,
+     "issue_id":155,
+     "content":"#[Port]#\r\ntcp/80\r\n\r\n#[Description]#\r\nList of affected location:\r\n\r\n/backup\r\n/setup\r\n",
+     "author":"etd",
+     "created_at":"2014-08-06T15:14:58.214Z",
+     "updated_at":"2014-08-06T15:39:36.202Z"
+   },
+   ...
+ ]
+            </code></pre>
+          </section>
+				</section>
+
+        <section>
+          <section>
+     				<h2>Client bindings</h2>
+    				<ul>
+    				  <li>Implemented as a <strong>Gem</strong>.</li>
+    				  <li>Thin wrapper around the API.</li>
+              <li>Talk to Dradis from your own tools.</li>
+              <li>Get it at: <a href="https://github.com/dradis/dradis-client">dradis/dradis-client</a></li>
+    				</ul>
+          </section>
+					<section>
+  					<h2>Using the client lib</h2>
+  					<pre class="line-by-line"><code class="ruby">
+  gem 'dradis-client', github: 'dradis/dradis-client'
+            </code></pre>
+            <p>And</p>
+  					<pre class="line-by-line"><code class="bash">
+  $ bundle install
+            </code></pre>
+  				</section>
+
+          <section>
+            <h2>Client configuration</h2>
+            <pre><code class="ruby">
+ require 'dradis-client'
+ 
+ dradis = Dradis::Client::Endpoint.new(
+                           host: 'http://dradisframework.dev',
+                           user: 'adama',
+                           shared_secret: 'shared_password'
+                          )
+            </code></pre>
+            <p>Or</p>
+            <pre><code class="ruby">
+ client = Dradis::Client::Endpoint.new do |config|
+   config.host          = 'https://dradisframework.dev'
+   config.user          = 'adama'
+   config.shared_secret = 'shared_password'
+ end
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Query the server</h2>
+            <pre><code class="ruby">
+irb> client.nodes
+ => [
+     #&lt;Dradis::Client::Node:0x007fd5f899b788 @attrs={:id=>29, :label=>"child", :parent_id=>28, :type_id=>nil}&gt;,
+     #&lt;Dradis::Client::Node:0x007fd5f899b738 @attrs={:id=>28, :label=>"clientapp", :parent_id=>nil, :type_id=>nil}&gt;,
+     ...
+    ]
+irb> node = client.nodes.last
+=> #&lt;Dradis::Client::Node:0x007fd5f90ebec0 @attrs={:id=>1, :label=>"Dradis Framework v2.10.0", :parent_id=>nil, :type_id=>nil}&gt;
+irb> node.label
+=> "Dradis Framework v2.10.0"
+irb> node.notes
+=> [...]
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Adding content</h2>
+            <pre><code class="ruby">
+ client.add_node('child', parent_id: 28)
+ client.add_note("#[Title]#\nAdded from API", category_id: 1, node_id: 29)
+ 
+ dradis.nodes.each do |node|
+   puts "%02i: %-30s (pid: %02i)" % [node.id, node.label, node.parent_id || 0]
+ 
+   dradis.notes(node.id).each do |note|
+     puts "\t- #{note.title}"
+   end
+ end
+            </code></pre>
+          </section>
+          <section>
+            <pre><code class="ruby">
+ 29: child                          (pid: 28)
+ 	- Added from API
+ 28: clientapp                      (pid: 00)
+ 03: Getting help                   (pid: 01)
+ 	- This Note doesn't provide a Title field
+ 02: What's new?                    (pid: 01)
+ 	- This Note doesn't provide a Title field
+ 01: Dradis Framework v2.10.0       (pid: 00)
+ 	- Con captura
+ 	- .NET assemblies were not obfuscated 2
+ 	- Insufficient SSL validation
+ 	- Persistent cross-site scripting (XSS)
+ 	- Out-of-date Apache server
+ 	- This Note doesn't provide a Title field
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Dradis plugin for Metasploit</h2>
+            <img src="img/msf_plugin.png" />
+          </section>
+
+          <section>
+            <h2>Dradis plugin for Metasploit</h2>
+            <pre><code>
+ # The list of commands we make available to the ./msfconsole
+ def commands
+   {
+     # meta commands
+     'dradis_config'   => "Show Dradis API configuration (#{config_file})",
+     'dradis_help'     => 'Displays help',
+     'dradis_version'  => 'Displays version information',
+ 
+     # API commands
+     'dradis_add_node' => 'Add a new Node to dradis',
+     'dradis_nodes'    => 'List all nodes'
+   }
+ end
+            </code></pre>
+          </section>
+          <section>
+            <h2>Dradis plugin for Metasploit</h2>
+            <pre><code>
+ def cmd_dradis_nodes
+   return missing_config unless configured?
+ 
+   dradis.nodes.each do |node|
+     print_line "%02i: %-30s (pid: %02i)" % [node.id, node.label, node.parent_id || 0]
+   end
+ end
+            </code></pre>
+          </section>
+
+          <section>
+     				<h2>Dradis plugin for Metasploit</h2>
+    				<ul>
+    				  <li>Implemented as a <strong>Gem</strong> ;)</li>
+    				  <li>GitHub: <a href="https://github.com/dradis/metasploit-dradis">dradis/metasploit-dradis</a></li>
+    				</ul>
+          </section>
+
+          <!-- <section>
+             <h2>Dradis plugin for Metasploit</h2>
+            <p>Demo!</p>
+          </section> -->
+
+        </section>
+
+        <section>
+					<section>
+  					<h2>New plugins</h2>
+            <div class="fragment visible" data-fragment-index="0">
+              <p>Export:</p>
+              <ul style="margin-top: 0.25em">
+                <li><a href="https://github.com/dradis/dradis-pdf_export">dradis/dradis-pdf_export</a></li>
+                <li><a href="https://github.com/dradis/dradis-csv">dradis/dradis-csv</a></li>
+              </ul>
+            </div>
+            <div class="fragment" data-fragment-index="1">
+              <p style="margin-top: 40px">Tools:</p>
+              <ul style="margin-top: 0.25em">
+                <li><a href="http://github.com/dradis/dradis-brakeman">dradis/dradis-brakeman</a></li>
+                <li><a href="http://github.com/dradis/dradis-qualys">dradis/dradis-qualys</a></li>
+              </ul>
+            </div>
+            <div class="fragment" data-fragment-index="2">
+              <p style="margin-top: 40px">Your own?</p>
+            </div>
+  				</section>
+  			</section>
+
+				<section>
+					<h1>Thank You</h1>
+					<h3><a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></h3>
+          <p>- don't forget your stickers! -</p>
+				</section>
+
+				<section>
+					<h1>You will ask questions now</h1>
+					<img src="img/hypnotoad.gif" height="332" width="474"/>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
