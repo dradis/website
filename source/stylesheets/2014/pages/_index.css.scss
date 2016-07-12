@@ -9,6 +9,13 @@ body.index {
     @include outer-container;
   }
 
+  .flash-notice {
+    @extend %flash-base;
+    @include flash(#e5edf8);
+
+    text-align: center;
+  }
+
   .light-gray-wrapper {
     background: #f4f4f4;
     padding: 5em 0 3em;
