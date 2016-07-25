@@ -32,17 +32,9 @@ description: Dradis Framework documentation.
       </div>
     </li>
   </ul>
-  <h4 id="dependencies">Dependencies</h4>
-  <ul>
-    <li><strong>Redis</strong>: make sure Redis is installed and running on your local system. If you're not sure how to install it on your local system, try searching Google for "install Redis [operating system]"</li>
-  </ul>
-
-  <h4 id="troubleshooting">Troubleshooting tips</h4>
-  <p>If you get an error like <code>The path '~/dradis-plugins' does not exist</code>, check the file structure. Did the download create a folder like <strong>/community</strong> that holds the <strong>dradis-plugins</strong> folder? If so, move the contents of the <strong>community</strong> folder out into the same file that holds the <strong>dradis-ce</strong> folder.</p>
-
-  <p>If you get a message like <code>An error occurred while installing gem-name (1.0.0), and Bundler cannot continue</code>, it's likely a system-specific dependency issue. The first line of defense is to Google the specific error message to see whether StackOverflow or similar sites offer a solution. If you cannot resolve the issue, let us know in the <a href="http://discuss.dradisframework.org">Community Forums</a></p>
   <br/>
   <br/>
+
   <h3>Setting up the app</h3>
   <br/>
   <ol>
@@ -69,6 +61,24 @@ description: Dradis Framework documentation.
     <%= image_tag 'documentation/dradisframework-03.png', width: "90%" %>
   </div>
   </p>
+  <br/><hr/>
+  <h4 id="dependencies">Dependencies</h4>
+  <ul>
+    <li><strong>Redis</strong>: make sure Redis is installed and running on your local system. If you're not sure how to install it on your local system, try searching Google for "install Redis [operating system]"</li><br/>
+    <li><strong>Kali Linux dependencies</strong>: see the <a href="install_kali.html#dependencies">dependencies section</a> of the Installing Dradis on Kali Linux guide.</li>
+  </ul>
+  <br/><br/>
+  <h4 id="troubleshooting">Troubleshooting tips</h4>
+  <ul>
+    <li><strong>I'm installing on Kali Linux</strong>: check out the <a href="install_kali.html#troubleshooting">troubleshooting section</a> of the Installing Dradis on Kali Linux guide.</li><br/>
+    <li><strong><code>The path '~/dradis-plugins' does not exist</code></strong>:<br/>
+    First, check the file structure. Have you created any folders other than <code>dradis-ce</code>? If not, try running: <code>$ ./bin/setup</code>.<br/>
+    Did the download create a folder like <strong>/community</strong> that holds the <strong>dradis-plugins</strong> folder? If so, move the contents of the <strong>community</strong> folder out into the same file that holds the <strong>dradis-ce</strong> folder.
+    </li><br/>
+    <li><strong><code>An error occurred while installing gem-name (1.0.0), and Bundler cannot continue</code></strong>:<br/>
+    This is ikely a system-specific dependency issue. The first line of defense is to Google the specific error message to see whether StackOverflow or similar sites offer a solution. If you cannot resolve the issue, let us know in the <a href="http://discuss.dradisframework.org">Community Forums</a>
+    </li>
+  </ul>
   <br/><br/>    
   <h3 style="text-align:center">Next? Check out <a href="/documentation/">the rest of the Dradis Community guides</a>.</h3>
   <br/><br/><br/>
