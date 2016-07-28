@@ -1,0 +1,54 @@
+---
+title: Installing Dradis on Kali Linux | Dradis Framework
+description: Dradis Framework documentation to install Dradis Community Edition on Kali Linux.
+---
+
+<div class="intro-text">
+  <h2>Installing Dradis on Kali Linux</h2>
+  <h4>If your answer is not here the <a href="http://discuss.dradisframework.org">Community Forums</a> are your best bet.</h4>
+</div>
+
+  
+<div class="container" id="dependencies">
+  <h1>Installing Dradis on <a href="https://www.kali.org/" target="_blank">Kali Linux</a></h1>
+
+  <p>We're going to install Dradis Community Edition from <a href="https://github.com/dradis/dradis-ce">GitHub</a> so that you can stay up to date with the latest changes.</p>
+  <p>Before we get started, we'll need to install a few packages. Run the following in your terminal:</p>
+  <p><code>$ apt-get install libsqlite3-dev</code></p>
+  <p><code>$ apt-get install mysql-server mysql-client libmysqlclient-dev</code></p>
+  <p><code>$ apt-get install redis-server</code></p>
+  <p><code>$ redis-server</code></p>
+
+  <h4 style="text-align:center">You're ready to follow the steps in the <a href="install_git.html">Installing Dradis from Git</a> guide.</h4>
+  <br/><br/><hr/>
+
+  <h2 id="troubleshooting">Troubleshooting</h2>
+  <br/>
+  <ul>
+    <li>
+      <p><strong><code>Unable to fetch some archives</code></strong>:</p>
+      <p>If you get an error message like <code>Unable to fetch some archives</code> as shown in the screenshot below, run the following in your terminal before continuing:</p>
+      <p><code>apt-get update</code></p>
+      <div class="centered-image">
+        <%= image_tag 'documentation/dradisframework-12.png', width: "75%" %> 
+      </div>
+    </li><hr/>
+    <li>
+      <p><strong><code>add_root_vertex' for Molinillo::DependencyGraph:</code></strong></p>
+      <p>Run the following command in your terminal before re-trying the <code>bundle install</code> command.</p>
+      <p><code>apt-get install --only-upgrade bundler</code></p>
+      <p>Credit for this fix goes to GitHub user <a href="https://github.com/bundler/bundler/issues/4383" target="_blank">codebycody</a>.</p>
+    </li><hr/>
+    <li>
+      <p><strong>Troubleshooting Redis</strong></p>
+      <p>Run the following in your terminal to confirm that Redis is up and running:</p>
+      <p><code>$ redis-cli ping</code></p>
+      <p>Expected output:</p>
+      <p><code>PONG</code></p>
+    </li><hr/>
+  </ul>
+  
+  <br/><br/>    
+  <h3 style="text-align:center">Next? Check out <a href="/documentation/">the rest of the Dradis Community guides</a>.</h3>
+  <br/><br/><br/>
+</div>
