@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Custom Dradis Framework plugins</title>
+
+		<meta name="description" content="Learn how to extend Dradis in every possible way">
+		<meta name="author" content="Daniel Martin, @etdsoft">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/fonts.css">
+		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
+		<script>
+			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+		</script>
+
+    <style type="text/css" media="screen">
+      .reveal ul {
+        margin-top: 1em;
+      }
+      .reveal li {
+        margin-bottom: 10px;
+      }
+      .reveal pre.line-by-line {
+        margin: 0 auto;
+      }
+      .reveal pre.line-by-line.fragment {
+        padding-top: 0;
+      }
+      .reveal pre.code-highlight code:hover {
+        background-color: #a0a0a0;
+        color: #3f3f3f;
+      }
+    </style>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1>Dradis<br/>Framework</h1>
+					<h3>Creating custom plugins</h3>
+					<p>
+						<small>By <a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></small>
+					</p>
+				</section>
+
+				<section>
+					<h2>Agenda</h2>
+          <ul>
+            <li>It's just a Rails app</li>
+            <li>Basics: notes, nodes and categories</li>
+            <li>Debugging: logs, <code>rails console</code> &amp; <code>Thor</code></li>
+            <li>Plugin types</li>
+          </ul>
+					<aside class="notes">
+						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+					</aside>
+				</section>
+
+				<!-- Example of nested vertical slides -->
+				<section>
+					<section>
+						<h2>A simple rails app</h2>
+  					<pre><code>app/
+attachments/
+config/
+config.ru
+db/
+doc/
+lib/
+log/
+public/
+script/
+spec/
+test/
+tmp/
+vendor/</code></pre>
+					</section>
+					<section>
+						<h2>A simple rails app</h2>
+  					<pre class="line-by-line"><code>app/            # models, views &amp; controllers</code></pre>
+  					<pre class="line-by-line fragment"><code>attachments/    # uploaded files</code></pre>
+            <pre class="line-by-line fragment"><code>config/         # app config (e.g. db connection)</code></pre>
+            <pre class="line-by-line fragment"><code>config.ru       # boring...
+db/
+doc/
+lib/</code></pre>
+            <pre class="line-by-line fragment"><code>log/            # app logs (more later)</code></pre>
+            <pre class="line-by-line fragment"><code>public/         # boring...
+script/
+spec/
+test/
+tmp/</code></pre>
+            <pre class="line-by-line fragment"><code>vendor/        # plugins!</code></pre>
+					</section>
+					<section>
+						<h2>/vendor/plugins</h2>
+						<img src="img/plugin_banner.png" height="150" width="800" border="0"/>
+					</section>
+
+					<section>
+						<h2>The ugly truth about plugins</h2>
+						<p>Plugins boil down to a single method:</p>
+					</section>
+
+          <section>
+            <h2>Export plugin</h2>
+            <pre><code>
+module CsvExport
+  module Actions
+
+    # This method is invoked by the framework
+    def to_csv(params={})
+      # [...]
+      
+      # Create the CSV data
+      csv_string = ::CSV.generate do |csv|
+        # [...]
+      end
+
+      # Use Rails functions to send the generated data
+      send_data csv_string, :filename => 'dradis-results.csv'
+    end
+  end
+end
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Upload plugin</h2>
+            <pre><code>
+module BrakemanUpload
+  # This method will be called by the framework when the user selects
+  # your plugin from the drop down list of the 'Import from file'
+  # dialog
+  def self.import(params={})
+    file_content = File.read( params[:file] )
+    # [...]
+    # Parse the uploaded file into a Ruby Hash
+    data = MultiJson.decode(file_content)
+    # [...]
+    data['warnings'].each do |warning|
+      # [...]
+      node_for_type.notes.create(
+        :author => @author,
+        :category => @category,
+        :text => warning_info
+      )
+      # [...]
+    end
+end
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Import plugin</h2>
+            <pre><code>
+# Search NIST NVD for issues
+module NVDKeyword
+  NAME = "Keyword search against the NVD"
+  CONF = { :url => "http://web.nvd.nist.gov/view/vuln/[...]" }
+  def self.run(params={})
+    records = []
+    # [...] fetch elements from remote source
+    while(elements.any?)
+      # [...] convert elements into "records"
+      records << {
+        :title => record[:title],
+        :description => record.map do |key,value|
+          "#[#{key}]#\n#{value}" }.join("\n\n")
+        end
+    end
+    # [...]
+    return records
+  end
+end
+            </code></pre>
+          </section>
+					<section>
+						<h2>... and the code structure is generated for you</h2>
+						<h3>(more on this later)</h3>
+					</section>
+
+					<section>
+						<h2>More on Rails for hackers</h2>
+						<ul>
+  						<li><a href="http://carnal0wnage.attackresearch.com/2012/10/basics-of-rails-part-1.html">Rails Basics</a> series by <a href="http://twitter.com/cktricky">@cktricky</a></li>
+  						<li><a href="http://railscasts.com">Railscasts</a> learn by watching</li>
+  						<li><a href="http://railsforzombies.org/">RailsForZombies.org</a> step-by-step videos</li>
+  						<li><a href="http://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a> guide</li>
+  						<li><a href="http://tryruby.org/">Try ruby</a> learn by doing (non-Rails)</li>
+  					</ul>
+					</section>
+				</section>
+
+				<section>
+				  <section>
+  					<h2>Notes, nodes and categories</h2>
+            <img src="img/nodes.png" height="276" width="480"/>
+          </section>
+          <section>
+            <h2>Note format</h2>
+            <img src="img/note_editor.png" height="492" width="650"/>
+          </section>
+          <section>
+            <h2>Note fields</h2>
+            <pre><code class="ruby">
+{
+  'Title' => 'Directory Listings',
+  'Impact' => 'Low',
+  'Description' => 'Some directories...',
+  'Recommendation' => 'Disable directory listings.',
+  'CVSSv2' => 'AV:N/AC:L/Au:N/C:P/I:N/A:N'
+}
+            </code></pre>
+          </section>
+          <section>
+            <h2>Categories</h2>
+            <img src="img/categories-01.png" height="203" width="303"/>
+            <img src="img/categories-02.png" height="191" width="162"/>
+          </section>
+          <section>
+            <h2>In the DB</h2>
+            Node --&lt; Notes --- Category
+          </section>
+				</section>
+
+			  <section>
+				<h2>Debugging</h2>
+				<ul>
+				  <li>Log files</li>
+				  <li>Rails console</li>
+				  <li>Thor</li>
+				</ul>
+				</section>
+
+				<section>
+					<section>
+  					<h2>Debugging: log files</h2>
+  					<pre class="line-by-line"><code>app/
+attachments/
+config/
+config.ru
+db/
+doc/
+lib/</code></pre>
+<pre class="line-by-line code-highlight"><code>log/</code></pre>
+<pre class="line-by-line"><code>public/
+script/
+spec/
+test/
+tmp/
+vendor/
+            </code></pre>
+  				</section>
+					<section>
+  					<h2>Log files</h2>
+  					<pre class="line-by-line"><code>log/</code></pre>
+          <pre class="line-by-line code-highlight"><code>    development.log</code></pre>
+          <pre class="line-by-line"><code>    production.log
+    test.log</code></pre>
+            <pre class="line-by-line code-highlight fragment"><code>    bj.etds-MacBook-Air.local.development.log    # background jobs</code></pre>
+  				</section>
+
+          <section>
+            <h2>Log files</h2>
+            <pre><code>Started GET "/upload/status?item_id=5&after=229" for 127.0.0.1
+  at 2013-04-23 11:45:53 +0200
+Processing by UploadController#status as JS
+  Parameters: {"item_id"=>"5", "after"=>"229", "_"=>"1366710352985"}
+  Log Load (0.2ms)  SELECT "logs".* FROM "logs" WHERE
+    (uid = '5' and id > 229)
+  Rendered upload/status.js.erb (0.0ms)
+Completed 200 OK in 6ms (Views: 4.7ms | ActiveRecord: 0.2ms)
+            </code></pre>
+            <p>Completed 500 Internal Server Error</p>
+            <pre class="line-by-line"><code>Started POST "/upload/create" for 127.0.0.1 at...
+Processing by UploadController#create as JS
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"YhZSz[...]", 
+    "uploader"=>"NessusUpload", "file"=>"", "item_id"=>"4"}
+  Configuration Load (0.2ms) SELECT "configurations".*
+    FROM "configurations"
+      WHERE "configurations"."name" = 'uploads_node' LIMIT 1
+  Node Load (0.1ms) SELECT "nodes".* FROM "nodes"
+    WHERE "nodes"."label" = 'Uploaded files' LIMIT 1</code></pre>
+<pre class="line-by-line code-highlight"><code>Completed 500 Internal Server Error in 2ms</code></pre>
+<pre class="line-by-line"><code>
+NoMethodError (undefined method `original_filename' for "":String):
+  app/controllers/upload_controller.rb:99:in `create'
+
+  Rendered ../actionpack-.../.../rescues/_trace.erb (1.6ms)
+  Rendered ../actionpack-.../.../rescues/_request_and_response.erb (1.4ms)
+  Rendered ../actionpack-.../.../rescues/diagnostics.erb within rescues/layout (14.7ms)
+            </code></pre>
+          </section>
+        </section>
+
+        <section>
+					<section>
+  					<h2>Debugging: Rails console</h2>
+  					<p>(Runs in Development mode by default)</p>
+  				</section>
+  				<section>
+  				  <h2>Querying the DB</h2>
+            <img src="img/nodes.png" height="276" width="480"/>
+				  </section>
+  				<section>
+  				  <h2>Object finders</h2>
+            <pre><code>$ bundle exec rails console
+Loading development environment (Rails 3.2.13)
+
+1.9.3p327 :001 > Node.count
+   (0.2ms)  SELECT COUNT(*) FROM "nodes"
+ => 36
+
+1.9.3p327 :002 > Node.first
+  Node Load (0.3ms)  SELECT "nodes".* FROM "nodes" LIMIT 1
+ => #&lt;Node id: 2, type_id: 0, label: "2012-11_Client1-001",
+ parent_id: nil, created_at: "2012-11-...",
+ updated_at: "2012-11-...", position: 1&gt;
+
+1.9.3p327 :003 > Node.where(:parent_id => nil)
+  Node Load (0.3ms)  SELECT "nodes".* FROM "nodes"
+    WHERE "nodes"."parent_id" IS NULL
+ => [#&lt;Node id: 2, type_id: 0, label: "2012-11_Client1-001" [...]&gt;,
+     #&lt;Node id: 6, type_id: 3, label: "All issues" [...]&gt;,
+     #&lt;Node id: 10, type_id: nil, label: "Uploaded files" [...]&gt;,
+     #... ]
+            </code></pre>
+  				</section>
+  				<section>
+  				  <h2>Associations</h2>
+            <pre><code>1.9.3p327 :005 > Node.find_by_label('webapps')
+  Node Load (0.3ms)  SELECT "nodes".* FROM "nodes"
+    WHERE "nodes"."label" = 'webapps'
+ => #&lt;Node id: 4, type_id: 0, label: "webapps", parent_id: 2 [...]&gt;
+
+1.9.3p327 :006 > Node.find(4).notes
+  Node Load (0.4ms)  SELECT "nodes".* FROM "nodes"
+    WHERE "nodes"."id" = ?  [["id", 4]]
+  Note Load (0.4ms)  SELECT "notes".* FROM "notes"
+    WHERE "notes"."node_id" = 4
+ => [
+   #&lt;Note id: 2, author: "etd", text: "#[Title]#\nRefl..." [...]&gt;,
+   #&lt;Note id: 3, author: "etd", text: "#[Title]#\nPers..." [...]&gt;,
+   #&lt;Note id: 25, author: "etd", text: "#[Title]#\nBusy..." [...]&gt;
+   ]
+
+1.9.3p327 :007 > Node.find(4).notes.last.category
+  Node Load (0.2ms)  SELECT "nodes".* FROM "nodes"
+    WHERE "nodes"."id" = ? [["id", 4]]
+  Note Load (0.3ms)  SELECT "notes".* FROM "notes"
+    WHERE "notes"."node_id" = 4
+  Category Load (0.1ms)  SELECT "categories".*
+    FROM "categories" WHERE "categories"."id" = 1 LIMIT 1
+ => #&lt;Category id: 1, name: "default category" [...]&gt;
+            </code></pre>
+  				</section>
+
+					<section>
+						<h2>Create, destroy, update</h2>
+            <pre><code>1.9.3p327 :009 > node = Node.create :label => 'BSides London 2013'
+ => #&lt;Node id: 40, label: "BSides London 2013" [...]&gt;
+
+1.9.3p327 :011 > node.notes.create(:author => 'rails console',
+  :text => 'hello,world', :category => Category.last)
+ => #&lt;Note id: 101, author: "rails console", text: "hello,world",
+  node_id: 40, category_id: 8, [...]&gt;
+     
+1.9.3p327 :012 > node.destroy
+=> #&lt;Node id: 40, type_id: nil, label: "BSides London 2013" [...]&gt;
+
+1.9.3p327 :014 >   Note.find(101)
+ Note Load  SELECT "notes".* FROM "notes"
+  WHERE "notes"."id" = ?  [["id", 101]]
+ActiveRecord::RecordNotFound: Couldn't find Note with id=101
+from ../active_record/relation/finder_methods.rb:343:in `find_one'
+from ../active_record/relation/finder_methods.rb:314:in `find_with_ids'
+from ../active_record/relation/finder_methods.rb:107:in `find'
+from ../active_record/querying.rb:5:in `find'
+from (irb):14
+1.9.3p327 :015 >
+            </code></pre>
+          </section>
+
+					<section>
+						<h2>More on the Rails console</h2>
+						<ul>
+  						<li><a href="http://railscasts.com/episodes/48-console-tricks">Console tricks</a> Railscast</li>
+  						<li><a href="http://railscasts.com/episodes/215-advanced-queries-in-rails-3">Advanced Queries in Rails 3</a> Railscast</li>
+            </ul>
+          </section>
+  			</section>
+
+  		  <section>
+  				<section>
+  					<h2>Debugging: Thor</h2>
+  					<p>Use your plugins from the command line.</p>
+  					<p><a href="https://github.com/wycats/thor">https://github.com/wycats/thor</a></p>
+  				</section>
+  				<section>
+  				  <h2>Available tasks</h2>
+            <pre><code>$ bundle exec thor -T
+dradis
+------
+thor dradis:backup                        # creates a backup of your current ...
+thor dradis:export:html                   # export the current repository str...
+thor dradis:export:project:package        # creates a copy of your current re...
+thor dradis:export:project:template       # export the current repository str...
+thor dradis:export:word                   # export the current repository str...
+thor dradis:import:cve:keyword QUERY      # import CVE records from the NVD
+thor dradis:import:msf:all                # Import the hosts, sevices, notes,...
+thor dradis:import:osvdb:lookup ID        # search the OSVDB for a specific ID
+thor dradis:import:osvdb:search QUERY     # search the OSVDB with a general q...
+thor dradis:import:vulndb:hq QUERY        # search your VulnDB HQ (http://vul...
+thor dradis:import:vulndb:private QUERY   # search a remote VulnDB instance w...
+thor dradis:import:wiki:search14 QUERY    # perform a general search against ...
+thor dradis:import:wiki:search15 QUERY    # perform a general search against ...
+thor dradis:reset                         # resets your local dradis repository
+thor dradis:reset:attachments             # removes all attachments
+thor dradis:reset:database                # removes all data from a dradis re...
+thor dradis:reset:logs                    # removes all log files
+thor dradis:reset:password                # Set a new shared password to acce...
+thor dradis:server                        # start dradis server
+thor dradis:settings [NAMESPACE]          # list dradis settings, with an opt...
+thor dradis:settings:get SETTING          # get the value of a dradis setting
+thor dradis:settings:set SETTING VALUE    # change the value of a dradis setting
+thor dradis:setup:configure               # Creates the Dradis configuration ...
+thor dradis:setup:migrate                 # ensures the database schema is up...
+thor dradis:setup:seed                    # adds initial values to the databa...
+thor dradis:upload:brakeman FILE          # upload Brakeman results in JSON f...
+thor dradis:upload:burp FILE              # upload Burp scanner XML output
+thor dradis:upload:nessus FILE            # upload nessus results
+thor dradis:upload:nexpose FILE           # upload NeXpose results
+thor dradis:upload:nikto FILE             # upload nikto results
+thor dradis:upload:nmap FILE              # upload the results of an Nmap scan
+thor dradis:upload:openvas FILE           # upload OpenVAS results
+thor dradis:upload:project:package FILE   # import an entire repository package
+thor dradis:upload:project:template FILE  # create a new repository structure...
+thor dradis:upload:retina FILE            # upload Retina results
+thor dradis:upload:surecheck FILE         # Upload a SureCheck .sc file
+thor dradis:upload:typhon FILE            # upload typhon results
+thor dradis:upload:w3af FILE              # upload w3af results
+thor dradis:upload:wxf FILE               # upload wXf results
+thor dradis:upload:zap FILE               # upload ZAP results
+thor dradis:version                       # displays the version of the dradi...
+            </code></pre>
+  				</section>
+  				<section>
+  				  <h2>Task description</h2>
+  				  <pre><code>$ bundle exec thor help dradis:import:cve:keyword
+
+Usage:
+  thor dradis:import:cve:keyword QUERY
+
+Description:
+  This command searches CVE records from the National Vulnerability
+  Database (http://web.nvd.nist.gov/)</code></pre>
+            <p>Running a task:</p>
+            <pre><code>$ bundle exec thor dradis:import:cve:keyword BackupBuddy
+CVE Search
+===========
+4 results
+CVE-2013-2744 (BackupBuddy)
+CVE-2013-2743 (BackupBuddy)
+CVE-2013-2742 (BackupBuddy)
+CVE-2013-2741 (BackupBuddy)</code></pre>
+  				</section>
+  				<section>
+  				  <h2>Defining tasks</h2>
+  				  <p>&lt;plugin&gt;/lib/tasks/thorfile.rb</p>
+  				  <pre><code>class Import &lt; Thor
+  namespace "dradis:import:cve"
+
+  desc "keyword QUERY", "import CVE records from the NVD"
+  long_desc "This command searches CVE records from the National..."
+  def keyword(query)
+    require 'config/environment'
+
+    # Invoke the plugin
+    results = CveImport::Filters::NVDKeyword.run(:query => query)
+
+    puts "CVE Search\n==========="
+    puts "#{results.size} results"
+
+    results.each do |record|
+      puts record[:title]
+    end
+  end
+end</code></pre>
+            <p>(also generated for you)</p>
+  				</section>
+				</section>
+
+				<section>
+				  <section>
+  					<h2>Plugin types</h2>
+  					<ul>
+  						<li>Export: HTML &amp; Word</li>
+  						<li class="fragment">Import: MediaWiki, VulnDB &amp; OSVDB</li>
+  						<li class="fragment">Upload: Burp, Nessus, Nexpose, Nikto, Nmap, OpenVAS, Qualys, Retina, SureCheck, Typhon, w3af, wXf, ZAP</li>
+  					</ul>
+  				</section>
+  				<section>
+  				  <h2>Plugin generator</h2>
+  				  <pre><code>$ bundle exec rails generate
+Usage: rails generate GENERATOR [args] [options]
+
+# ....
+
+ExportPlugin:
+  export_plugin
+
+ImportPlugin:
+  import_plugin
+
+# ....
+
+UploadPlugin:
+  upload_plugin</code></pre>
+  				</section>
+  				<section>
+  				  <p>Upload plugin:</p>
+  				  <pre class="line-by-line"><code>
+$ bundle exec rails g upload_plugin BrakemanUpload
+create  brakeman_upload/README
+create  brakeman_upload/MIT-LICENSE
+create  brakeman_upload/Rakefile
+create  brakeman_upload/init.rb
+create  brakeman_upload/install.rb
+create  brakeman_upload/uninstall.rb</code></pre>
+<pre class="line-by-line code-highlight"><code>create  brakeman_upload/lib/brakeman_upload.rb</code></pre>
+<pre class="line-by-line"><code>create  brakeman_upload/lib/tasks/thorfile.rb
+create  brakeman_upload/lib/tasks/brakeman_upload_tasks.rake
+create  brakeman_upload/spec/spec_helper.rb
+create  brakeman_upload/spec/brakeman_upload_spec.rb
+create  brakeman_upload/lib/brakeman_upload/meta.rb
+create  brakeman_upload/lib/brakeman_upload/filters.rb
+            </code></pre>
+            <p>Import plugin:</p>
+            <pre><code>$ bundle exec rails g import_plugin CveImport</code></pre>
+            <p>Export plugin:</p>
+            <pre><code>$ bundle exec rails g export_plugin CsvUpload</code></pre>
+				  </section>
+
+          <section>
+            <h2>Plugin configuration</h2>
+            <pre><code>
+module BrakemanUpload
+  class Configuration < Core::Configurator
+    configure :namespace => 'brakeman_upload'
+
+    setting :category, :default => 'Plugin output'
+    setting :author, :default => 'Brakeman Scanner plugin'
+    setting :parent_node, :default => 'plugin.output'
+  end
+end
+            </code></pre>
+            <p>(more on this later)</p>
+          </section>
+
+          <section>
+            <h2>Lots of examples</h2>
+            <p><a href="http://git.io/dradis">http://git.io/dradis</a></p>
+          </section>
+				</section>
+
+        <section>
+          <section>
+            <h2>Upload plugin: Brakeman</h2>
+            <p><a href="http://brakemanscanner.org/">Brakeman</a> - Rails Security Scanner</p>
+            <p><small>By <a href="http://twitter.com/presidentbeef">Justin Collins</a></small></p>
+            <img src="img/brakeman.png" height="307" width="225" />
+          </section>
+          <section>
+            <h2>Brakeman output</h2>
+            <p>To specify an output file for the results:</p>
+            <pre><code>brakeman -o output_file</code></pre>
+            <p>The output format is determined by the file extension or by using the -f option.</p>
+            <ul>
+              <li><code>text</code></li>
+              <li><code>html</code></li>
+              <li><code>tabs</code></li>
+              <li><code>json</code></li>
+              <li><code>csv</code></li>
+            </ul>
+            <p>Multiple output files can be specified:</p>
+            <pre><code>brakeman -o output.html -o output.json</code></pre>
+          </section>
+          <section>
+            <h2>Back to our<br/>generated code</h2>
+            <p>&lt;plugin&gt;/brakeman_upload/lib/brakeman_upload/filters.rb</p>
+            <pre><code>
+module BrakemanUpload  
+  private
+  @@logger=nil
+
+  public
+
+  # This method will be called by the framework when the user selects
+  # your plugin from the drop down list of the 'Import from file'
+  # dialog
+  def self.import(params={})
+    file_content = File.read( params[:file] )
+    @@logger = params.fetch(:logger, Rails.logger)
+
+    # TODO: do something with the contents of the file!
+    # if you want to print out something to the screen or to the
+    # uploader interface use @@logger.info("Your message")
+  end
+end
+            </code></pre>
+          </section>
+          <section>
+            <p>&lt;plugin&gt;/brakeman_upload/lib/brakeman_upload/filters.rb</p>
+            <pre><code>
+module BrakemanUpload  
+  # [...]
+
+  # This method will be called by the framework when the user selects
+  # your plugin from the drop down list of the 'Import from file'
+  # dialog
+  def self.import(params={})
+    # [...]
+
+    # 0. Load plugin config
+    # 1. Parse the uploaded file into a Ruby object (e.g. Hash)
+    # 2. For each Brakeman issue...
+    # 2.1. Extract interesting information
+    # 2.2. Create a note with it
+  end
+end
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Remember the plugin configuration?</h2>
+            <pre><code>
+module BrakemanUpload
+  class Configuration < Core::Configurator
+    configure :namespace => 'brakeman_upload'
+
+    setting :category, :default => 'Plugin output'
+    setting :author, :default => 'Brakeman Scanner plugin'
+    setting :parent_node, :default => 'plugin.output'
+  end
+end
+            </code></pre>
+          </section>
+
+          <section>
+            <p>&lt;plugin&gt;/brakeman_upload/lib/brakeman_upload/filters.rb</p>
+            <pre><code>def self.import(params={})
+  # 0. Load plugin config
+
+  # We'll create a bunch of Nodes/Notes, we need to initialize some
+  # details:
+  #
+  # get the "Plugin output" category instance or create it if it does
+  # not exist
+  @category = Category.find_or_create_by_name(Configuration.category)
+
+  # every note we create will be assigned to this author
+  @author = Configuration.author
+  # create the parent early so we can use it to provide feedback and
+  # errors
+  @parent = Node.find_or_create_by_label(Configuration.parent_node)
+
+  # [...]
+end</code></pre>
+          </section>
+          <section>
+            <p>&lt;plugin&gt;/brakeman_upload/lib/brakeman_upload/filters.rb</p>
+            <pre><code>
+def self.import(params={})
+  # 1. Parse the uploaded file into a Ruby object (e.g. Hash)
+
+  # Parse the uploaded file into a Ruby Hash
+  data = MultiJson.decode(file_content)
+
+  # [...]
+end
+            </code></pre>
+            <p><a href="https://github.com/intridea/multi_json">intridea/multi_json</a></p>
+            <div class="fragment">
+              <p>Other formats:</p>
+              <ul>
+                <li><code>XML</code> - Burp, Nessus...</li>
+                <li><code>SQLite3</code> - SureCheck</li>
+                <li><code>ZIP</code> - ProjectManagement</li>
+              </ul>
+            </div>
+          </section>
+          <section>
+            <p>&lt;plugin&gt;/brakeman_upload/lib/brakeman_upload/filters.rb</p>
+            <pre><code>
+def self.import(params={})
+  # 2. For each Brakeman issue...
+  # 2.1. Extract interesting information
+  # 2.2. Create a note with it
+
+  # [...]
+end
+            </code></pre>
+          </section>
+          <section>
+            <h2>Brakeman file format</h2>
+            <pre><code>{
+"warnings": [
+  {
+    "warning_type": "File Access",
+    "warning_code": 16,
+    "message": "Model attribute value used in file name",
+    "file": "./app/controllers/attachments_controller.rb",
+    "line": 60,
+    "code": "File.rename(Attachment.find(params[:id], [...]).to_s)",
+    "location": {
+      "type": "method",
+      "class": "AttachmentsController",
+      "method": "update"
+    },
+    "user_input": "Attachment.find([...])",
+    "confidence": "Medium"
+    // ...
+  },
+  // ...
+]
+}</code></pre>
+          </section>
+
+          <section>
+            <p>&lt;plugin&gt;/brakeman_upload/lib/brakeman_upload/filters.rb</p>
+            <pre><code>
+  def self.import(params={})
+    # 2. For each Brakeman issue...
+
+    # Keep a reference to the node holding each warning type
+    sorted_warnings = {}
+
+    data['warnings'].each do |warning|
+      type = warning['warning_type']
+
+      # Check if this is the first time we've found this warning type
+      if !sorted_warnings.key?(type)
+        # and create a child node to hold any warnings
+        sorted_warnings[type] = @parent.children.find_or_create_by_label(type)
+      end
+
+      node_for_type = sorted_warnings[type]
+
+      warning_info =<<EOW
+#[Message]#
+#{warning['message']}
+
+#[Confidence]#
+#{warning['confidence']}
+
+#[Path]#
+#{warning['file']}##{warning['line']}
+
+#[Code]#
+bc.. #{warning['code']}
+
+#[References]#
+#{warning['link']}
+EOW
+
+      node_for_type.notes.create(
+        :author => @author,
+        :category => @category,
+        :text => warning_info
+      )
+    end
+  end
+            </code></pre>
+          </section>
+          <section>
+            <h2>Plugin results</h2>
+            <img src="img/brakeman_result.png" height="185" width="454"/>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Import plugin: CVE</h2>
+            <p><a href="http://nvd.nist.gov/home.cfm">NIST's National Vulnerability Database</a></p>
+          </section>
+          <section>
+            <h2>Searching the database</h2>
+            <p>http://web.nvd.nist.gov/view/vuln/search-results?search_type=all&cves=on&query=<strong>&lt;QUERY&gt;</strong></p>
+            <br/>
+            <p>For example:</p>
+            <p><a href="http://web.nvd.nist.gov/view/vuln/search-results?search_type=all&cves=on&query=BackupBuddy">http://web.nvd.nist.gov/view/vuln/search-results?search_type=all&cves=on&query=BackupBuddy</a></p>
+          </section>
+          <section>
+            <img src="img/cve_import.png" height="584" width="796"/>
+          </section>
+          <section>
+            <img src="img/cve_import_scraping.png"/>
+          </section>
+          <section>
+            <h2>Cleaning up the HTML</h2>
+            <pre><code>
+&lt;dl&gt;
+  &lt;span&gt;
+    &lt;dt&gt;&lt;a href=&quot;http:...&quot;&gt;CVE-2013-2744&lt;/a&gt;&lt;/dt&gt;
+    &lt;dd&gt;
+      &lt;p class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;Summary:&lt;/span&gt; ...&lt;/p&gt;
+      &lt;div class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;Published:&lt;/span&gt; 04/02/2013&lt;/div&gt;
+      &lt;div class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;CVSS Severity:&lt;/span&gt; 5.0 (MEDIUM)&lt;/div&gt;
+    &lt;/dd&gt;
+    &lt;dt&gt;&lt;a href=&quot;http:...&quot;&gt;CVE-2013-2743&lt;/a&gt;&lt;/dt&gt;
+    &lt;dd&gt;
+      &lt;p class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;Summary:&lt;/span&gt; ...&lt;/p&gt;
+      &lt;div class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;Published:&lt;/span&gt; 04/02/2013&lt;/div&gt;
+      &lt;div class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;CVSS Severity:&lt;/span&gt; 7.5 (HIGH)&lt;/div&gt;
+    &lt;/dd&gt;
+    ...
+  &lt;/span&gt;
+&lt;/dl&gt;
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>And this is what we need</h2>
+            <img src="img/cve_import_result.png"/>
+            <p>Each entry is a Ruby hash:</p>
+            <pre><code>{ :title => '...', :description => '...'}</code></pre>
+          </section>
+
+          <section>
+            <p>From:</p>
+            <pre><code>
+&lt;dl&gt;
+  &lt;span&gt;
+    &lt;dt&gt;&lt;a href=&quot;http:...&quot;&gt;CVE-2013-2744&lt;/a&gt;&lt;/dt&gt;
+    &lt;dd&gt;
+      &lt;p class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;Summary:&lt;/span&gt; ...&lt;/p&gt;
+      &lt;div class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;Published:&lt;/span&gt; 04/02/2013&lt;/div&gt;
+      &lt;div class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;CVSS Severity:&lt;/span&gt; 5.0 (MEDIUM)&lt;/div&gt;
+    &lt;/dd&gt;
+    ...
+  &lt;/span&gt;
+&lt;/dl&gt;
+            </code></pre>
+            <p>To:</p>
+            <pre><code>
+[
+  { :title => 'CVE-2013-2744', :description => '#[Title]#\nCVE-2013-2744 (BackupBu...'}
+  // ...
+]
+            </code></pre>
+          </section>
+
+          <section>
+            <p>&lt;plugin&gt;/cve_import/lib/cve_import/filters.rb</p>
+            <pre><code>
+module CveImport::Filters
+  module NVDKeyword
+    # Plugin config
+    NAME = "Keyword search against the NVD"
+    CONF = {
+      :url => "http://web.nvd.nist.gov/view/vuln/search-results?search_type=all&cves=on&query="
+    }
+
+    def self.run(params={})
+      # [...]
+
+      # 1. Make the request
+      # 2. Scrape the page. For each issue create a hash with :title
+      # and :description
+    end
+  end
+end
+            </code></pre>
+          </section>
+
+          <section>
+            <p>&lt;plugin&gt;/cve_import/lib/cve_import/filters.rb</p>
+            <pre><code>
+require 'open-uri'
+
+module CveImport::Filters
+  module NVDKeyword
+    # [...]
+    def self.run(params={})
+      records = []
+
+      # 1. Make the request
+      begin
+        keyword = CGI::escape(params[:query])
+        url = CONF[:url] + keyword
+        results = Nokogiri::HTML(open(url))
+
+        // [...]
+
+      rescue Exception => e
+        // [...]
+      end
+
+      return records
+    end
+  end
+end
+            </code></pre>
+            <p><a href="http://nokogiri.org/">Nokogiri</a> - XML/HTML parsing</p>
+          </section>
+
+          <section>
+            <p>From:</p>
+            <pre><code>
+&lt;dl&gt;
+  &lt;span&gt;
+    &lt;dt&gt;&lt;a href=&quot;http:...&quot;&gt;CVE-2013-2744&lt;/a&gt;&lt;/dt&gt;
+    &lt;dd&gt;
+      &lt;p class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;Summary:&lt;/span&gt; ...&lt;/p&gt;
+      &lt;div class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;Published:&lt;/span&gt; 04/02/2013&lt;/div&gt;
+      &lt;div class=&quot;row&quot;&gt;&lt;span class=&quot;label&quot;&gt;CVSS Severity:&lt;/span&gt; 5.0 (MEDIUM)&lt;/div&gt;
+    &lt;/dd&gt;
+    ...
+  &lt;/span&gt;
+&lt;/dl&gt;
+            </code></pre>
+            <p>To:</p>
+            <pre><code>
+[
+  { :title => 'CVE-2013-2744', :description => '#[Title]#\nCVE-2013-2744 (BackupBu...'}
+  // ...
+]
+            </code></pre>
+          </section>
+
+          <section>
+            <p>&lt;plugin&gt;/cve_import/lib/cve_import/filters.rb</p>
+            <pre><code>
+module CveImport::Filters
+  module NVDKeyword
+    # [...]
+    def self.run(params={})
+      # [...]
+
+      # 2. Scrape the page. For each issue create a hash with :title
+      # and :description
+      elements = results.xpath('//dl/span').first.elements
+      while(elements.any?)
+        dt = elements.shift
+        dd = elements.shift
+        record = {}
+        record[:title]     = "#{dt.text} (#{keyword})"
+        record[:link]      = "http://web.nvd.../detail?vulnId=" + dt.text
+        record[:summary]   = dd.elements[0].text.split(': ')[1]
+        record[:published] = dd.elements[1].text.split(': ')[1]
+        record[:severity]  = dd.elements[2].text.split(': ')[1]
+        record[:vector]    = CGI::unescape(dd.elements[2].xpath('.//a').first['href'].split('&')[1].split('=')[1])
+
+        records << {
+          :title => record[:title],
+          :description => record.map do |key,value|
+              "#[#{key}]#\n#{value}"
+            end.join("\n\n")
+        }
+      end
+
+      # [...]
+    end
+  end
+end
+            </code></pre>
+          </section>
+          <section>
+            <h2>Thor task</h2>
+  				  <pre><code>class Import &lt; Thor
+  namespace "dradis:import:cve"
+
+  desc "keyword QUERY", "import CVE records from the NVD"
+  long_desc "This command searches CVE records from the National..."
+  def keyword(query)
+    require 'config/environment'
+
+    # Invoke the plugin
+    results = CveImport::Filters::NVDKeyword.run(:query => query)
+
+    puts "CVE Search\n==========="
+    puts "#{results.size} results"
+
+    results.each do |record|
+      puts record[:title]
+    end
+  end
+end</code></pre>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>Export plugin: CSV</h2>
+            <pre><code>Reflected XSS, "Reflected XSS occurs...", "Reliable avoidance of..."
+  Dangerous HTTP methods, "The HTTP PUT...", "Disable any..."
+  Too many secrets, "Relying on too many...", "Focus on..."</code></pre>
+          </section>
+          <section>
+            <h2>Generated code</h2>
+            <p>&lt;plugin&gt;/csv_export/lib/csv_export.rb</p>
+            <pre><code class="ruby">module CsvExport
+  module Actions
+    # first action
+    def to_myformat(params={})
+      # your action code to do the export goes here
+      render :type =&gt; &#x27;text/html&#x27;,
+        :text =&gt; &#x27;&lt;html&gt;&lt;body&gt;&lt;h1&gt;Sample Export Plugin&lt;/h1&gt;&#x27; +
+          &#x27;&lt;p&gt;This method does not define any format.&lt;/p&gt;&#x27; +
+          &quot;&lt;p&gt;Find me at: &lt;code&gt;#{__FILE__}&lt;/code&gt;&lt;/p&gt;&quot;
+    end
+
+    # [...]
+  end
+end</code></pre>
+          </section>
+          <section>
+            <p>&lt;plugin&gt;/csv_export/lib/csv_export.rb</p>
+            <pre><code>def to_csv(params={})
+  # [...]
+
+  # 1. Locate the Notes to export
+
+  # 2. Cycle through the notes &amp; create CSV data
+
+  # [...]
+end</code></pre>
+          </section>
+          <section>
+            <p>&lt;plugin&gt;/csv_export/lib/csv_export.rb</p>
+            <pre><code>def to_csv(params={})
+  # 1. Locate the Notes to export
+
+  # Locate our Category
+  csv_category = Category.find_by_name( Configuration.category )
+
+  # Find the notes that are assigned to our category
+  notes = Note.where(:category_id => csv_category)
+
+  # [...]
+end</code></pre>
+          </section>
+          <section>
+            <p>&lt;plugin&gt;/csv_export/lib/csv_export.rb</p>
+            <pre><code>def to_csv(params={})
+  # [...]
+
+  # 2. Cycle through the notes &amp; create CSV data
+  # Create the CSV data
+  csv_string = ::CSV.generate do |csv|
+
+    # Add the header line with all the field names.
+    # Remember note.field returns a hash:
+    #   {'Title' => 'Foo', 'Description' => 'Bar'...}
+    csv << notes.first.fields.keys
+
+    # For each of the notes, we dump the field values.
+    # This assumes all notes have the same fields *and*
+    # in the same order
+    notes.each do |note|
+      csv << note.fields.values
+    end
+  end
+
+  # While debugging, it's ok to render the results in the browser
+  render :type => 'text/html', :text => csv_string
+
+  # For the final plugin, send the resulting CSV data
+  # as a downloadable file
+  # send_data csv_string, :filename => 'dradis-results.csv'
+end</code></pre>
+            <p>Ruby stdlib's <a href="http://ruby-doc.org/stdlib-1.9.2/libdoc/csv/rdoc/CSV.html">CSV</a></p>
+          </section>
+          <section>
+            <h2>CSV result</h2>
+            <pre><code class="csv">Title, Description, Recommendation...
+Reflected XSS, "Reflected XSS occurs...", "Reliable avoidance of..."
+Dangerous HTTP methods, "The HTTP PUT...", "Disable any..."
+Too many secrets, "Relying on too many...", "Focus on..."</code></pre>
+          </section>
+        </section>
+
+				<section>
+					<h1>Thank You</h1>
+					<h3><a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></h3>
+				</section>
+
+				<section>
+					<h1>You will ask questions now</h1>
+					<img src="img/hypnotoad.gif" height="332" width="474"/>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

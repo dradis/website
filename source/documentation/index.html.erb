@@ -9,18 +9,41 @@ description: Dradis Framework documentation.
 </div>
 
 
-<div class="container">
-  <h3>Guides</h3>
+<div class="container" id="guides">
+  <h2>Guides</h2>
   <p>Please be patient as we're rebuilding the docs for the 3.0 release:</p>
-  <ul>
-    <li><a href="../FAQ.html">Dradis Framework Frequently Asked Questions (FAQs)</a></li>
-    <li><a href="add-ons.html">Enabling/Disabling Add-ons</a></li>
-    <li><a href="install_git.html">Installing Dradis from Git</a></li>
-    <li><a href="install_cloud9.html">Installing Dradis on Cloud9</a></li>
-  </ul>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header">
+        <h4 id="install">Install Dradis:</h4>
+      </div>
+      <div class="card-copy">
+        <p><a href="install_git.html">Installing Dradis from Git</a></p>
+        <p><a href="install_cloud9.html">Installing Dradis on Cloud9</a></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Add-ons:</h4>
+      </div>
+      <div class="card-copy">
+        <p><a href="add-ons.html">Enabling/Disabling Add-ons</a></p>
+        <p><a href="export_add-on.html">Create a Custom Export Add-on</a></p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <h4>Miscellaneous:</h4>
+      </div>
+      <div class="card-copy">
+        <p><a href="../FAQ.html">Frequently Asked Questions (FAQs)</a></p>
+      </div>
+    </div>
+  </div>
 </div>
-<div class="container">
-  <h3>Videos</h3>
+
+<div class="container" id="videos">
+  <h2>Videos</h2>
   <br/>
 
   <div class="cards">
@@ -38,26 +61,140 @@ description: Dradis Framework documentation.
 
     <div class="card">
       <!-- <div class="card-image">
-
       </div>
       <div class="card-header">
-
       </div>
       <div class="card-copy">
-
       </div> -->
     </div>
 
     <div class="card">
       <!-- <div class="card-image">
-
       </div>
       <div class="card-header">
-
       </div>
       <div class="card-copy">
-
       </div> -->
     </div>
+  </div>
+  <br/><br/>      
+</div>
+<div class="container" id="presentations">
+  <h2>Presentations</h2>
+  <br/> 
+  <div class="cards">
+    <div class="card">
+      <div class="card-image">
+        <%= link_to image_tag('documentation/presentations/bsides-london-2016.png'), 'slides/bsides2016/', target: "_blank" %>
+      </div>
+      <div class="card-header">
+        <a href="slides/bsides2016/" target="_blank"><strong>Dradis 3.1: A Year of Updates</strong></a>
+      </div>
+      <div class="card-copy">
+        <p>Security BSides London 2016</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <%= link_to image_tag('documentation/presentations/bsides-london-2015.png'), 'slides/bsides2015/', target: "_blank" %>
+      </div>
+      <div class="card-header">
+        <a href="slides/bsides2015/" target="_blank"><strong>Dradis 3.0: About time.</strong></a>
+      </div>
+      <div class="card-copy">
+        <p>Security BSides London 2015</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <%= link_to image_tag('documentation/presentations/black-hat-2014.png'), 'slides/bhusa2014/', target: "_blank" %>
+      </div>
+      <div class="card-header">
+        <a href="slides/bhusa2014/" target="_blank"><strong>Dradis 3.0: Packed with Goodness</strong></a>
+      </div>
+      <div class="card-copy">
+        <p>Black Hat USA 2014</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-image">
+        <%= link_to image_tag('documentation/presentations/bsides-london-2014.png'), 'slides/bsides2014/', target: "_blank"  %>
+      </div>
+      <div class="card-header">
+        <a href="slides/bsides2014/" target="_blank"><strong>Dradis Framework: API, Excel, and more.</strong></a>
+      </div>
+      <div class="card-copy">
+        <p>Security BSides London 2014</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <%= link_to image_tag('documentation/presentations/bsides-london-2013.png'), 'slides/bsides2013/', target: "_blank"  %>
+      </div>
+      <div class="card-header">
+        <a href="slides/bsides2013/" target="_blank"><strong>Dradis Framework: Creating custom plugins.</strong></a>
+      </div>
+      <div class="card-copy">
+        <p>Security BSides London 2013</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <%= link_to image_tag('documentation/presentations/defcon-17.png'), 'slides/defcon-17-daniel_gomez-etd-dradis.pdf', target: "_blank"  %>
+      </div>
+      <div class="card-header">
+        <a href="slides/defcon-17-daniel_gomez-etd-dradis.pdf" target="_blank"><strong>Dradis Framework: Sharing information will get you root.</strong></a>
+      </div>
+      <div class="card-copy">
+        <p>DEFCON 17, 2009</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-image">
+        <%= link_to image_tag('documentation/presentations/effective-info-sharing.png'), 'slides/dc4420_2009-03.pdf', target: "_blank"  %>
+      </div>
+      <div class="card-header">
+        <a href="slides/dc4420_2009-03.pdf" target="_blank"><strong>Dradis: Effective information sharing.</strong></a>
+      </div>
+      <div class="card-copy">
+        <p>2009</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <%= link_to image_tag('documentation/presentations/plugin-programming.png'), 'slides/dradis_plugin_programming_2008-02-22.pdf', target: "_blank"  %>
+      </div>
+      <div class="card-header">
+        <a href="slides/dradis_plugin_programming_2008-02-22.pdf" target="_blank"><strong>Introduction to Dradis plugin programming.</strong></a>
+      </div>
+      <div class="card-copy">
+        <p>2008</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-image">
+        <%= link_to image_tag('documentation/presentations/overview.png'), 'slides/overview.pdf', target: "_blank"  %>
+      </div>
+      <div class="card-header">
+        <a href="slides/overview.pdf" target="_blank"><strong>Dradis overview.</strong></a>
+      </div>
+      <div class="card-copy">
+        <p>2007</p>
+      </div>
+    </div>
+    <!-- <div class="card">
+      <div class="card-image">
+      </div>
+      <div class="card-header">
+      </div>
+      <div class="card-copy">
+      </div>
+    </div> -->
   </div>
 </div>

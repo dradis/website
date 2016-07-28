@@ -1,0 +1,178 @@
+---
+title: Create a Custom Export Add-on | Dradis Framework
+description: How to create a custom add-on to export your Dradis projects into the format that you need.
+---
+
+<div class="intro-text">
+  <h2>Create a Custom Export Add-on</h2>
+  <h4>If your answer is not here the <a href="http://discuss.dradisframework.org">Community Forums</a> are your best bet.</h4>
+</div>
+
+<div class="container">
+	<h3>Introduction to export add-ons</h3>
+	<p><strong>Before you get started with this guide, make sure you are running Dradis v3.0 or later (check the footer to confirm your version).<br/>If needed, install the latest version of Dradis from Git with <a href="install_git.html">these instructions</a> before moving on.</strong></p>
+	<br/>
+	<p>In this guide we're going to walk through the process to create a custom export add-on. An export add-on will allow you to generate a report from your Dradis project in any format you want.</p>
+	<p>In this case, we're creating a simple JSON export add-on<!-- (available for review on <a href="https://github.com/dradis/dradis-json">GitHub</a>)-->. Our JSON exporter is going to open up a new browser tab and display all of the Issues in your project in JSON strings.</p>
+	<br/>
+	<h2>1. Clone your Add-on</h2>
+	<p>The easiest way to start building is to clone one of the existing export add-ons to use as a working guide as you customize your export add-on.</p>
+	<p>Which of the available export add-ons is closest to what you're building?</p>
+	<ul class="bullets">
+		<li><a href="https://github.com/dradis/dradis-csv" target="_blank"><code>dradis-csv</code></a>: CSV export plugin</li>
+		<li><a href="https://github.com/dradis/dradis-html_export" target="_blank"><code>dradis-html_export</code></a>: HTML export plugin</li>
+		<li><a href="https://github.com/dradis/dradis-json" target="_blank"><code>dradis-json</code></a>: JSON export plugin</li>
+	</ul>
+	<br/>
+	<p>To clone the add-on:</p>
+	<ol type="A">
+		<li>
+			<p>Pick an export plugin from the list above to use as a template.</p>
+		</li>
+		<li>
+			<p>Click the link above to open the plugin's GitHub repo.</p>
+		</li>
+		<li>
+			<p>Copy the HTTPS link to clone the repo. 
+			In the example below, we're going to clone the <a href="https://github.com/dradis/dradis-csv"><code>dradis-csv</code> repo.</a></p>
+			<div class="centered-image">
+		  	<%= image_tag 'documentation/dradisframework-08.png', width: "75%" %> 
+		  </div>
+		</li>
+		<li>
+			<p>Back on your local system, open the terminal and navigate to the folder where you installed <code>dradis-ce</code>.</p>
+		</li>
+		<li>
+			<p>Run the following in the terminal:</p>
+			<pre>$ git clone [repo link]</pre>
+			<p>Paste in the HTTPS link you copied from GitHub! Example:</p>
+			<pre>$ git clone https://github.com/dradis/dradis-csv.git</pre>
+		</li>
+	</ol>
+</div>
+<hr/>
+<div class="container">
+	<h2>2. Rename your add-on</h2>
+	<p>Below is an example of the file structure of a Dradis add-on. Every export add-on uses this basic file structure. If the add-on uses templates (like <code>dradis-html_export</code>), there will also be a <code>templates/</code> folder.</p>
+	<div class="centered-image">
+		<%= image_tag 'documentation/dradisframework-09.png', width: "25%" %>
+	</div>
+	<h3>Rename files and folders</h3>
+	<p>On your local system, rename your folders and files. For the root folder, we recommend using the <code>dradis-[name]</code> naming convention where <code>[name]</code> is a placeholder for your exporter type (e.g. <code>json</code>). In the examples below, we're going to assume you're working with the <code>dradis-csv</code> repo.</p>
+	<ul>
+		<li>
+			<p>Rename <code>dradis-csv/app/controllers/dradis/plugins/csv/</code> to:<br/><code>dradis-<strong>[name]</strong>/app/controllers/dradis/plugins/<strong>[name]</strong>/</code></p>
+		</li>
+		<li>
+			<p>Rename <code>dradis-csv/lib/dradis/plugins/csv/</code> to:<br/><code>dradis-<strong>[name]</strong>/lib/dradis/plugins/<strong>[name]</strong>/</code></p>
+		</li>
+		<li>
+			<p>Rename <code>dradis-csv/lib/dradis/plugins/csv.rb</code> to:<br/><code>dradis-<strong>[name]</strong>/lib/dradis/plugins/<strong>[name]</strong>.rb</code></p>
+		</li>
+		<li>
+			<p>Rename <code>dradis-csv/lib/dradis-csv.rb</code> to:<br/><code>dradis-<strong>[name]</strong>/lib/dradis-<strong>[name]</strong>.rb</code></p>
+		</li>
+		<li>
+			<p>Rename <code>dradis-csv/spec/csv_export_spec.rb</code> to:<br/><code>dradis-<strong>[name]</strong>/spec/<strong>[name]</strong>_spec.rb</code></p>
+		</li>
+		<li>
+			<p>Rename <code>dradis-csv/dradis-csv.gemspec</code> to: <br/><code>dradis-<strong>[name]</strong>/dradis-<strong>[name]</strong>.gemspec</code></p>
+		</li>
+	</ul>
+	<p>After renaming, your filesystem should look similar to this:</p>
+	<div class="centered-image">
+		<%= image_tag 'documentation/dradisframework-10.png', width: "25%" %>
+	</div>
+</div>
+<hr/>
+<div class="container">
+	<h2>3. Edit your files</h2>
+	<p>Before you upload the add-on to Dradis, you're going to want to edit files and at least change the references to the old export add-on name (e.g. <code>CSV</code>) and change them to your new name (e.g. <code>JSON</code>).</p>
+	<p>The instructions below will not cover exactly how to code your specific export add-on. They are simply a high-level overview of the different files that comprise an export add-on to help you get started. This is not an exhaustive list of all of the changes you may need to make. After completing the steps below, you should be ready to <strong>start</strong> your custom coding.</p>
+	<p>Note: when the instructions say, "update all references to the old name", it means to go through the file and change things like class names to match the new syntax of your custom export add-on. For example, change <code>csv</code> to <code>json</code> and <code>CSV</code> to <code>JSON</code>). Remember: in Ruby, capitalization counts!</p>
+	<h3>Start by editing the following files:</h3>
+	<ul>
+		<li><p><strong>dradis-[name].gemspec</strong>: update this file with the details about you (the author!) and the export add-on you're creating. Update all references to the old name.</p></li>
+		<li><p><strong>dradis-[name]/app/controllers/dradis/plugins/[name]/base_controller.rb</strong>: update all references to the old name. Starting at <a href="https://github.com/dradis/dradis-csv/blob/master/app/controllers/dradis/plugins/csv/base_controller.rb#L14">Line #14</a>, you'll need to customize the code to match the format of your add-on. <!--See <a href="">JSON export add-on example</a>--></p></li>
+		<li><p><strong>dradis-[name]/config/routes.rb</strong>: update all references to the old name.</p></li>
+		<li><p><strong>dradis-[name]/lib/dradis-[name].rb</strong>: update all references to the old name.</p></li>
+		<li><p><strong>dradis-[name]/lib/dradis/plugins/[name].rb</strong>: update all references to the old name.</p></li>
+		<li>
+			<p><strong>dradis-[name]/lib/dradis/plugins/[name]/engine.rb</strong>: update all references to the old name.<br/>
+			Starting around <a href="https://github.com/dradis/dradis-csv/blob/master/lib/dradis/plugins/csv/engine.rb#L5">Line #5</a>, you'll need to customize the code to match the format of your add-on.<br/>
+			The <code>description</code> you set in <a href="https://github.com/dradis/dradis-csv/blob/master/lib/dradis/plugins/csv/engine.rb#L7">Line #7</a> will be the name that appears in the tab for your exporter at <code>/export</code> in the webapp:</p>
+		</li>
+		<li>
+			<p><strong>dradis-[name]/lib/dradis/plugins/[name]/exporter.rb</strong>: update all references to the old name. This is likely the file where you will spend most of your time as it is the controls the way that the content is exported.<br/>
+			The very simplest of export add-ons can be created with the following <code>exporter.rb</code> file:
+			<pre>
+module Dradis::Plugins::XYZ
+  class Exporter < Dradis::Plugins::Export::Base
+    def export(args={})
+      template        = args[:template]
+
+      issues = content_service.all_issues
+
+      if issues.empty?
+        return "The project didn't contain any issues"
+      else
+        return "The project did contain issues!"
+      end
+
+    end
+  end
+end
+			</pre>
+		</li>
+		<li><p><strong>dradis-[name]/lib/dradis/plugins/[name]/gem_version.rb</strong>: update all references to the old name.</p></li>
+		<li><p><strong>dradis-[name]/lib/dradis/plugins/[name]/version.rb</strong>: update all references to the old name.</p></li>
+		<li><p><strong>dradis-[name]/lib/tasks/thorfile.rb</strong>: update all references to the old name. Staring at <a href="https://github.com/dradis/dradis-csv/blob/master/lib/tasks/thorfile.rb#L6">Line #6</a>, update the code to match your specific export add-on.</p></li>
+		<li><p><strong>dradis-[name]/spec/[name]_export_spec.rb</strong>: update all references to the old name.</p></li>
+		<li><p><strong>README.md</strong>: update the description of your add-on and remove references to the old add-on. Make sure to leave in the <code>## Installation</code> section, just change references like <code>dradis-csv</code> to your <code>dradis-<strong>[name]</strong></code>.</p></li>
+	</ul>
+	<h3>Edit depending on your add-on:</h3>
+	<ul>
+		<li><p><strong>dradis-[name]/spec/spec_helper.rb</strong>: depending on the add-on you're creating, you may need to edit this file extensively to correctly configure the Rails Environment. In other cases, you may not need to edit this file at all.</p></li>
+		<li><p><strong>Rakefile</strong>: depending on the add-on you're creating, you may need to edit this file extensively. In other cases, you may be able to use the exising cloned Rakefile without making any changes.</p></li>
+	</ul>
+	<h3>In most cases you can ignore all the following files:</h3>
+	<ul>
+		<li>LICENSE</li>
+		<li>Gemfile (unless extra gems are required for your add-on)</li>
+		<li>CONTRIBUTING.md</li>
+		<li>.rspec</li>
+		<li>.gitignore</li>
+	</ul>
+</div>
+<hr/>
+<div class="container">
+	<h2>4. Load the Add-on to Dradis</h2>
+	<ol type="A">
+		<li>
+			<p>Open up the <code>dradis-ce</code> folder on your local system and open file <code>dradis-ce/Gemfile.plugins</code>.</p>
+		</li>
+		<li>
+			<p>Add a reference to your new export add-on by adding a line to the <code># -- Export</code> section:
+			<pre>gem 'dradis-[name]', path '../dradis-[name]'</pre>
+			Example: 
+			<pre>gem 'dradis-json', path '../dradis-json'</pre>
+			<strong>Note:</strong> make sure that your new export add-on is in the same folder as the other export add-ons on your system so that it matches the filepath you just added to <code>Gemfile.plugins</code>.</p>
+		</li>
+		<li>
+			<p>On your local system, open the terminal and navigate to the <code>dradis-ce</code> folder. (Shut down Dradis if it was already running). Then run:
+			<pre>$ bundle install</pre>
+			<pre>$ bundle exec rails server</pre>
+			</p>
+		</li>
+		<li>Open Dradis in your browser and click <strong>Export results</strong> in the header. Check out the tab for your new export add-on! Depending on how much custom coding you've already done (and how much is left to do) you may be able to test out your export add-on at this point. Otherwise, continue on to the final step.</li>
+		<div class="centered-image">
+			<%= image_tag 'documentation/dradisframework-11.png', width: "90%" %>
+		</div>
+	</ol>
+</div>
+<hr/>
+<div class="container">
+	<h2>5. Test, Edit, Repeat</h2>
+	<p>It's almost a guarantee that you'll be spending a lot of time at this step making changes to your code, running into stack traces/errors, searching Google for workarounds, and testing your exporter until it does what you need it to do. If you're this far, keep up the great work!</p>
+	<p>Remember, <a href="http://stackoverflow.com/">StackOverflow</a> is your friend and the <a href="http://discuss.dradisframework.org/">Dradis Community Forums</a> are here to help.</p>
+</div>
