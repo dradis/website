@@ -14,13 +14,13 @@ description: Dradis Framework documentation.
     <li class="bullet two-col-bullet">
       <div class="bullet-content" style="margin-left: 0">
         <h1>Text Instructions</h1>
-        <h3>Getting started</h3>
-        <ol>
-          <li>Head over to the <a href="https://github.com/dradis/dradis-ce">Dradis Framework repo</a> on GitHub.</li>
-          <li>On your local system, run the following in your command line:<br/><code>$ git clone https://github.com/dradis/dradis-ce.git</code><br/><code>$ cd dradis-ce/</code></li>
-          <li>Run the following in your command line:<br/><code>$ bundle install</code></li>
-          <li>Run the following in your command line:<br/><code>$ ./bin/setup</code></li>
-        </ol>
+        <br/><br/>
+        <h3 id="dependencies">Dependencies</h3>
+        <br/>
+        <ul>
+          <li><strong>Redis</strong>: make sure Redis is installed and running on your local system. If you're not sure how to install it on your local system, try searching Google for "install Redis [operating system]"</li><br/>
+          <li><strong>Kali Linux dependencies</strong>: see the <a href="install_kali.html#dependencies">dependencies section</a> of the Installing Dradis on Kali Linux guide.</li>
+        </ul>
       </div>
     </li>
     <li class="bullet two-col-bullet">
@@ -32,9 +32,16 @@ description: Dradis Framework documentation.
       </div>
     </li>
   </ul>
-  <br/>
-  <br/>
 
+  <h3>Getting started</h3>
+  <br/>
+  <ol>
+    <li>Head over to the <a href="https://github.com/dradis/dradis-ce">Dradis Framework repo</a> on GitHub.</li>
+    <li>On your local system, run the following in your command line:<br/><code>$ git clone https://github.com/dradis/dradis-ce.git</code><br/><code>$ cd dradis-ce/</code></li>
+    <li>Run the following in your command line:<br/><code>$ bundle install</code></li>
+    <li>Run the following in your command line:<br/><code>$ ./bin/setup</code></li>
+  </ol>
+  <br/><br/>
   <h3>Setting up the app</h3>
   <br/>
   <ol>
@@ -55,19 +62,13 @@ description: Dradis Framework documentation.
   <br/>
   <br/>
 
-  <h1>Congratulations!</h1>
+  <h1>Congratulations!</h1><br/>
   <p>You did it! You have now completed the installation process. Congratulations on making it all the way from git to running!
   <div class="centered-image">
     <%= image_tag 'documentation/dradisframework-03.png', width: "90%" %>
   </div>
   </p>
   <br/><hr/>
-  <h4 id="dependencies">Dependencies</h4>
-  <ul>
-    <li><strong>Redis</strong>: make sure Redis is installed and running on your local system. If you're not sure how to install it on your local system, try searching Google for "install Redis [operating system]"</li><br/>
-    <li><strong>Kali Linux dependencies</strong>: see the <a href="install_kali.html#dependencies">dependencies section</a> of the Installing Dradis on Kali Linux guide.</li>
-  </ul>
-  <br/><br/>
   <h4 id="troubleshooting">Troubleshooting tips</h4>
   <ul>
     <li><strong>I'm installing on Kali Linux</strong>: check out the <a href="install_kali.html#troubleshooting">troubleshooting section</a> of the Installing Dradis on Kali Linux guide.</li><br/>
