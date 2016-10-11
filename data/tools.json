@@ -23,7 +23,7 @@
   {
     "title": "NeXpose",
     "page": "nexpose",
-    "description": "Vulnerability management product from Rapid7.",
+    "description": "NeXpose is a vulnerability management software product created by Rapid7.",
     "github": "http://github.com/dradis/dradis-nexpose",
     "vendor": "http://www.rapid7.com/products/nexpose/"
   },
@@ -44,7 +44,7 @@
   {
     "title": "Metasploit",
     "page": "metasploit",
-    "description": "Penetration testing software.",
+    "description": "Metasploit is a penetration testing software created through a collaboration between the open source community and Rapid7.",
     "github": "http://github.com/dradis/dradis-metasploit",
     "vendor": "http://www.metasploit.com/"
   },
@@ -72,7 +72,7 @@
   {
     "title": "Retina",
     "page": "retina",
-    "description": "Integrated network, web & virtual vulnerability scanner",
+    "description": "Retina is an integrated network, web, and virtual vulnerability scanner",
     "github": "http://github.com/dradis/dradis-retina",
     "vendor": "http://www.beyondtrust.com/Products/RetinaNetworkSecurityScanner/"
   },
