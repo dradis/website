@@ -93,7 +93,7 @@
   {
     "title": "w3af",
     "page": "w3af",
-    "description": "The project's goal is to create a framework to find and exploit web application vulnerabilities.",
+    "description": "The goal of w3af is to create a framework to find and exploit web application vulnerabilities.",
     "github": "http://github.com/dradis/dradis-w3af",
     "vendor": "http://w3af.org/"
   },
