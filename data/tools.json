@@ -109,7 +109,7 @@
     "page": "wxf",
     "description": "A Metasploit-like framework focused on the web standards along with exploits & payloads designed specifically for defeating web application protections.",
     "github": "http://github.com/dradis/dradis-wxf",
-    "vendor": "http://webexploitationframework.github.com/wXf/"
+    "vendor": "https://github.com/forced-request/wXf"
   },
   {
     "title": "Zed Attack Proxy",
