@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem "middleman", "~>3.2.2"
-gem 'middleman-sprockets', github: 'middleman/middleman-sprockets'
+gem 'middleman-sprockets'#, github: 'middleman/middleman-sprockets'
 
 # Live-reloading plugin
 gem "middleman-livereload", "~> 3.1.1"
