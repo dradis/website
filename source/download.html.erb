@@ -5,7 +5,7 @@ description: Download the latest release of the Dradis Framework.
 
 <div class="intro-text">
   <h2>Download Dradis</h2>
-  <h4>The latest version of the Dradis Framework is <strong>3.1.0.rc2</strong></h4>
+  <h4>The latest version of the Dradis Framework is <strong>3.1.0</strong></h4>
 </div>
 
 
@@ -13,48 +13,54 @@ description: Download the latest release of the Dradis Framework.
   <ul class="bullets">
     <li class="bullet three-col-bullet">
       <div class="bullet-content">
-        <h2>Download for Linux</h2>
-        <ul>
-          <li><a href="http://sourceforge.net/projects/dradis/files/dradis/v3.1/dradis-3.1.0.rc2-linux-x86.tar.gz/download">dradis-3.1.0.rc2-linux-x86.tar.gz</a></li>
-          <li><a href="http://sourceforge.net/projects/dradis/files/dradis/v3.1/dradis-3.1.0.rc2-linux-x86_64.tar.gz/download">dradis-3.1.0.rc2-linux-x86_64.tar.gz</a></li>
-        </ul>
-        </div>
-    </li>
-    <li class="bullet three-col-bullet">
-      <div class="bullet-content">
-        <h2>Download for Mac</h2>
-        <ul>
-          <li><a href="http://sourceforge.net/projects/dradis/files/dradis/v3.1/dradis-3.1.0.rc2-osx.tar.gz/download">dradis-3.1.0.rc2-osx.tar.gz</a></li>
-        </ul>
-      </div>
-    </li>
-    <li class="bullet three-col-bullet">
-      <div class="bullet-content">
         <h2>Git download</h2>
         <p>Follow the instructions in our <a href="/documentation/install_git.html">Install from Git</a> guide.</p>
       </div>
     </li>
+    <li class="bullet three-col-bullet">
+      <div class="bullet-content">
+        <h2>Kali download</h2>
+        <p>Follow the instructions in our <a href="/documentation/install_kali.html">Install on Kali Linux</a> guide.</p>
+      </div>
+    </li>
+    <li class="bullet three-col-bullet">
+      <div class="bullet-content">
+        <!-- <h2>Download for Linux</h2>
+        <ul>
+          <li><a href="http://sourceforge.net/projects/dradis/files/dradis/v3.1/dradis-3.1.0.rc2-linux-x86.tar.gz/download">dradis-3.1.0.rc2-linux-x86.tar.gz</a></li>
+          <li><a href="http://sourceforge.net/projects/dradis/files/dradis/v3.1/dradis-3.1.0.rc2-linux-x86_64.tar.gz/download">dradis-3.1.0.rc2-linux-x86_64.tar.gz</a></li>
+        </ul> -->
+        </div>
+    </li>
+    <li class="bullet three-col-bullet">
+      <div class="bullet-content">
+        <!-- <h2>Download for Mac</h2>
+        <ul>
+          <li><a href="http://sourceforge.net/projects/dradis/files/dradis/v3.1/dradis-3.1.0.rc2-osx.tar.gz/download">dradis-3.1.0.rc2-osx.tar.gz</a></li>
+        </ul> -->
+      </div>
+    </li>
   </ul>
 
-  <p>It is advised to check the <a href="/sha256.txt">sha256 checksum</a> of the downloaded files.</p>
+  <!-- <p>It is advised to check the <a href="/sha256.txt">sha256 checksum</a> of the downloaded files.</p> -->
 
   <section>
     <article>
       <h2 class="faq">FAQ</h2>
 
-      <h3>Package or Git?</h3>
+      <!-- <h3>Package or Git?</h3>
       <p>If you are giving Dradis a try and want to see what it is about: <strong>package</strong>.</p>
       <p>If you are planning to run Dradis in the long run and are comfortable with ruby and ruby gems: <strong>git</strong>.</p>
-      <p>Check the <a href="/documentation/install_git.html">installing Dradis from Git</a> guide.</p>
+      <p>Check the <a href="/documentation/install_git.html">installing Dradis from Git</a> guide.</p> -->
 
       <h3>How do I run it?</h3>
 
-      <pre class="code">
+      <!-- <pre class="code">
 $ tar -xzf dradis-3.1.0.rc2-linux-x86.tar.gz
 $ cd dradis-3.1.0.rc2-linux-x86/
 $ ./dradis-webapp  &amp;&amp; ./dradis-worker</pre>
 
-      <p>Then point your browser to <a href="http://127.0.0.1:3000">http://127.0.0.1:3000</a>.</p>
+      <p>Then point your browser to <a href="http://127.0.0.1:3000">http://127.0.0.1:3000</a>.</p> -->
 
       <p><strong>Remember</strong>: you'll need to have Redis up and running:</p>
 
@@ -68,6 +74,28 @@ $ redis-server /usr/local/etc/redis.conf</pre>
 
       <h3>This isn't working, help!</h3>
       Calm down, it will all be fine (eventually), please head to the <a href="http://discuss.dradisframework.org">Community Forums</a> and tell us what went wrong.</p>
+
+      <h3>How do I get notified about updates and security patches?</h3>
+
+      <form action="https://www.getdrip.com/forms/65132523/submissions" method="post" data-drip-embedded-form="65132523">
+        <div data-drip-attribute="description2">
+          <p>Get notified in your inbox about new features or security issues with the framework.</p>
+        </div>
+        <fieldset>
+          <div>
+              <label for="fields[first_name]">First Name</label>
+              <input type="text" name="fields[first_name]" value="" />
+          </div>
+          <div>
+              <label for="fields[email]">Email Address</label>
+              <input type="email" name="fields[email]" value="" />
+          </div>
+          <div>
+            <input type="submit" name="submit" value="Keep me in the loop!" data-drip-attribute="sign-up-button" />
+          </div>
+        </fieldset>
+      </form>
+      <br/><br/>
     </article>
     <aside>
       <h3>Community or Pro</h3>
