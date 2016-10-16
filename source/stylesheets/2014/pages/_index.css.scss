@@ -3,6 +3,11 @@ body.index {
     @include outer-container;
     margin-bottom: 100px;
     margin-top: 50px;
+
+    &.press .logo2 {
+      filter: grayscale(100%);
+      margin-left: 40px;
+    }
   }
 
   .bullets {
@@ -22,6 +27,7 @@ body.index {
 
     section {
       margin: 0 auto;
+
     }
   }
 }
