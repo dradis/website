@@ -4,6 +4,14 @@ body.index {
     margin-bottom: 100px;
     margin-top: 50px;
 
+    &.header {
+      margin-bottom: 20px;
+
+      .buttons {
+        margin: 2em 0;
+      }
+    }
+
     &.press .logo2 {
       filter: grayscale(100%);
       margin-left: 40px;

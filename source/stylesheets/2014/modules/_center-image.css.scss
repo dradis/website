@@ -8,22 +8,22 @@
     font-weight: 300;
   }
 
-  img {
-    max-width: 120px;
-    padding: 1em;
-    border-radius: 50%;
-    // background: desaturate(darken($green, 20%), 30);
-    background: $light-gray;
-    transition: background 0.5s;
-
-    @include media($medium-screen) {
-      max-width: 180px;
-    }
-
-    &:hover {
-      background: lighten($light-gray, 5%);
-    }
-  }
+//  img {
+//    max-width: 120px;
+//    padding: 1em;
+//    border-radius: 50%;
+//    // background: desaturate(darken($green, 20%), 30);
+//    background: $light-gray;
+//    transition: background 0.5s;
+//
+//    @include media($medium-screen) {
+//      max-width: 180px;
+//    }
+//
+//    &:hover {
+//      background: lighten($light-gray, 5%);
+//    }
+//  }
 
   hr {
     margin: 2em auto 2.5em;
