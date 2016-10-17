@@ -1,30 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Dradis Framework 3.0</title>
+  <head>
+    <meta charset="utf-8">
+    <title>Dradis Framework 3.0, packed with goodness</title>
 
-		<meta name="description" content="BSides London 2014 workshop: Connecting Dradis to anything">
-		<meta name="author" content="Daniel Martin, @etdsoft">
+    <meta name="description" content="Black Hat USA 2014 workshop: Dradis Framework 3.0, packed with goodness">
+    <meta name="author" content="Daniel Martin, @etdsoft">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/theme/sky.css" id="theme">
     <!-- <link rel="stylesheet" href="css/theme/moon.css" id="theme">
     <link rel="stylesheet" href="css/theme/night.css" id="theme"> -->
 
-		<!-- For syntax highlighting -->
+    <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
 
     <style type="text/css" media="screen">
       .reveal ul {
@@ -57,36 +57,36 @@
       }
     </style>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-	<body>
+  <body>
 
-		<div class="reveal">
+    <div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
 
-				<section>
-					<h1>Dradis 3.0</h1>
-					<h3>Packed with goodness</h3>
-					<p>
-						<small>By <a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></small>
-					</p>
-					<aside class="notes">
-						<p>Show of hands:</p>
+        <section>
+          <h1>Dradis 3.0</h1>
+          <h3>Packed with goodness</h3>
+          <p>
+            <small>By <a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></small>
+          </p>
+          <aside class="notes">
+            <p>Show of hands:</p>
             <ul>
               <li>Ruby devs in the room.</li>
               <li>Rails devs in the room.</li>
               <li>Dradis devs in the room.</li>
             </ul>
-					</aside>
-				</section>
+          </aside>
+        </section>
 
-				<section>
-					<h2>Agenda</h2>
+        <section>
+          <h2>Agenda</h2>
           <ul>
             <li>New interface</li>
             <li>Gemfile.plugins</li>
@@ -94,25 +94,25 @@
             <li>Client bindings</li>
             <li>New plugins: Qualys, PDF reports...</li>
           </ul>
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
+          <aside class="notes">
+            Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+          </aside>
+        </section>
 
-				<section>
-					<h1>You will ask questions</h1>
-					<img src="img/hypnotoad.gif" height="332" width="474"/>
-				</section>
+        <section>
+          <h1>You will ask questions</h1>
+          <img src="img/hypnotoad.gif" height="332" width="474"/>
+        </section>
 
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>New interface</h2>
+        <!-- Example of nested vertical slides -->
+        <section>
+          <section>
+            <h2>New interface</h2>
             <img src="img/tour-01.png" height="600" width="911" style="border:none"/>
-					</section>
+          </section>
 
-					<section>
-						<h2>Issues/Evidence</h2>
+          <section>
+            <h2>Issues/Evidence</h2>
             <img src="img/issues-01.png" height="" width="" style="border:none"/>
             <p><code>Issue</code> is the part that rarely changes</p>
           </section>
@@ -120,20 +120,20 @@
           <section>
             <p><code>Evidence</code> is different each time</p>
             <img src="img/issues-02.png" height="" width="" style="border:none"/>
-					</section>
+          </section>
 
-					<section>
-						<h2>Issues Library</h2>
+          <section>
+            <h2>Issues Library</h2>
             <p>Shows the list of issues in the project</p>
             <img src="img/issues-03.png" height="" width="" style="border:none"/>
           </section>
           
-					<section>
-						<h2>At the Node level</h2>
+          <section>
+            <h2>At the Node level</h2>
             <p><code>Notes</code>, <code>Evidence</code> and <code>Attachments</code></p>
             <img src="img/issues-04.png" height="" width="" style="border:none"/>
-					</section>
-				</section>
+          </section>
+        </section>
 
         <section>
           <section>
@@ -170,25 +170,25 @@ gem 'dradis-nessus', path: '../dradis-nessus'
           </section>
         </section>
 
-			  <section>
+        <section>
           <section>
-     				<h2>HTTP API</h2>
-    				<ul>
-    				  <li>Implemented as a <strong>Gem</strong></li>
-    				  <li>Endpoints and <code>curl</code> examples</li>
+            <h2>HTTP API</h2>
+            <ul>
+              <li>Implemented as a <strong>Gem</strong></li>
+              <li>Endpoints and <code>curl</code> examples</li>
               <li>Get it at: <a href="https://github.com/dradis/dradis-api">dradis/dradis-api</a></li>
-    				</ul>
+            </ul>
           </section>
-					<section>
-  					<h2>In Gemfile.plugins</h2>
-  					<pre class="line-by-line"><code class="ruby">
+          <section>
+            <h2>In Gemfile.plugins</h2>
+            <pre class="line-by-line"><code class="ruby">
   gem 'dradis-api', github: 'dradis/dradis-api'
             </code></pre>
             <p>And</p>
-  					<pre class="line-by-line"><code class="bash">
+            <pre class="line-by-line"><code class="bash">
   $ bundle install
             </code></pre>
-  				</section>
+          </section>
           <section>
             <h2>Endpoints</h2>
             <pre><code>
@@ -292,28 +292,28 @@ gem 'dradis-nessus', path: '../dradis-nessus'
  ]
             </code></pre>
           </section>
-				</section>
+        </section>
 
         <section>
           <section>
-     				<h2>Client bindings</h2>
-    				<ul>
-    				  <li>Implemented as a <strong>Gem</strong>.</li>
-    				  <li>Thin wrapper around the API.</li>
+            <h2>Client bindings</h2>
+            <ul>
+              <li>Implemented as a <strong>Gem</strong>.</li>
+              <li>Thin wrapper around the API.</li>
               <li>Talk to Dradis from your own tools.</li>
               <li>Get it at: <a href="https://github.com/dradis/dradis-client">dradis/dradis-client</a></li>
-    				</ul>
+            </ul>
           </section>
-					<section>
-  					<h2>Using the client lib</h2>
-  					<pre class="line-by-line"><code class="ruby">
+          <section>
+            <h2>Using the client lib</h2>
+            <pre class="line-by-line"><code class="ruby">
   gem 'dradis-client', github: 'dradis/dradis-client'
             </code></pre>
             <p>And</p>
-  					<pre class="line-by-line"><code class="bash">
+            <pre class="line-by-line"><code class="bash">
   $ bundle install
             </code></pre>
-  				</section>
+          </section>
 
           <section>
             <h2>Client configuration</h2>
@@ -372,19 +372,19 @@ irb> node.notes
           <section>
             <pre><code class="ruby">
  29: child                          (pid: 28)
- 	- Added from API
+  - Added from API
  28: clientapp                      (pid: 00)
  03: Getting help                   (pid: 01)
- 	- This Note doesn't provide a Title field
+  - This Note doesn't provide a Title field
  02: What's new?                    (pid: 01)
- 	- This Note doesn't provide a Title field
+  - This Note doesn't provide a Title field
  01: Dradis Framework v2.10.0       (pid: 00)
- 	- Con captura
- 	- .NET assemblies were not obfuscated 2
- 	- Insufficient SSL validation
- 	- Persistent cross-site scripting (XSS)
- 	- Out-of-date Apache server
- 	- This Note doesn't provide a Title field
+  - Con captura
+  - .NET assemblies were not obfuscated 2
+  - Insufficient SSL validation
+  - Persistent cross-site scripting (XSS)
+  - Out-of-date Apache server
+  - This Note doesn't provide a Title field
             </code></pre>
           </section>
 
@@ -425,11 +425,11 @@ irb> node.notes
           </section>
 
           <section>
-     				<h2>Dradis plugin for Metasploit</h2>
-    				<ul>
-    				  <li>Implemented as a <strong>Gem</strong> ;)</li>
-    				  <li>GitHub: <a href="https://github.com/dradis/metasploit-dradis">dradis/metasploit-dradis</a></li>
-    				</ul>
+            <h2>Dradis plugin for Metasploit</h2>
+            <ul>
+              <li>Implemented as a <strong>Gem</strong> ;)</li>
+              <li>GitHub: <a href="https://github.com/dradis/metasploit-dradis">dradis/metasploit-dradis</a></li>
+            </ul>
           </section>
 
           <!-- <section>
@@ -440,8 +440,8 @@ irb> node.notes
         </section>
 
         <section>
-					<section>
-  					<h2>New plugins</h2>
+          <section>
+            <h2>New plugins</h2>
             <div class="fragment visible" data-fragment-index="0">
               <p>Export:</p>
               <ul style="margin-top: 0.25em">
@@ -459,53 +459,53 @@ irb> node.notes
             <div class="fragment" data-fragment-index="2">
               <p style="margin-top: 40px">Your own?</p>
             </div>
-  				</section>
-  			</section>
+          </section>
+        </section>
 
-				<section>
-					<h1>Thank You</h1>
-					<h3><a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></h3>
+        <section>
+          <h1>Thank You</h1>
+          <h3><a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></h3>
           <p>- don't forget your stickers! -</p>
-				</section>
+        </section>
 
-				<section>
-					<h1>You will ask questions now</h1>
-					<img src="img/hypnotoad.gif" height="332" width="474"/>
-				</section>
-			</div>
+        <section>
+          <h1>You will ask questions now</h1>
+          <img src="img/hypnotoad.gif" height="332" width="474"/>
+        </section>
+      </div>
 
-		</div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
 
-		<script>
+    <script>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
 
-				theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
 
-		</script>
+    </script>
 
-	</body>
+  </body>
 </html>

@@ -1,6 +1,6 @@
 ---
 title: Installing Dradis from Git | Dradis Framework
-description: Dradis Framework documentation.
+description: Install Dradis on your local system from GitHub. Download and deploy Dradis Community Edition using these quick instructions.
 ---
 
 <div class="intro-text">
@@ -13,17 +13,12 @@ description: Dradis Framework documentation.
   <ul class="bullets">
     <li class="bullet two-col-bullet">
       <div class="bullet-content" style="margin-left: 0">
-        <h1>Getting Started</h1>
-        <ol>
-          <li>Head over to the <a href="https://github.com/dradis/dradis-ce">Dradis Framework repo</a> on GitHub.</li>
-          <li>
-            <p>On your local system, run the following in your command line:</p>
-            <pre class="code">$ git clone https://github.com/dradis/dradis-ce.git
-$ cd dradis-ce/</pre>
-</li>
-          <li>Run the following in your command line:<br/><pre class="code">$ bundle install</pre></li>
-          <li>Run the following in your command line:<br/><pre class="code">$ ./bin/setup</pre></li>
-        </ol>
+        <h1 id="dependencies">Dependencies</h1>
+        <br/><br/>
+        <ul>
+          <li><strong>Redis</strong>: make sure Redis is installed and running on your local system. If you're not sure how to install it on your local system, try searching Google for "<em>install Redis [operating system]</em>"</li><br/>
+          <li><strong>Kali Linux dependencies</strong>: see the <a href="install_kali.html#dependencies">dependencies section</a> of the Installing Dradis on Kali Linux guide.</li>
+        </ul>
       </div>
     </li>
     <li class="bullet two-col-bullet">
@@ -35,10 +30,20 @@ $ cd dradis-ce/</pre>
       </div>
     </li>
   </ul>
-  <br/>
-  <br/>
 
-  <h2>Setting up the app</h2>
+  <h2>Getting Started</h2>
+  <ol>
+    <li>Head over to the <a href="https://github.com/dradis/dradis-ce">Dradis Framework repo</a> on GitHub.</li>
+    <li>
+      <p>On your local system, run the following in your command line:</p>
+      <pre class="code">$ git clone https://github.com/dradis/dradis-ce.git
+$ cd dradis-ce/</pre>
+</li>
+    <li>Run the following in your command line:<br/><pre class="code">$ bundle install</pre></li>
+    <li>Run the following in your command line:<br/><pre class="code">$ ./bin/setup</pre></li>
+  </ol>
+  <br/><br/>
+  <h3>Setting up the app</h3>
   <br/>
   <ol>
     <li>Once you've completed the steps above, fire up the server by running the following in your command line:<pre class="code">$ bundle exec rails server</pre></li>
@@ -65,12 +70,6 @@ $ cd dradis-ce/</pre>
   </div>
   </p>
   <br/><hr/>
-  <h4 id="dependencies">Dependencies</h4>
-  <ul>
-    <li><strong>Redis</strong>: make sure Redis is installed and running on your local system. If you're not sure how to install it on your local system, try searching Google for "install Redis [operating system]"</li><br/>
-    <li><strong>Kali Linux dependencies</strong>: see the <a href="install_kali.html#dependencies">dependencies section</a> of the Installing Dradis on Kali Linux guide.</li>
-  </ul>
-  <br/><br/>
   <h4 id="troubleshooting">Troubleshooting tips</h4>
   <ul>
     <li><strong>I'm installing on Kali Linux</strong>: check out the <a href="install_kali.html#troubleshooting">troubleshooting section</a> of the Installing Dradis on Kali Linux guide.</li><br/>

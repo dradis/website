@@ -1,5 +1,5 @@
 ---
-title: FAQs | Dradis Framework
+title: Frequently Asked Questions | Dradis Framework
 description: Dradis Framework Frequently Asked Questions (FAQs).
 ---
 
@@ -8,27 +8,86 @@ description: Dradis Framework Frequently Asked Questions (FAQs).
   <h4>If your answer is not here the <a href="http://discuss.dradisframework.org">Community Forums</a> are your best bet.</h4>
 </div>
 
+<div class="container" id="top">
+  <h4>Table of contents</h4>
+  <ol>
+    <li><a href="#server">By default the server starts in 0.0.0.0:3000 How can I make it listen on a different interface/port number?</a></li>
+    <li><a href="#configuration">Why is my configurations page blank?</a></li>
+    <li><a href="#plugins">Where is the ____ upload plugin?</a></li>
+  </ol>
+  <hr/><br/>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header">
+        <h4 id="server">By default the server starts in 0.0.0.0:3000 How can I make it listen on a different interface/port number?</h4>
+      </div>
+      <div class="card-copy">
+        <p><strong>Port</strong> number can be changed using the <strong>-p</strong> parameter. For instance to listen on port 80:</p>
+        <pre><code>./dradis-webapp -p 80</code></pre>
+        <p>The <strong>interface</strong> can be changed using the <strong>-b</strong> parameter. To listen on ALL (dangerous!) interfaces do:</p>
+        <pre><code>./dradis-webapp -b 0.0.0.0</code></pre>
+        <p style="text-align:right;"><a href="#top">back to top</a></p>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header">
+        <h4 id="configuration">Why is my configurations page blank?</h4>
+      </div>
+      <div class="card-copy">
+        <p>The page at <code>/configurations</code> is for add-ons that require configuration (e.g. your Mediawiki host, or your VulnDB credentials). If no add-ons that require configurations are loaded into the framework, nothing will show up.</p>
+        <p>To enable (or disable) add-ons, check out our <a href="/documentation/add-ons.html">Enable/Disable Add-ons</a> guide.</p>
+        <p style="text-align:right;"><a href="#top">back to top</a></p>
+      </div>
+    </div>
+  </div>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header">
+        <h4 id="plugins">Where is the ____ upload plugin?</h4>
+      </div>
+      <div class="card-copy">
+        <p>Dradis supports the following upload plugins:</p>
+        <table style="width: 60%;margin:20px auto">
+          <tbody>
+            <tr>
+              <td>Acunetix</td>
+              <td>Brakeman</td>
+              <td>Burp</td>
+              <td>Metasploit</td>
+            </tr>
+            <tr>
+              <td>Nessus</td>
+              <td>Nexpose</td>
+              <td>Nikto</td>
+              <td>Nmap</td>
+            </tr>
+            <tr>
+              <td>NTO Spider</td>
+              <td>OpenVAS</td>
+              <td>Qualys</td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
 
-<div class="container">
-
-  <h3 id="q4">By default the server starts in 0.0.0.0:3000 How can I make it listen on a different interface/port number?</h3>
-
-  <p><strong>Port</strong> number can be changed using the <strong>-p</strong> parameter. For instance to listen on port 80:</p>
-  <pre><code>./dradis-webapp -p 80</code></pre>
-
-  <p>The <strong>interface</strong> can be changed using the <strong>-b</strong> parameter. To listen on ALL (dangerous!) interfaces do:</p>
-  <pre><code>./dradis-webapp -b 0.0.0.0</code></pre>
-
-  <!-- <p>
-    <a href="#top">back to top</a>
-  </p> -->
+        <p>Dradis gives you control over which add-ons are enabled or disabled. If the plugin you're looking for isn't showing up, you'll need to <a href="/documentation/add-ons.html">Enable the Add-on</a></p>
+        <p style="text-align:right;"><a href="#top">back to top</a></p>
+      </div>
+    </div>
+  </div>
 
   <!--
-  <a name="q#"></a>
-  <h3></h3>
-  <p></p>
-  <p>
-    <a href="#top">back to top</a>
-  </p>
+  <div class="cards">
+    <div class="card">
+      <div class="card-header">
+        <h4 id=""></h4>
+      </div>
+      <div class="card-copy">
+        <p></p>
+        <p style="text-align:right;"><a href="#top">back to top</a></p>
+      </div>
+    </div>
+  </div>
   -->
 </div>

@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<title>Custom Dradis Framework plugins</title>
+  <head>
+    <meta charset="utf-8">
+    <title>Custom Dradis Framework plugins</title>
 
-		<meta name="description" content="Learn how to extend Dradis in every possible way">
-		<meta name="author" content="Daniel Martin, @etdsoft">
+    <meta name="description" content="Learn how to extend Dradis framework in every possible direction with custom Dradis framework plugins or add-ons. Security BSides London 2013">
+    <meta name="author" content="Daniel Martin, @etdsoft">
 
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/fonts.css">
-		<link rel="stylesheet" href="css/theme/sky.css" id="theme">
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/theme/sky.css" id="theme">
 
-		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
 
-		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
-		<script>
-			document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
-		</script>
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
 
     <style type="text/css" media="screen">
       .reveal ul {
@@ -43,44 +43,44 @@
       }
     </style>
 
-		<!--[if lt IE 9]>
-		<script src="lib/js/html5shiv.js"></script>
-		<![endif]-->
-	</head>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
 
-	<body>
+  <body>
 
-		<div class="reveal">
+    <div class="reveal">
 
-			<!-- Any section element inside of this container is displayed as a slide -->
-			<div class="slides">
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
 
-				<section>
-					<h1>Dradis<br/>Framework</h1>
-					<h3>Creating custom plugins</h3>
-					<p>
-						<small>By <a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></small>
-					</p>
-				</section>
+        <section>
+          <h1>Dradis<br/>Framework</h1>
+          <h3>Creating custom plugins</h3>
+          <p>
+            <small>By <a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></small>
+          </p>
+        </section>
 
-				<section>
-					<h2>Agenda</h2>
+        <section>
+          <h2>Agenda</h2>
           <ul>
             <li>It's just a Rails app</li>
             <li>Basics: notes, nodes and categories</li>
             <li>Debugging: logs, <code>rails console</code> &amp; <code>Thor</code></li>
             <li>Plugin types</li>
           </ul>
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
-				</section>
+          <aside class="notes">
+            Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
+          </aside>
+        </section>
 
-				<!-- Example of nested vertical slides -->
-				<section>
-					<section>
-						<h2>A simple rails app</h2>
-  					<pre><code>app/
+        <!-- Example of nested vertical slides -->
+        <section>
+          <section>
+            <h2>A simple rails app</h2>
+            <pre><code>app/
 attachments/
 config/
 config.ru
@@ -94,11 +94,11 @@ spec/
 test/
 tmp/
 vendor/</code></pre>
-					</section>
-					<section>
-						<h2>A simple rails app</h2>
-  					<pre class="line-by-line"><code>app/            # models, views &amp; controllers</code></pre>
-  					<pre class="line-by-line fragment"><code>attachments/    # uploaded files</code></pre>
+          </section>
+          <section>
+            <h2>A simple rails app</h2>
+            <pre class="line-by-line"><code>app/            # models, views &amp; controllers</code></pre>
+            <pre class="line-by-line fragment"><code>attachments/    # uploaded files</code></pre>
             <pre class="line-by-line fragment"><code>config/         # app config (e.g. db connection)</code></pre>
             <pre class="line-by-line fragment"><code>config.ru       # boring...
 db/
@@ -111,16 +111,16 @@ spec/
 test/
 tmp/</code></pre>
             <pre class="line-by-line fragment"><code>vendor/        # plugins!</code></pre>
-					</section>
-					<section>
-						<h2>/vendor/plugins</h2>
-						<img src="img/plugin_banner.png" height="150" width="800" border="0"/>
-					</section>
+          </section>
+          <section>
+            <h2>/vendor/plugins</h2>
+            <img src="img/plugin_banner.png" height="150" width="800" border="0"/>
+          </section>
 
-					<section>
-						<h2>The ugly truth about plugins</h2>
-						<p>Plugins boil down to a single method:</p>
-					</section>
+          <section>
+            <h2>The ugly truth about plugins</h2>
+            <p>Plugins boil down to a single method:</p>
+          </section>
 
           <section>
             <h2>Export plugin</h2>
@@ -195,26 +195,26 @@ module NVDKeyword
 end
             </code></pre>
           </section>
-					<section>
-						<h2>... and the code structure is generated for you</h2>
-						<h3>(more on this later)</h3>
-					</section>
+          <section>
+            <h2>... and the code structure is generated for you</h2>
+            <h3>(more on this later)</h3>
+          </section>
 
-					<section>
-						<h2>More on Rails for hackers</h2>
-						<ul>
-  						<li><a href="http://carnal0wnage.attackresearch.com/2012/10/basics-of-rails-part-1.html">Rails Basics</a> series by <a href="http://twitter.com/cktricky">@cktricky</a></li>
-  						<li><a href="http://railscasts.com">Railscasts</a> learn by watching</li>
-  						<li><a href="http://railsforzombies.org/">RailsForZombies.org</a> step-by-step videos</li>
-  						<li><a href="http://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a> guide</li>
-  						<li><a href="http://tryruby.org/">Try ruby</a> learn by doing (non-Rails)</li>
-  					</ul>
-					</section>
-				</section>
+          <section>
+            <h2>More on Rails for hackers</h2>
+            <ul>
+              <li><a href="http://carnal0wnage.attackresearch.com/2012/10/basics-of-rails-part-1.html">Rails Basics</a> series by <a href="http://twitter.com/cktricky">@cktricky</a></li>
+              <li><a href="http://railscasts.com">Railscasts</a> learn by watching</li>
+              <li><a href="http://railsforzombies.org/">RailsForZombies.org</a> step-by-step videos</li>
+              <li><a href="http://guides.rubyonrails.org/getting_started.html">Getting Started with Rails</a> guide</li>
+              <li><a href="http://tryruby.org/">Try ruby</a> learn by doing (non-Rails)</li>
+            </ul>
+          </section>
+        </section>
 
-				<section>
-				  <section>
-  					<h2>Notes, nodes and categories</h2>
+        <section>
+          <section>
+            <h2>Notes, nodes and categories</h2>
             <img src="img/nodes.png" height="276" width="480"/>
           </section>
           <section>
@@ -242,21 +242,21 @@ end
             <h2>In the DB</h2>
             Node --&lt; Notes --- Category
           </section>
-				</section>
+        </section>
 
-			  <section>
-				<h2>Debugging</h2>
-				<ul>
-				  <li>Log files</li>
-				  <li>Rails console</li>
-				  <li>Thor</li>
-				</ul>
-				</section>
+        <section>
+        <h2>Debugging</h2>
+        <ul>
+          <li>Log files</li>
+          <li>Rails console</li>
+          <li>Thor</li>
+        </ul>
+        </section>
 
-				<section>
-					<section>
-  					<h2>Debugging: log files</h2>
-  					<pre class="line-by-line"><code>app/
+        <section>
+          <section>
+            <h2>Debugging: log files</h2>
+            <pre class="line-by-line"><code>app/
 attachments/
 config/
 config.ru
@@ -271,15 +271,15 @@ test/
 tmp/
 vendor/
             </code></pre>
-  				</section>
-					<section>
-  					<h2>Log files</h2>
-  					<pre class="line-by-line"><code>log/</code></pre>
+          </section>
+          <section>
+            <h2>Log files</h2>
+            <pre class="line-by-line"><code>log/</code></pre>
           <pre class="line-by-line code-highlight"><code>    development.log</code></pre>
           <pre class="line-by-line"><code>    production.log
     test.log</code></pre>
             <pre class="line-by-line code-highlight fragment"><code>    bj.etds-MacBook-Air.local.development.log    # background jobs</code></pre>
-  				</section>
+          </section>
 
           <section>
             <h2>Log files</h2>
@@ -315,16 +315,16 @@ NoMethodError (undefined method `original_filename' for "":String):
         </section>
 
         <section>
-					<section>
-  					<h2>Debugging: Rails console</h2>
-  					<p>(Runs in Development mode by default)</p>
-  				</section>
-  				<section>
-  				  <h2>Querying the DB</h2>
+          <section>
+            <h2>Debugging: Rails console</h2>
+            <p>(Runs in Development mode by default)</p>
+          </section>
+          <section>
+            <h2>Querying the DB</h2>
             <img src="img/nodes.png" height="276" width="480"/>
-				  </section>
-  				<section>
-  				  <h2>Object finders</h2>
+          </section>
+          <section>
+            <h2>Object finders</h2>
             <pre><code>$ bundle exec rails console
 Loading development environment (Rails 3.2.13)
 
@@ -346,9 +346,9 @@ Loading development environment (Rails 3.2.13)
      #&lt;Node id: 10, type_id: nil, label: "Uploaded files" [...]&gt;,
      #... ]
             </code></pre>
-  				</section>
-  				<section>
-  				  <h2>Associations</h2>
+          </section>
+          <section>
+            <h2>Associations</h2>
             <pre><code>1.9.3p327 :005 > Node.find_by_label('webapps')
   Node Load (0.3ms)  SELECT "nodes".* FROM "nodes"
     WHERE "nodes"."label" = 'webapps'
@@ -374,10 +374,10 @@ Loading development environment (Rails 3.2.13)
     FROM "categories" WHERE "categories"."id" = 1 LIMIT 1
  => #&lt;Category id: 1, name: "default category" [...]&gt;
             </code></pre>
-  				</section>
+          </section>
 
-					<section>
-						<h2>Create, destroy, update</h2>
+          <section>
+            <h2>Create, destroy, update</h2>
             <pre><code>1.9.3p327 :009 > node = Node.create :label => 'BSides London 2013'
  => #&lt;Node id: 40, label: "BSides London 2013" [...]&gt;
 
@@ -402,23 +402,23 @@ from (irb):14
             </code></pre>
           </section>
 
-					<section>
-						<h2>More on the Rails console</h2>
-						<ul>
-  						<li><a href="http://railscasts.com/episodes/48-console-tricks">Console tricks</a> Railscast</li>
-  						<li><a href="http://railscasts.com/episodes/215-advanced-queries-in-rails-3">Advanced Queries in Rails 3</a> Railscast</li>
+          <section>
+            <h2>More on the Rails console</h2>
+            <ul>
+              <li><a href="http://railscasts.com/episodes/48-console-tricks">Console tricks</a> Railscast</li>
+              <li><a href="http://railscasts.com/episodes/215-advanced-queries-in-rails-3">Advanced Queries in Rails 3</a> Railscast</li>
             </ul>
           </section>
-  			</section>
+        </section>
 
-  		  <section>
-  				<section>
-  					<h2>Debugging: Thor</h2>
-  					<p>Use your plugins from the command line.</p>
-  					<p><a href="https://github.com/wycats/thor">https://github.com/wycats/thor</a></p>
-  				</section>
-  				<section>
-  				  <h2>Available tasks</h2>
+        <section>
+          <section>
+            <h2>Debugging: Thor</h2>
+            <p>Use your plugins from the command line.</p>
+            <p><a href="https://github.com/wycats/thor">https://github.com/wycats/thor</a></p>
+          </section>
+          <section>
+            <h2>Available tasks</h2>
             <pre><code>$ bundle exec thor -T
 dradis
 ------
@@ -464,10 +464,10 @@ thor dradis:upload:wxf FILE               # upload wXf results
 thor dradis:upload:zap FILE               # upload ZAP results
 thor dradis:version                       # displays the version of the dradi...
             </code></pre>
-  				</section>
-  				<section>
-  				  <h2>Task description</h2>
-  				  <pre><code>$ bundle exec thor help dradis:import:cve:keyword
+          </section>
+          <section>
+            <h2>Task description</h2>
+            <pre><code>$ bundle exec thor help dradis:import:cve:keyword
 
 Usage:
   thor dradis:import:cve:keyword QUERY
@@ -484,11 +484,11 @@ CVE-2013-2744 (BackupBuddy)
 CVE-2013-2743 (BackupBuddy)
 CVE-2013-2742 (BackupBuddy)
 CVE-2013-2741 (BackupBuddy)</code></pre>
-  				</section>
-  				<section>
-  				  <h2>Defining tasks</h2>
-  				  <p>&lt;plugin&gt;/lib/tasks/thorfile.rb</p>
-  				  <pre><code>class Import &lt; Thor
+          </section>
+          <section>
+            <h2>Defining tasks</h2>
+            <p>&lt;plugin&gt;/lib/tasks/thorfile.rb</p>
+            <pre><code>class Import &lt; Thor
   namespace "dradis:import:cve"
 
   desc "keyword QUERY", "import CVE records from the NVD"
@@ -508,21 +508,21 @@ CVE-2013-2741 (BackupBuddy)</code></pre>
   end
 end</code></pre>
             <p>(also generated for you)</p>
-  				</section>
-				</section>
+          </section>
+        </section>
 
-				<section>
-				  <section>
-  					<h2>Plugin types</h2>
-  					<ul>
-  						<li>Export: HTML &amp; Word</li>
-  						<li class="fragment">Import: MediaWiki, VulnDB &amp; OSVDB</li>
-  						<li class="fragment">Upload: Burp, Nessus, Nexpose, Nikto, Nmap, OpenVAS, Qualys, Retina, SureCheck, Typhon, w3af, wXf, ZAP</li>
-  					</ul>
-  				</section>
-  				<section>
-  				  <h2>Plugin generator</h2>
-  				  <pre><code>$ bundle exec rails generate
+        <section>
+          <section>
+            <h2>Plugin types</h2>
+            <ul>
+              <li>Export: HTML &amp; Word</li>
+              <li class="fragment">Import: MediaWiki, VulnDB &amp; OSVDB</li>
+              <li class="fragment">Upload: Burp, Nessus, Nexpose, Nikto, Nmap, OpenVAS, Qualys, Retina, SureCheck, Typhon, w3af, wXf, ZAP</li>
+            </ul>
+          </section>
+          <section>
+            <h2>Plugin generator</h2>
+            <pre><code>$ bundle exec rails generate
 Usage: rails generate GENERATOR [args] [options]
 
 # ....
@@ -537,10 +537,10 @@ ImportPlugin:
 
 UploadPlugin:
   upload_plugin</code></pre>
-  				</section>
-  				<section>
-  				  <p>Upload plugin:</p>
-  				  <pre class="line-by-line"><code>
+          </section>
+          <section>
+            <p>Upload plugin:</p>
+            <pre class="line-by-line"><code>
 $ bundle exec rails g upload_plugin BrakemanUpload
 create  brakeman_upload/README
 create  brakeman_upload/MIT-LICENSE
@@ -560,7 +560,7 @@ create  brakeman_upload/lib/brakeman_upload/filters.rb
             <pre><code>$ bundle exec rails g import_plugin CveImport</code></pre>
             <p>Export plugin:</p>
             <pre><code>$ bundle exec rails g export_plugin CsvUpload</code></pre>
-				  </section>
+          </section>
 
           <section>
             <h2>Plugin configuration</h2>
@@ -582,7 +582,7 @@ end
             <h2>Lots of examples</h2>
             <p><a href="http://git.io/dradis">http://git.io/dradis</a></p>
           </section>
-				</section>
+        </section>
 
         <section>
           <section>
@@ -988,7 +988,7 @@ end
           </section>
           <section>
             <h2>Thor task</h2>
-  				  <pre><code>class Import &lt; Thor
+            <pre><code>class Import &lt; Thor
   namespace "dradis:import:cve"
 
   desc "keyword QUERY", "import CVE records from the NVD"
@@ -1101,49 +1101,49 @@ Too many secrets, "Relying on too many...", "Focus on..."</code></pre>
           </section>
         </section>
 
-				<section>
-					<h1>Thank You</h1>
-					<h3><a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></h3>
-				</section>
+        <section>
+          <h1>Thank You</h1>
+          <h3><a href="http://securityroots.com/story.html">Daniel Martin</a> / <a href="http://twitter.com/etdsoft">@etdsoft</a></h3>
+        </section>
 
-				<section>
-					<h1>You will ask questions now</h1>
-					<img src="img/hypnotoad.gif" height="332" width="474"/>
-				</section>
-			</div>
+        <section>
+          <h1>You will ask questions now</h1>
+          <img src="img/hypnotoad.gif" height="332" width="474"/>
+        </section>
+      </div>
 
-		</div>
+    </div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.min.js"></script>
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
 
-		<script>
+    <script>
 
-			// Full list of configuration options available here:
-			// https://github.com/hakimel/reveal.js#configuration
-			Reveal.initialize({
-				controls: true,
-				progress: true,
-				history: true,
-				center: true,
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
 
-				theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        theme: Reveal.getQueryHash().theme || 'sky', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
 
-				// Optional libraries used to extend on reveal.js
-				dependencies: [
-					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
-					{ src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
-					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
-					// { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
-				]
-			});
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/showdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; } }
+          // { src: 'plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
 
-		</script>
+    </script>
 
-	</body>
+  </body>
 </html>

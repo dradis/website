@@ -23,7 +23,7 @@
   {
     "title": "NeXpose",
     "page": "nexpose",
-    "description": "Vulnerability management product from Rapid7.",
+    "description": "NeXpose is a vulnerability management software product created by Rapid7.",
     "github": "http://github.com/dradis/dradis-nexpose",
     "vendor": "http://www.rapid7.com/products/nexpose/"
   },
@@ -44,7 +44,7 @@
   {
     "title": "Metasploit",
     "page": "metasploit",
-    "description": "Penetration testing software.",
+    "description": "Metasploit is a penetration testing software created through a collaboration between the open source community and Rapid7.",
     "github": "http://github.com/dradis/dradis-metasploit",
     "vendor": "http://www.metasploit.com/"
   },
@@ -72,7 +72,7 @@
   {
     "title": "Retina",
     "page": "retina",
-    "description": "Integrated network, web & virtual vulnerability scanner",
+    "description": "Retina is an integrated network, web, and virtual vulnerability scanner",
     "github": "http://github.com/dradis/dradis-retina",
     "vendor": "http://www.beyondtrust.com/Products/RetinaNetworkSecurityScanner/"
   },
@@ -93,7 +93,7 @@
   {
     "title": "w3af",
     "page": "w3af",
-    "description": "The project's goal is to create a framework to find and exploit web application vulnerabilities.",
+    "description": "The goal of w3af is to create a framework to find and exploit web application vulnerabilities.",
     "github": "http://github.com/dradis/dradis-w3af",
     "vendor": "http://w3af.org/"
   },
@@ -109,7 +109,7 @@
     "page": "wxf",
     "description": "A Metasploit-like framework focused on the web standards along with exploits & payloads designed specifically for defeating web application protections.",
     "github": "http://github.com/dradis/dradis-wxf",
-    "vendor": "http://webexploitationframework.github.com/wXf/"
+    "vendor": "https://github.com/forced-request/wXf"
   },
   {
     "title": "Zed Attack Proxy",
