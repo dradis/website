@@ -13,13 +13,16 @@ description: Dradis Framework documentation.
   <ul class="bullets">
     <li class="bullet two-col-bullet">
       <div class="bullet-content" style="margin-left: 0">
-        <h1>Text Instructions</h1>
-        <h3>Getting started</h3>
+        <h1>Getting Started</h1>
         <ol>
           <li>Head over to the <a href="https://github.com/dradis/dradis-ce">Dradis Framework repo</a> on GitHub.</li>
-          <li>On your local system, run the following in your command line:<br/><code>$ git clone https://github.com/dradis/dradis-ce.git</code><br/><code>$ cd dradis-ce/</code></li>
-          <li>Run the following in your command line:<br/><code>$ bundle install</code></li>
-          <li>Run the following in your command line:<br/><code>$ ./bin/setup</code></li>
+          <li>
+            <p>On your local system, run the following in your command line:</p>
+            <pre class="code">$ git clone https://github.com/dradis/dradis-ce.git
+$ cd dradis-ce/</pre>
+</li>
+          <li>Run the following in your command line:<br/><pre class="code">$ bundle install</pre></li>
+          <li>Run the following in your command line:<br/><pre class="code">$ ./bin/setup</pre></li>
         </ol>
       </div>
     </li>
@@ -35,10 +38,10 @@ description: Dradis Framework documentation.
   <br/>
   <br/>
 
-  <h3>Setting up the app</h3>
+  <h2>Setting up the app</h2>
   <br/>
   <ol>
-    <li>Once you've completed the steps above, fire up the server by running the following in your command line:<br/><code>$ bundle exec rails server</code></li>
+    <li>Once you've completed the steps above, fire up the server by running the following in your command line:<pre class="code">$ bundle exec rails server</pre></li>
     <li>Point your browser to: <a href="https://localhost:3000/">https://localhost:3000</a></li>
     <li>Configure the shared password by entering it and confirming it:
       <div class="centered-image">
@@ -50,12 +53,12 @@ description: Dradis Framework documentation.
         <%= image_tag 'documentation/dradisframework-02.png', width: "60%" %>
       </div>
     </li>
-    <li>In a new tab in your terminal, start the <a href="#dependencies"><strong>Background worker</strong></a> that is needed to upload and parse tool output.<br/><code>$ bundle exec rake resque:work</code></li>
+    <li>In a new tab in your terminal, start the <a href="#dependencies"><strong>Background worker</strong></a> that is needed to upload and parse tool output.<pre class="code">$ bundle exec rake resque:work</pre></li>
   </ol>
   <br/>
   <br/>
 
-  <h1>Congratulations!</h1>
+  <h2>Congratulations!</h2>
   <p>You did it! You have now completed the installation process. Congratulations on making it all the way from git to running!
   <div class="centered-image">
     <%= image_tag 'documentation/dradisframework-03.png', width: "90%" %>
@@ -86,6 +89,10 @@ description: Dradis Framework documentation.
     </li>
   </ul>
   <br/><br/>    
-  <h3 style="text-align:center">Next? Check out <a href="/documentation/">the rest of the Dradis Community guides</a>.</h3>
+
+  <%= partial '/optin' %>
+
+  <br/><br/>
+  <h3 class="text-center">Next? Check out <a href="/documentation/">the rest of the Dradis Community guides</a>.</h3>
   <br/><br/><br/>
 </div>

@@ -23,7 +23,8 @@ description: Use c9.io to get Dradis up and running on the Cloud9 IDE
     <li><p>From your Cloud9 dashboard, click <a href="https://c9.io/new">+ Create a new workspace</a></p></li><hr/>
     <li><p>Give your workspace a name (any name)<br/>Optionally give your workspace a description</p></li><hr/>
     <li><p>For this guide, we're going to be working with a Hosted workspace. Make sure to select either a Private or a Public workspace.</p></li><hr/>
-    <li><p>Enter the following value into the <strong>Clone from Git or Mercurial URL</strong> field:<br/><code>https://github.com/dradis/dradis-ce.git</code></p></li><hr/>
+    <li><p>Enter the following value into the <strong>Clone from Git or Mercurial URL</strong> field:
+      <pre class="code">https://github.com/dradis/dradis-ce.git</pre></li><hr/>
     <li><p>Under <strong>Choose a template</strong>, select the <strong>Ruby</strong> icon.</p></li><hr/>
     <li>
       <p>Click <strong>Create workspace</strong></p><br/>
@@ -45,7 +46,10 @@ description: Use c9.io to get Dradis up and running on the Cloud9 IDE
         <%= image_tag 'documentation/dradisframework-06.png', width: "33%" %>
       </div>
     </li><hr/>
-    <li><p>Run the following in the terminal at the bottom of your screen:<br/><code>$ ./bin/setup</code><br/>Don't worry about the warning about <code>The path `/home/ubuntu/dradis-plugins` does not exist.</code>, we'll fix that next</p></li><hr/>
+    <li><p>Run the following in the terminal at the bottom of your screen:</p>
+      <pre class="code">$ ./bin/setup</pre>
+      <p>Don't worry about the warning about <code>The path `/home/ubuntu/dradis-plugins` does not exist.</code>, we'll fix that next</p>
+    </li><hr/>
     <li><p>Expand the <strong>~</strong> folder under <strong>Favorites</strong> at the top of your screen and expand the <strong>community</strong> folder so that you can see all 18 folders inside.</p></li><hr/>
     <li>
       <p>Move all 18 folders out of the <strong>community</strong> folder so that they are on the same level as the <strong>workspace</strong> folder (CTRL + click to select all 18 folders as once). Your file structure should now look like this:</p>
@@ -62,9 +66,23 @@ description: Use c9.io to get Dradis up and running on the Cloud9 IDE
         </ul>
       </p>
     </li><hr/>
-    <li><p>Run the following in the terminal at the bottom of your screen:<br/><code>$ ./bin/setup</code><br/><br/><em>Troubleshooting this step:</em> If you get an error message similar to <code>"NoMethodError: undefined method `last_comment' for #<Rake::Application:0x007ff0cf37be38>"</code>, you can resolve it by inserting the following content in line #6 of your <code>Rakefile</code> to bypass an issue with Rake version 11:<br/><pre># temp fix for NoMethodError: undefined method `last_comment'<br/># remove when fixed in Rake 11.x<br/>module TempFixForRakeLastComment<br/>  def last_comment<br/>    last_description<br/>  end<br/>end<br/>Rake::Application.send :include, TempFixForRakeLastComment<br/>### end of temfix</pre><a href="http://stackoverflow.com/questions/35893584/nomethoderror-undefined-method-last-comment-after-upgrading-to-rake-11/35893941">Credit to StackOverflow for this patch</a></p></li><hr/>
-    <li><p>Run the following in the terminal at the bottom of your screen:<br/><code>$ bundle exec rails server -p $PORT -b $IP</code></p></li><hr/>
-    <li>In a new tab in your terminal, start the Background worker that is needed to upload and parse tool output by running:<br/><code>$ sudo service redis-server start</code></li><hr/>
+    <li>
+      <p>Run the following in the terminal at the bottom of your screen:</p>
+      <pre class="code">$ ./bin/setup</pre>
+      <p><em>Troubleshooting this step:</em> If you get an error message similar to <code>"NoMethodError: undefined method `last_comment' for #<Rake::Application:0x007ff0cf37be38>"</code>, you can resolve it by inserting the following content in line #6 of your <code>Rakefile</code> to bypass an issue with Rake version 11:</pre>
+
+      <pre class="code"># temp fix for NoMethodError: undefined method `last_comment'
+# remove when fixed in Rake 11.x
+module TempFixForRakeLastComment
+  def last_comment
+    last_description
+  end
+end
+Rake::Application.send :include, TempFixForRakeLastComment
+### end of temfix</pre>
+      <p><a href="http://stackoverflow.com/questions/35893584/nomethoderror-undefined-method-last-comment-after-upgrading-to-rake-11/35893941">Credit to StackOverflow for this patch</a></p></li><hr/>
+    <li><p>Run the following in the terminal at the bottom of your screen:<pre class="code">$ bundle exec rails server -p $PORT -b $IP</pre></li><hr/>
+    <li>In a new tab in your terminal, start the Background worker that is needed to upload and parse tool output by running:<pre class="code">$ sudo service redis-server start</pre></li><hr/>
     <li>
       <p>Navigate to the URL where Dradis is now running! The url requires your workspace name (dradis-ce in this example) and your Cloud9 username (rkorinek in this example). The url uses the following format: [WorkspaceName]-[Cloud9Username].c9users.io. <br/>Example: https://[workspace]dradis-ce-rkorinek.c9users.io/</p>
       <div class="centered-image">
@@ -100,6 +118,10 @@ description: Use c9.io to get Dradis up and running on the Cloud9 IDE
       <%= image_tag 'documentation/dradisframework-03.png', width: "75%" %>
     </div>
   <br/><br/>
-  <h3 style="text-align:center">Next? Check out <a href="/documentation/">the rest of the Dradis Community guides</a>.</h3>
+
+  <%= partial '/optin' %>
+  <br/>
+  <br/>
+  <h3 class="text-center">Next? Check out <a href="/documentation/">the rest of the Dradis Community guides</a>.</h3>
   <br/><br/><br/>
 </div>

@@ -14,10 +14,12 @@ description: Dradis Framework documentation to install Dradis Community Edition 
 
   <p>We're going to install Dradis Community Edition from <a href="https://github.com/dradis/dradis-ce">GitHub</a> so that you can stay up to date with the latest changes.</p>
   <p>Before we get started, we'll need to install a few packages. Run the following in your terminal:</p>
-  <p><code>$ apt-get install libsqlite3-dev</code></p>
-  <p><code>$ apt-get install mysql-server mysql-client libmysqlclient-dev</code></p>
-  <p><code>$ apt-get install redis-server</code></p>
-  <p><code>$ redis-server</code></p>
+  <pre class="code">
+$ apt-get install libsqlite3-dev
+$ apt-get install mysql-server mysql-client libmysqlclient-dev
+$ apt-get install redis-server
+$ redis-server</pre>
+  <br/>
 
   <h4 style="text-align:center">You're ready to follow the steps in the <a href="install_git.html">Installing Dradis from Git</a> guide.</h4>
   <br/><br/><hr/>
@@ -28,7 +30,7 @@ description: Dradis Framework documentation to install Dradis Community Edition 
     <li>
       <p><strong><code>Unable to fetch some archives</code></strong>:</p>
       <p>If you get an error message like <code>Unable to fetch some archives</code> as shown in the screenshot below, run the following in your terminal before continuing:</p>
-      <p><code>apt-get update</code></p>
+      <pre class="code">apt-get update</pre>
       <div class="centered-image">
         <%= image_tag 'documentation/dradisframework-12.png', width: "75%" %> 
       </div>
@@ -36,15 +38,15 @@ description: Dradis Framework documentation to install Dradis Community Edition 
     <li>
       <p><strong><code>add_root_vertex' for Molinillo::DependencyGraph:</code></strong></p>
       <p>Run the following command in your terminal before re-trying the <code>bundle install</code> command.</p>
-      <p><code>apt-get install --only-upgrade bundler</code></p>
+      <pre class="code">apt-get install --only-upgrade bundler</pre>
       <p>Credit for this fix goes to GitHub user <a href="https://github.com/bundler/bundler/issues/4383" target="_blank">codebycody</a>.</p>
     </li><hr/>
     <li>
       <p><strong>Troubleshooting Redis</strong></p>
       <p>Run the following in your terminal to confirm that Redis is up and running:</p>
-      <p><code>$ redis-cli ping</code></p>
+      <pre class="code">$ redis-cli ping</pre>
       <p>Expected output:</p>
-      <p><code>PONG</code></p>
+      <pre class="code">PONG</pre>
     </li><hr/>
   </ul>
   
