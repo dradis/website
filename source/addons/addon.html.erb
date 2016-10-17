@@ -1,4 +1,6 @@
-<%# see ./config.rb - we can't use frontmatter in dynamic pages afaik %>
+<%# we can't use frontmatter in dynamic pages afaik %>
+<% content_for :page_title, "#{title} add-on | Dradis Framework" %>
+<% content_for :page_description, description[0..154] %>
 
 <div class="intro-text">
   <h2><%= title %></h2>
