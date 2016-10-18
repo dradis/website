@@ -12,6 +12,12 @@ body.index {
       }
     }
 
+    &.integrations {
+      h3 {
+        margin-bottom: 1em;
+      }
+    }
+
     &.press .logo2 {
       filter: grayscale(100%);
       margin-left: 40px;

@@ -21,6 +21,39 @@ pre.code {
 //  white-space: nowrap;
 }
 
+.navigation-projects {
+  background-color: #000;
+  line-height: 16px;
+  padding: 6px 0;
+
+  .navigation-wrapper {
+    @include clearfix;
+    @include outer-container;
+    position: relative;
+    z-index: 9999;
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      li {
+        display: inline-block;
+        margin-left: 24px;
+
+        a {
+          color: #fff;
+          font-size: 12px;
+          letter-spacing: .5px;
+          text-decoration: none;
+
+          &:hover {
+            border-bottom: 1px solid #fff;
+          }
+        }
+      }
+    }
+  }
+}
 
 .container {
   @include outer-container;
